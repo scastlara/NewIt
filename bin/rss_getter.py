@@ -1,6 +1,7 @@
 import feedparser
 import codecs
 import MySQLdb
+import time
 
 def write_feed(file, data):
     fh = codecs.open(file, "w", "utf-8")
@@ -23,31 +24,18 @@ def add_entries(data):
     db = MySQLdb.connect("localhost","testuser","qwerty", "news")
     cursor = db.cursor()
 
-    #sql = """CREATE TABLE NEWS (
-    #ID  CHAR(100) NOT NULL,
-    #FECHA  CHAR(20),
-    #NEWSPAPER CHAR(20),
-    #CONTENT CHAR(10000))"""
-
-    #try:
-    #    cursor.execute(sql)
-    #    db.commit()
-    #    print("TABLA CREADA")
-    #except:
-    #    db.rollback()
-    #    print("ERRORRRRR DB ERROR")
-
     for article in data.entries:
-        identifier = "hola"
-        fecha = "12"
+        time.sleep(1)
+        identifier = article.title + article.published
+        title = article.title
+        fecha = article.published
         newsp = "ELDIARIO.ES"
         content = article.description
-
-        sql = "INSERT INTO NEWSTABLE(ID, \
-FECHA, NEWSPAPER, CONTENT) \
-VALUES ('%s', '%s', '%s', '%s')" % (identifier, fecha, newsp, content)
+        sql = "INSERT INTO NEWSTABLE(ID, TITLE, FECHA, NEWSPAPER, CONTENT) \
+VALUES ('%s', '%s', '%s', '%s', '%s')" % (title, identifier, fecha, newsp, content)
         try:
             cursor.execute(sql)
+            db.commit()
             print("TO BIEN")
         except:
             db.rollback()
