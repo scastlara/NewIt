@@ -21,9 +21,10 @@ def read_rss(link):
     return(d)
 
 def add_entries(data):
-    db = MySQLdb.connect("localhost","testuser","qwerty", "news")
+    db = MySQLdb.connect("localhost","root","5961", "news")
     cursor = db.cursor()
 
+    fh = codecs.open("test", "w", "utf-8")
     for article in data.entries:
         time.sleep(1)
         identifier = article.title + article.published
@@ -31,14 +32,27 @@ def add_entries(data):
         fecha = article.published
         newsp = "ELDIARIO.ES"
         content = article.description
+
+        title.replace("'", r"\'")
+        content.replace("'", r"\'")
+        title = title.encode("ascii", "ignore")
+        content = content.encode("ascii", "ignore")
+
+        fh.write("IDENTIFIER: " + identifier + "\n\n")
+        fh.write("TITLE: " + title + "\n\n")
+        fh.write("FECHA: " + fecha + "\n\n")
+        fh.write("newsp: " + newsp + "\n\n")
+        fh.write("CONTENT: " + content + "\n\n")
+        fh.write("-----\n")
+
         sql = "INSERT INTO NEWSTABLE(ID, TITLE, FECHA, NEWSPAPER, CONTENT) \
 VALUES ('%s', '%s', '%s', '%s', '%s')" % (title, identifier, fecha, newsp, content)
         try:
             cursor.execute(sql)
             db.commit()
             print("TO BIEN")
-        except:
-            db.rollback()
+        except MySQLdb.ProgrammingError, e:
+            print 'There was a MySQL warning.  This is the info we have about it: %s' %(e)
             print("NO se pudo subir datos")
 
     db.close()
