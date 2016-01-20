@@ -1,0 +1,20 @@
+HOLA PANCHIS
+
+1. afegir a my.cnf (en el meu cas es troba a /usr/local/mysql/my.cnf):
+[client]
+default-character-set = utf8mb4
+
+[mysqld]
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+
+[mysql]
+default-character-set = utf8mb4
+
+
+2. Un cop has creat la DB i la taula i tot plegat, afegir al mysql: 
+
+SHOW VARIABLES LIKE 'char%'; SHOW VARIABLES LIKE 'collation%';
+ALTER DATABASE news CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE NEWSTABLE CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+SHOW VARIABLES LIKE 'char%'; SHOW VARIABLES LIKE 'collation%';
