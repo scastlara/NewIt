@@ -11,6 +11,8 @@
         <input type="submit" value="Submit" />
     </form>
 
-    <h4>BUSCASTE ESTO WEY:</h4>
-    <p> {{ term }}
+    {% if term %}
+        <h4>BUSCASTE ESTO WEY:</h4>
+        <p> {{ term }}
+    {% endif %}
 {% endblock content %}

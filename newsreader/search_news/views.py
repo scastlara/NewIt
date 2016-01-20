@@ -2,7 +2,7 @@
 # MODULES
 #--------
 from django.shortcuts import render
-from .forms import NameForm
+from .forms import SearchForm
 
 '''
 Here we define what GELPI (aka L'HOME)
@@ -20,11 +20,15 @@ def index_view(request):
     string = "Esto es content que viene de index_view() en views.py y se envía a la template base.html"
 
     if request.method == "POST":
-        form = NameForm(request.POST)
+        form = SearchForm(request.POST)
         if form.is_valid():
-            # Here we would do the mySQL search
-            return render(request, 'search_news/index.html', {'form': form, 'content': "has buscado algo", 'term' : form.cleaned_data["sterm"]} )
+            # Get what the user wrote:
+            search_term = form.cleaned_data['sterm']
+
+            # Here we would do magic (MySQL search) and we will return something that will go to
+            # the template =D
+            return render(request, 'search_news/index.html', {'form': form, 'content': "has buscado algo", 'term' : search_term} )
     else:
-        form = NameForm()
+        form = SearchForm()
 
     return render(request, 'search_news/index.html', {'content': string, 'form': form})
