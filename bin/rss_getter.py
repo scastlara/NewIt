@@ -2,6 +2,7 @@ import feedparser
 import codecs
 import MySQLdb
 import time
+import sys
 
 def write_feed(file, data):
     fh = codecs.open(file, "w", "utf-8")
@@ -27,13 +28,13 @@ def date_changer(date):
 	sergio_date = date[4].split(":")[0] + date[4].split(":")[1]
 	new_date = date[3]+"-"+month_dict[date[2]]+"-"+date[1]+" "+date[4]
 	return (new_date,sergio_date)
-	
+
 
 def get_ID(title, source, date):
     title = title.encode("ascii", "ignore")
     words = title.split()
 
-    source_codes = { 'ELDIARIO.ES':001  }
+    source_codes = { 'ELDIARIO.ES': 1  }
     title_code = int()
     max_i = 10
     i     = 0
@@ -46,60 +47,53 @@ def get_ID(title, source, date):
 
     final_code = str()
     final_code = str(source_codes[source]) + str(title_code) + str(date)
-    print(title_code)
+    return(final_code)
 
 def add_entries(data):
-    db     = MySQLdb.connect("localhost","root","5961", "news")
 
+    # CONNECT TO DATABASE
+    db     = MySQLdb.connect("localhost","root","5961", "news")
     cursor = db.cursor()
+
+    # UTF8 THINGS
     db.set_character_set('utf8')
     cursor.execute('SET NAMES utf8;')
     cursor.execute('SET CHARACTER SET utf8;')
     cursor.execute('SET character_set_connection=utf8;')
-    fh = codecs.open("test", "w", "utf-8")
-
-    fileout = codecs.open("culo", "w", "utf-8")
 
     for article in data.entries:
         time.sleep(1)
-        identifier = article.title + article.published
         title   = article.title
-        fecha   = article.published
+        date   = article.published
         newsp   = "ELDIARIO.ES"
         content = article.description
 
-       
+        # (formatted_date, hour+minutes)
+        date_tuple = date_changer(date)
 
         # GET ID FOR DATABASE
-        get_ID(title, newsp, fecha)
-        title = title.replace("'", "")
-        content=content.replace("'", "")
+        identifier = get_ID(title, newsp, date_tuple[1])
 
+        # REMOVE SINGLE QUOTES
+        title   = title.replace("'", "")
+        content = content.replace("'", "")
 
-        print(title)
-        #title = title.encode("ascii", "ignore")
-        #content = content.encode("ascii", "ignore")
-
-        fh.write("IDENTIFIER: " + identifier + "\n\n")
-        fh.write("TITLE: " + title + "\n\n")
-        fh.write("FECHA: " + fecha + "\n\n")
-        fh.write("newsp: " + newsp + "\n\n")
-        fh.write("CONTENT: " + content + "\n\n")
-        fh.write("-----\n")
-
+        # SQL QUERY TO ADD DATA TO DB
         sql = "INSERT INTO NEWSTABLE(ID, TITLE, FECHA, NEWSPAPER, CONTENT) \
-VALUES ('%s', '%s', '%s', '%s', '%s')" % (title, identifier, fecha, newsp, content)
-        fileout.write(sql)
+VALUES ('%s', '%s', '%s', '%s', '%s')" % ( identifier, title, date, newsp, content)
+
         try:
             cursor.execute(sql)
             db.commit()
-            print("TO BIEN")
+            sys.stderr.write('Adding article to database: ' + identifier + '  ok\n')
         except MySQLdb.ProgrammingError, e:
-            print 'There was a MySQL warning.  This is the info we have about it: %s' %(e)
-            print("NO se pudo subir datos")
+            sys.stderr.write('Adding article to database: ' + identifier + '  not ok\n')
+            sys.stderr.write('\tWarning %s' %(e) )
 
     db.close()
 
+
+# FUNCTION CALLS TO TEST
 feed = read_rss('http://eldiario.es.feedsportal.com/rss')
 write_feed("kk.html", feed)
 add_entries(feed)
