@@ -3,4 +3,14 @@
 {% block content %}
     <!-- This 'content' variable will come from the view index_view()  -->
     {{ content }}
+
+
+    <form action="#" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" />
+    </form>
+
+    <h4>BUSCASTE ESTO WEY:</h4>
+    <p> {{ term }}
 {% endblock content %}
