@@ -23,16 +23,19 @@ li#vmenu a:hover {
 
 #header {
     width:90%;
-    background-color: red;
+    background-color: #51b4c2;
     float:left;
     margin: auto;
     height: 20%;
+    box-shadow: 0 4px 8px 0 #888888, 0 6px 20px 0 #888888;
 }
 
 #content {
     float: left;
-    width: 60%;
-    background-color: blue;
+    width: 65%;
+    background-color: #EAEAEA;
+    padding-left: 10%;
+    box-shadow: 0 4px 8px 0 #888888, 0 6px 20px 0 #888888;
 }
 
 #sidebar {
