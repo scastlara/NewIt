@@ -1,16 +1,28 @@
 <html>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'search_news/style.css' %}" />
 <meta charset="utf-8">
 <head>
     <title> News Reader </title>
 </head>
 
 <body>
-    <h1> THIS IS A NEWS READER </h1>
-    <h4> ¿Qué te interesa? </h4>
+    <div id="header">
+        <h1> THIS IS A NEWS READER </h1>
+    </div>
 
-    <!-- This will be filled by index.html template -->
-    {% block content %}
-    {% endblock %}
+
+    <div id="sidebar">
+        hola
+    </div>
+
+
+    <div id="content">
+        <h4> ¿Qué te interesa? </h4>
+        <!-- This will be filled by index.html template -->
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 
 </html>

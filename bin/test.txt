@@ -1,0 +1,23 @@
+TO BIEN
+TO BIEN
+TO BIEN
+TO BIEN
+TO BIEN
+There was a MySQL warning.  This is the info we have about it: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Consumidos': David Cronenberg se enfrenta al peligro de la literatura', ''Consum' at line 1")
+NO se pudo subir datos
+TO BIEN
+TO BIEN
+TO BIEN
+TO BIEN
+TO BIEN
+TO BIEN
+TO BIEN
+There was a MySQL warning.  This is the info we have about it: (1064, 'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \'nmero dos\' por "prdida de confianza"\', \'El secretario de Podemos en Galicia sust\' at line 1')
+NO se pudo subir datos
+TO BIEN
+TO BIEN
+TO BIEN
+TO BIEN
+TO BIEN
+There was a MySQL warning.  This is the info we have about it: (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'antisistema'.</p><p>Berln est dejando de ser una ciudad atractiva para los artis' at line 1")
+NO se pudo subir datos
