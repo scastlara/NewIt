@@ -72,6 +72,7 @@ def add_entries(data):
 
         # (formatted_date, hour+minutes)
         date_tuple = date_changer(date)
+        date = date_tuple[0]
 
         # GET ID FOR DATABASE
         identifier = get_ID(title, newsp, date_tuple[1])
