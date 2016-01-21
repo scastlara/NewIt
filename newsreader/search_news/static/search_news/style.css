@@ -33,6 +33,7 @@ li#vmenu a:hover {
 #content {
     float: left;
     width: 65%;
+    height: 90%;
     background-color: #EAEAEA;
     padding-left: 10%;
     box-shadow: 0 4px 8px 0 #888888, 0 6px 20px 0 #888888;
