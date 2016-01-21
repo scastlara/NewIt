@@ -24,6 +24,7 @@ def index_view(request):
         if form.is_valid():
             # Get what the user wrote:
             search_term = form.cleaned_data['sterm']
+            
             if len(search_term) > 0:
                 string = "has buscado algo"
 
