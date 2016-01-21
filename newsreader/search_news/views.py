@@ -19,8 +19,8 @@ calling a template
 def index_view(request):
     string = "Esto es content que viene de index_view() en views.py y se envía a la template base.html"
 
-    if request.method == "POST":
-        form = SearchForm(request.POST)
+    if request.method == "GET":
+        form = SearchForm(request.GET)
         if form.is_valid():
             # Get what the user wrote:
             search_term = form.cleaned_data['sterm']
