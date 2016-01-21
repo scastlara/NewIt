@@ -37,14 +37,16 @@ def get_ID(title, source, date):
     source_codes = { 'ELDIARIO.ES': 1  }
     title_code = int()
     max_i = 10
+    prime_nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 27]
     i     = 0
     for word in words:
         if i < max_i:
-            title_code += ord(word[0])
+            title_code += ord(word[0]) * prime_nums[i]
             i += 1
         else:
             break
 
+    print("Source: ", source_codes[source], " Title: ", title_code, " Date:", date, "\n")
     final_code = str()
     final_code = str(source_codes[source]) + str(title_code) + str(date)
     return(final_code)
