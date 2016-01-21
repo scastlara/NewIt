@@ -2,7 +2,7 @@
 
 ## Run the server
 
-To run the server, go to your project directory and run the following command:
+To run the server, go to the directory newsreader/ and run the following command:
 
 ```
 python3 manage.py runserver
