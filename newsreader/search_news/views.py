@@ -24,10 +24,13 @@ def index_view(request):
         if form.is_valid():
             # Get what the user wrote:
             search_term = form.cleaned_data['sterm']
+            if len(search_term) > 0:
+                string = "has buscado algo"
 
             # Here we would do magic (MySQL search) and we will return something that will go to
             # the template =D
-            return render(request, 'search_news/index.html', {'form': form, 'content': "has buscado algo", 'term' : search_term} )
+            return render(request, 'search_news/index.html', {'form': form, 'content': string, 'term' : search_term} )
+
     else:
         form = SearchForm()
 
