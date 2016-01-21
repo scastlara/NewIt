@@ -9,6 +9,7 @@
 - [ ] Change rss_getter.py to work with the new database.
 
 ### Design and CSS
+- [ ] Create Logo and Header (we need a name!)
 - [ ] Create CSS for 'h1', 'h2', and 'p' to have a consistent design.
 - [ ] Create CSS for the sidebar.
 - [ ] Create CSS divs for user login box.
