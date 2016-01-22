@@ -1,5 +1,17 @@
 # README
 
+## Version
+
+v.0.1.0
+
+* Each time you fix a bug (backwards-compatible solution), increase the PATCH version.
+* Each time you change the model, fix a bug (incompatible solution), add new features... increase the MINOR version.
+* We won't change the MAJOR version until we have a fully working version of the website.
+
+See: http://semver.org/
+
+
+
 ## TO DO
 
 ### Models and Database
@@ -79,7 +91,7 @@ To install *MySQLdb*
 sudo pip install MySQLdb
 ```
 
-Then, you have to configure your Django application. You shoiuld have all the files up-to-date
+Then, you have to configure your Django application. You should have all the files up-to-date
 with our Github repository, because you don't want to mess around with all the config files by yourself.
 
 The user and the password are in this folder (obviously, for the final version we will change it):
