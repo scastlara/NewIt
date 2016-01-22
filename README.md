@@ -2,7 +2,7 @@
 
 ## Version
 
-v.0.2.1
+v.0.2.2
 
 * Each time you fix a bug (backwards-compatible solution), increase the PATCH version.
 * Each time you change the model, fix a bug (incompatible solution), add new features... increase the MINOR version.
@@ -18,6 +18,8 @@ See: http://semver.org/
 
 - [ ] Improve Database design to increase performance.
 - [ ] Check if Data-Types and constrains are correct.
+- [ ] Learn how to check if a record exist before uplading it and change rss_getter.py to do that.
+    - See: http://stackoverflow.com/questions/10369042/how-to-check-if-record-exists-if-not-insert
 - [x] Change rss_getter.py to work with the new database.
 - [ ] Learn how to do Full text search using SQL.
 - [ ] Learn how to do the queries on Django
