@@ -71,7 +71,7 @@ def read_sources():
             continue
         codes[line] = i
         i += 1
-    print(codes)
+    sys.stderr.write(codes)
     return(codes)
 
 
