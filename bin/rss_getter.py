@@ -124,7 +124,7 @@ def add_entries(data):
         time.sleep(1)
         title   = article.title
         date   = article.published
-        newsp   = "ELDIARIO.ES"
+        newsp   = "ELDIARIO"
         content = article.description
         link    = article.link
 
