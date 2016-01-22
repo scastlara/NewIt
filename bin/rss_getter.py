@@ -64,7 +64,7 @@ def read_sources():
     script_path = script_path.replace("rss_getter.py", "")
     source_file = script_path + "sources.txt"
     sfile = open(source_file, "r")
-    i     = 0
+    i     = 1
     for line in sfile:
         line = line.strip()
         if line[0] == "#":
@@ -85,7 +85,7 @@ def get_ID(title, source, date, source_codes):
     title_code = int()
     max_i = 10
     prime_nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 27]
-    i     = 1
+    i     = 0
     for word in words:
         if i < max_i:
             title_code += ord(word[0]) * prime_nums[i]
