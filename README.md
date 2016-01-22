@@ -1,5 +1,7 @@
 # README
 
+![mockup](https://raw.githubusercontent.com/scastlara/appnoticiosa/master/mockups/mock1.png)
+
 ## Version
 
 v.0.1.0
