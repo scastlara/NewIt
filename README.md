@@ -2,7 +2,7 @@
 
 ## Version
 
-v.0.1.0
+v.0.1.1
 
 * Each time you fix a bug (backwards-compatible solution), increase the PATCH version.
 * Each time you change the model, fix a bug (incompatible solution), add new features... increase the MINOR version.

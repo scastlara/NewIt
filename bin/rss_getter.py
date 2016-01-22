@@ -1,10 +1,24 @@
+# ---------------------------------------------
+# MODULES
+# ---------------------------------------------
 import feedparser
 import codecs
 import MySQLdb
 import time
 import sys
+import os
 
+
+# ---------------------------------------------
+# FUNCTIONS
+# ---------------------------------------------
+
+# ---------------------------------------------
+'''
+This function is for debugging/development. It prints the feeds to an html file.
+'''
 def write_feed(file, data):
+
     fh = codecs.open(file, "w", "utf-8")
 
     fh.write("<html>\n<meta charset=\"UTF-8\"> ")
@@ -17,11 +31,20 @@ def write_feed(file, data):
 
         fh.write("</html>")
 
+
+# ---------------------------------------------
+'''
+Function that downloads and parses de XML from the feed
+'''
 def read_rss(link):
     d = feedparser.parse(link)
     return(d)
 
 
+# ---------------------------------------------
+'''
+Changes the date to a format suitable for MySQL
+'''
 def date_changer(date):
 	month_dict={ 'Jan':'01','Feb':'02','Mar':'03','Apr':'04','May':'05','Jun':'06','Jul':'07','Aug':'08','Sep':'09','Oct':'10','Nov':'11','Dec':'12'}
 	date = date.split(" ")
@@ -30,11 +53,35 @@ def date_changer(date):
 	return (new_date,sergio_date)
 
 
-def get_ID(title, source, date):
+# ---------------------------------------------
+'''
+Function that reads all the "allowed" sources and assigns a number to them
+for the article "identifier"
+'''
+def read_sources():
+    codes = dict()
+    script_path = os.path.realpath(__file__)
+    script_path = script_path.replace("rss_getter.py", "")
+    source_file = script_path + "sources.txt"
+    sfile = open(source_file, "r")
+    i     = 0
+    for line in sfile:
+        line = line.strip()
+        if line[0] == "#":
+            continue
+        codes[line] = i
+        i += 1
+    print(codes)
+    return(codes)
+
+
+# ---------------------------------------------
+'''
+This hashing function creates a "unique" ID for each article/story
+'''
+def get_ID(title, source, date, source_codes):
     title = title.encode("ascii", "ignore")
     words = title.split()
-
-    source_codes = { 'ELDIARIO.ES': 1  }
     title_code = int()
     max_i = 10
     prime_nums = [2, 3, 5, 7, 11, 13, 17, 19, 23, 27]
@@ -46,11 +93,18 @@ def get_ID(title, source, date):
         else:
             break
 
-    print("Source: ", source_codes[source], " Title: ", title_code, " Date:", date, "\n")
+    sys.stderr.write("Source: " + str(source_codes[source]) + " Title: " + str(title_code) + " Date:" + str(date) + "\n")
     final_code = str()
     final_code = str(source_codes[source]) + str(title_code) + str(date)
     return(final_code)
 
+
+# ---------------------------------------------
+'''
+Uploads the News/articles to our MySQL database. Right now it uses the module MySQLdb.
+We may need to change it to PyMySQL, depending on the configuration of GELPI's server.
+It is a very big function. It needs refactoring.
+'''
 def add_entries(data):
 
     # CONNECT TO DATABASE
@@ -62,6 +116,9 @@ def add_entries(data):
     cursor.execute('SET NAMES utf8;')
     cursor.execute('SET CHARACTER SET utf8;')
     cursor.execute('SET character_set_connection=utf8;')
+
+    # READ FEED SOURCES
+    source_codes = read_sources()
 
     for article in data.entries:
         time.sleep(1)
@@ -75,7 +132,7 @@ def add_entries(data):
         date = date_tuple[0]
 
         # GET ID FOR DATABASE
-        identifier = get_ID(title, newsp, date_tuple[1])
+        identifier = get_ID(title, newsp, date_tuple[1], source_codes)
 
         # REMOVE SINGLE QUOTES
         title   = title.replace("'", "")
@@ -96,7 +153,10 @@ VALUES ('%s', '%s', '%s', '%s', '%s')" % ( identifier, title, date, newsp, conte
     db.close()
 
 
-# FUNCTION CALLS TO TEST
+# ---------------------------------------------
+# MAIN PROGRAM
+# ---------------------------------------------
+
 feed = read_rss('http://eldiario.es.feedsportal.com/rss')
 write_feed("kk.html", feed)
 add_entries(feed)
