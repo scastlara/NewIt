@@ -71,7 +71,7 @@ def read_sources():
             continue
         codes[line] = i
         i += 1
-    sys.stderr.write(codes)
+    sys.stderr.write(str(codes))
     return(codes)
 
 
@@ -126,6 +126,7 @@ def add_entries(data):
         date   = article.published
         newsp   = "ELDIARIO.ES"
         content = article.description
+        link    = article.link
 
         # (formatted_date, hour+minutes)
         date_tuple = date_changer(date)
@@ -139,8 +140,8 @@ def add_entries(data):
         content = content.replace("'", "")
 
         # SQL QUERY TO ADD DATA TO DB
-        sql = "INSERT INTO NEWSTABLE(ID, TITLE, FECHA, NEWSPAPER, CONTENT) \
-VALUES ('%s', '%s', '%s', '%s', '%s')" % ( identifier, title, date, newsp, content)
+        sql = "INSERT INTO search_news_notisiario (identifier, title, pubdate, source, language, link, content) \
+               VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % ( identifier, title, date, newsp, "ESP", link, content)
 
         try:
             cursor.execute(sql)
