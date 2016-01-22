@@ -18,7 +18,7 @@ See: http://semver.org/
 
 - [ ] Improve Database design to increase performance.
 - [ ] Check if Data-Types and constrains are correct.
-- [ ] Change rss_getter.py to work with the new database.
+- [x] Change rss_getter.py to work with the new database.
 - [ ] Learn how to do Full text search using SQL.
 - [ ] Learn how to do the queries on Django
     - Full text search over multiple columns is not possible using Django models.
