@@ -33,6 +33,7 @@ See: http://semver.org/
 - [ ] Create CSS divs for user login box.
 - [ ] Improve padding for current (and future) divs.
 - [ ] Search box design and position (maybe centered? ykse tio xd)
+- [ ] Better checkboxes for the subscriptions page (see mockups). http://tutorialzine.com/2011/03/better-check-boxes-jquery-css/
 - [ ] [ OPTIONAL ] Tweak CSS and javascript to have responsive desing (so it can be used on phones).
 
 ### Application
