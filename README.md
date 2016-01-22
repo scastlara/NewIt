@@ -7,6 +7,10 @@
 - [ ] Improve Database design to increase performance.
 - [ ] Check if Data-Types and constrains are correct.
 - [ ] Change rss_getter.py to work with the new database.
+- [ ] Learn how to do Full text search using SQL.
+- [ ] Learn how to do the queries on Django
+    - Full text search over multiple columns is not possible using Django models.
+     However, one can execute SQL queries and map the results to Django Models. See: https://docs.djangoproject.com/en/dev/topics/db/sql/
 
 ### Design and CSS
 - [ ] Create Logo and Header (we need a name!)
@@ -22,6 +26,9 @@
 - [ ] Implement User login view + template.
 - [ ] Implement a way to sign up in our application.
 - [ ] Create view + template for user settings (user management before this).
+- [ ] [ OPTIONAL ] Integrate Javascript word clouds for categories? news read by the user? search terms?
+- [ ] [ OPTIONAL ] Implement a way to add or request the addition of new RSS sources.
+- [ ] [ OPTIONAL ] Related news after reading one? that's machine learning ;)
 
 
 ## Github tips
