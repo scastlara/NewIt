@@ -19,6 +19,7 @@
 - [ ] Create CSS divs for user login box.
 - [ ] Improve padding for current (and future) divs.
 - [ ] Search box design and position (maybe centered? ykse tio xd)
+- [ ] [ OPTIONAL ] Tweak CSS and javascript to have responsive desing (so it can be used on phones).
 
 ### Application
 - [ ] Drop down menu to choose category (using another GET request parameter).  
@@ -37,14 +38,17 @@ You need to be inside the Git project folder: the one with newsreader/ and bin/
 
 ### Add new changes
 
+```
 git add your_file.py
 git commit -m 'Your message'
 git push
+```
 
 ### Update your local repository
 
+```
 git pull
-
+```
 
 ## Run the server
 
