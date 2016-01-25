@@ -8,6 +8,26 @@
 
 <body>
 
+  <div id="sidebar">
+    <ul id="menu">
+      <li>
+        <a href="/"> home</a>
+      </li>
+      <li>
+        <a href="http://www.ub.edu/web/ub/galeries/imatges/noticies/2010/10/josepabril.JPG_1668829180.jpg" target="_blank">sergio</a>
+      </li>
+      <li>
+        <a href="index.html">my</a>
+      </li>
+      <li>
+        <a href="#">cameras</a>
+      </li>
+    </ul>
+
+  </div>
+
+
+
     <div id="header">
 	<img src="{% static 'search_news/Images/cutre.jpg' %}", alt="mec">
 	<h1 class="title"> EL NOTISIARIO </h1>
@@ -16,32 +36,13 @@
 	<a href="default.asp" target="_blank">This is a link</a>
 
     </div>
-
-
-    <div id="sidebar">
-      <ul id="menu">
-        <li>
-          <a href="/"> home</a>
-        </li>
-        <li>
-          <a href="http://www.ub.edu/web/ub/galeries/imatges/noticies/2010/10/josepabril.JPG_1668829180.jpg">sergio</a>
-        </li>
-        <li>
-          <a href="index.html">my</a>
-        </li>
-        <li>
-          <a href="#">cameras</a>
-        </li>
-      </ul>
-
-    </div>
-
-
     <div id="content">
+      <div id="text_content">
         <h4> ¿Qué te interesa? </h4>
         <!-- This will be filled by index.html template -->
         {% block content %}
         {% endblock %}
+      </div>
     </div>
 
 
