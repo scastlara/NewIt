@@ -51,10 +51,10 @@
     margin: 0;
     float:right;
     background-color: #EAEAEA;
-    padding-left:  ;
+    padding-right: 0% ;
     padding-top: 100px;
     width: 80%;
-    height: 100%;
+    height: 800px;
 /*    box-shadow: 0 4px 8px 0 #888888, 0 6px 20px 0 #888888;*/
 }
 #text_content {
@@ -103,4 +103,14 @@ h1 {
 
 .highlight {
     background-color: #333;
+}
+
+#footer {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0px;
+  float:right;
+  text-align: right;
+  width: 80%;
+  height: 2%;
 }
