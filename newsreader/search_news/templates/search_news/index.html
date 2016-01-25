@@ -15,7 +15,8 @@
         <h4>BUSCASTE ESTO WEY:</h4>
         <p> {{ term }}
         {% for item in news %}
-            <h3> {{ item }} </h3>
+            <h3> <a href="{{ item.link }}"> {{ item.title }} </a> </h3>
+             {% autoescape off %} {{ item.content }} {% endautoescape %}
         {% endfor %}
 
     {% endif %}
