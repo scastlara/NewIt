@@ -105,7 +105,7 @@ Uploads the News/articles to our MySQL database. Right now it uses the module My
 We may need to change it to PyMySQL, depending on the configuration of GELPI's server.
 It is a very big function. It needs refactoring.
 '''
-def add_entries(data):
+def add_entries(data, category):
 
     # CONNECT TO DATABASE
     db     = MySQLdb.connect("localhost","root","5961", "news")
@@ -140,8 +140,14 @@ def add_entries(data):
         content = content.replace("'", "")
 
         # SQL QUERY TO ADD DATA TO DB
-        sql = "INSERT INTO search_news_notisiario (identifier, title, pubdate, source, language, link, content) \
-               VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')" % ( identifier, title, date, newsp, "ESP", link, content)
+        #sql =  "INSERT INTO search_news_articles (identifier, title, pubdate, source, language, link, content, category_id) \
+        #        VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') \
+        #       SELECT * FROM (SELECT '%s') AS tmp \
+        #       WHERE NOT EXISTS ( \
+        #            SELECT identifier FROM search_news_articles WHERE identifier = '%s' \
+        #       );" % ( identifier, title, date, newsp, "ESP", link, content, category, identifier, identifier)
+        sql = "INSERT INTO search_news_articles (identifier, title, pubdate, source, language, link, content, category_id) \
+               VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % ( identifier, title, date, newsp, "ESP", link, content, category)
 
         try:
             cursor.execute(sql)
@@ -155,9 +161,63 @@ def add_entries(data):
 
 
 # ---------------------------------------------
+'''
+This function reads the feeds with their category. It returns a list of tuples.
+'''
+def read_feeds(filename):
+    my_feeds = list()
+    fd = open(filename, "r")
+    for line in fd:
+        line      = line.strip()
+        feed_elem = line.split()
+        feed_tup  = (feed_elem[0], feed_elem[1])
+        my_feeds.append(feed_tup)
+        print(feed_tup)
+    return(my_feeds)
+
+
+def add_categories(cat):
+    # CONNECT TO DATABASE
+    db     = MySQLdb.connect("localhost","root","5961", "news")
+    cursor = db.cursor()
+
+    # UTF8 THINGS
+    db.set_character_set('utf8')
+    cursor.execute('SET NAMES utf8;')
+    cursor.execute('SET CHARACTER SET utf8;')
+    cursor.execute('SET character_set_connection=utf8;')
+
+    sql =  "INSERT INTO search_news_category (category) \
+           SELECT * FROM (SELECT '%s') AS tmp \
+           WHERE NOT EXISTS ( \
+                SELECT category FROM search_news_category WHERE category = '%s' \
+           );" % (cat, cat)
+    try:
+        cursor.execute(sql)
+        db.commit()
+        sys.stderr.write('Adding category to database: ' + cat + '  ok\n')
+    except MySQLdb.ProgrammingError, e:
+        sys.stderr.write('Adding category to database: ' + cat + '  not ok\n')
+        sys.stderr.write('\tWarning %s' %(e) )
+
+    db.close()
+
+
+
+# ---------------------------------------------
 # MAIN PROGRAM
 # ---------------------------------------------
 
-feed = read_rss('http://eldiario.es.feedsportal.com/rss')
-write_feed("kk.html", feed)
-add_entries(feed)
+# GET SCRIPT PATH
+script_path = os.path.realpath(__file__)
+script_path = script_path.replace("rss_getter.py", "")
+
+# GET FEEDS WITH CATEGORIES
+feed_path   = script_path + "feeds.tbl"
+all_feeds  = read_feeds(feed_path)
+
+# UPLOAD FEEDS TO DB
+for feed in all_feeds:
+    feed_obj = read_rss(feed[0])
+    add_categories(feed[1])
+    add_entries(feed_obj, feed[1])
