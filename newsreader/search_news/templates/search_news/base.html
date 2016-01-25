@@ -7,30 +7,27 @@
 </head>
 
 <body>
+ 
     <div id="header">
-        <h1> THIS IS A NEWS READER </h1>
+	<img src="{% static 'search_news/Images/cutre.jpg' %}", alt="mec">
+	<h1 class="title"> EL NOTISIARIO </h1>
+	<a href="default.asp" target="_blank">This is another link</a>
+	<a href="default.asp" target="_blank">This is a link</a>
     </div>
+
+
     <div id="sidebar">
-      <ul id="menu">
-        <li>
-          <a href="/"> home</a>
-        </li>
-        <li>
-          <a href="/">sergio</a>
-        </li>
-        <li>
-          <a href="index.html">my</a>
-        </li>
-        <li>
-          <a href="#">cameras</a>
-        </li>
-      </ul>
+        hola
     </div>
+
+
     <div id="content">
-      <h4> ¿Qué te interesa? </h4>
-      <!-- This will be filled by index.html template -->
-      {% block content %}
-      {% endblock %}
+        <h4> ¿Qué te interesa? </h4>
+        <!-- This will be filled by index.html template -->
+        {% block content %}
+        {% endblock %}
     </div>
+   
 </body>
+
 </html>
