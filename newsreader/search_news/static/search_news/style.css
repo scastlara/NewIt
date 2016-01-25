@@ -70,21 +70,14 @@
     list-style-type: none;
     margin: 0%;
     float: left;
-    padding: 0;
+    padding: 1;
     width: 200px;
 }
 #menu a {
-  color: #9ACD32;
-	display: block;
-	font-family: "Arial Black", Gadget, sans-serif;
-	font-size: 14px;
-	font-weight: normal;
-	margin: 0;
-  padding: 10px 0 20px;
-	text-decoration: none;
-  text-align: center;
-	text-transform: uppercase;
-
+    display: block;
+    text-align: center;
+    padding: 0px 0 0px 0px;
+    text-decoration: none;
 }
 
 #menu li a:hover {
