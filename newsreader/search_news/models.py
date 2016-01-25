@@ -6,14 +6,24 @@ We should do it here beacause we will be able to use
 django internal functions and the admin site.
 '''
 
+# TABLE FOR CATEGORIES
+class Category(models.Model):
+    category     = models.CharField(max_length=10, primary_key=True)
+    synonyms     = models.TextField()
+    num_articles = models.IntegerField()
+    num_queries  = models.IntegerField()
 
-# MAIN TABLE WITH EVERYTHING
-class Notisiario(models.Model):
+
+# TABLES FOR ARTICLES
+class Articles(models.Model):
     identifier = models.IntegerField(primary_key=True)
     pubdate    = models.DateField()
-    category   = models.CharField(max_length=15)
     title      = models.TextField()
     language   = models.CharField(max_length=3)
     content    = models.TextField()
+    category   = models.ForeignKey(
+        "Category",
+    )
     link       = models.URLField()
     source     = models.CharField(max_length=10)
+    bookmarked = models.BooleanField()
