@@ -30,7 +30,7 @@
 	float:left;
 }
 
-#header a:link, a:visited {
+#header a:link, #header a:visited {
     background-color: #f44336;
     color: white;
     padding: 14px 25px;
@@ -54,7 +54,7 @@
     padding-right: 0% ;
     padding-top: 100px;
     width: 80%;
-    height: 800px;
+    height: 98%;
 /*    box-shadow: 0 4px 8px 0 #888888, 0 6px 20px 0 #888888;*/
 }
 #text_content {
