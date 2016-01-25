@@ -47,6 +47,7 @@ See: http://semver.org/
 - [ ] [ OPTIONAL ] Integrate Javascript word clouds for categories? news read by the user? search terms?
 - [ ] [ OPTIONAL ] Implement a way to add or request the addition of new RSS sources.
 - [ ] [ OPTIONAL ] Related news after reading one? that's machine learning ;)
+- [ ] [ OPTIONAL ] User organization of subscriptions by folders, and displayed in the sidebar.
 
 
 ## Github tips
