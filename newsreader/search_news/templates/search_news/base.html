@@ -8,8 +8,13 @@
 
 <body>
     <div id="header">
-        <h1> THIS IS A NEWS READER </h1>
+	<img src="{% static 'search_news/Images/cutre.jpg' %}", alt="mec">
+	<h1 class="title"> EL NOTISIARIO </h1>
+	<a id="Adri" href="default.asp" target="_blank">This is another link</a>
+	<a id="Adri" href="default.asp" target="_blank">This is a link</a>
     </div>
+
+
     <div id="sidebar">
       <ul id="menu">
         <li>
@@ -25,12 +30,17 @@
           <a href="#">cameras</a>
         </li>
       </ul>
+
     </div>
+
+
     <div id="content">
-      <h4> ¿Qué te interesa? </h4>
-      <!-- This will be filled by index.html template -->
-      {% block content %}
-      {% endblock %}
+        <h4> ¿Qué te interesa? </h4>
+        <!-- This will be filled by index.html template -->
+        {% block content %}
+        {% endblock %}
     </div>
+
 </body>
+
 </html>
