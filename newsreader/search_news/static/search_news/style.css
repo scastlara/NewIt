@@ -1,28 +1,15 @@
-ul#vmenu {
-    list-style-type: none;
-    margin: 5%;
-    float: left;
-    padding: 0;
-    width: 200px;
-    background-color: #f1f1f1;
-}
-
-li#vmenu a {
-    display: block;
-    color: #000;
-    text-align: center;
-    padding: 8px 0 8px 16px;
-    text-decoration: none;
-}
-
-li#vmenu a:hover {
-    background-color: #333;
-    color: white;
-}
-
-
+  body {
+  	background: #fff;
+  	font-family: Arial, Helvetica, sans-serif;
+  	/*font-size: 14px;*/
+  	font-weight: normal;
+  	line-height: 1;
+  	margin: 0;
+  	min-width: 960px;
+  	padding: 0;
+  }
 #header {
-    width:90%;
+    width:100%;
     background-color: #51b4c2;
     float:left;
     margin: auto;
@@ -32,8 +19,8 @@ li#vmenu a:hover {
 
 #content {
     float: left;
-    width: 65%;
-    height: 90%;
+    width: 75%;
+    height: 100%;
     background-color: #EAEAEA;
     padding-left: 10%;
     box-shadow: 0 4px 8px 0 #888888, 0 6px 20px 0 #888888;
@@ -46,6 +33,27 @@ li#vmenu a:hover {
     background-color: #333333;
 }
 
+ul#vmenu {
+    list-style-type: none;
+    margin: 100%;
+    float: left;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+}
+
+li#vmenu a {
+    display: block;
+    color: #000;
+    text-align: center;
+    padding: 0px 0 0px 0px;
+    text-decoration: none;
+}
+
+li#vmenu a:hover {
+    background-color: #333;
+    color: white;
+}
 
 h1 {
     color: #333333;
