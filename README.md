@@ -2,7 +2,7 @@
 
 ## Version
 
-v.0.3.0
+v.0.4.0
 
 * Each time you fix a bug (backwards-compatible solution), increase the PATCH version.
 * Each time you change the model, fix a bug (incompatible solution), add new features... increase the MINOR version.
@@ -87,13 +87,13 @@ then you need to install *PyMySQL*. Otherwise, use *MySQLdb*.
 
 To install *PyMySQL*:
 
-```
+```bash
 sudo pip3 install PyMySQL
 ```
 
 To install *MySQLdb*
 
-```
+```bash
 sudo pip install MySQLdb
 ```
 
@@ -129,4 +129,20 @@ less search_news/migrations/0001_initial.py
 
 # Create the table
 python3 manage.py sqlmigrate search_news 0001
+```
+
+### Full text search
+In order to do full text searches, one has to use the MYSIAM engine (put it in your settings.py).
+Then, you have to create indexes for the fields on which you want to search.
+Add this to your settings.py
+
+```python
+'OPTIONS': {
+    "init_command": "SET storage_engine=MYISAM",
+}
+```
+
+```sql
+ALTER TABLE search_news_articles ADD FULLTEXT(title);
+ALTER TABLE search_news_articles ADD FULLTEXT(content);
 ```
