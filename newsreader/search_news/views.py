@@ -18,7 +18,7 @@ calling a template
 #--------
 
 def index_view(request):
-    string = "Esto es content que viene de index_view() en views.py y se envía a la template base.html"
+    string = "Esto es content que viene de index_view() en views.py y se envia a la template base.html"
 
     if request.method == "GET":
         form = SearchForm(request.GET)
@@ -36,11 +36,11 @@ def index_view(request):
                               OR MATCH(content) AGAINST("%s") )' % (search_term, search_term)
                 if category != "All":
                     sql_query += ' AND category = "%s"' % (category)
-            elif category != "All":
+            elif category != "All" and len(category) > 0:
                 sql_query += ' WHERE category = "%s"' % (category)
 
             for article in Articles.objects.raw (sql_query):
-            	news.append(article.title)
+            	news.append(article)
 
             # Here we would do magic (MySQL search) and we will return something that will go to
             # the template =D
