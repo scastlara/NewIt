@@ -146,7 +146,7 @@ def add_entries(data, category):
         #       WHERE NOT EXISTS ( \
         #            SELECT identifier FROM search_news_articles WHERE identifier = '%s' \
         #       );" % ( identifier, title, date, newsp, "ESP", link, content, category, identifier, identifier)
-        sql = "INSERT INTO search_news_articles (identifier, title, pubdate, source, language, link, content, category_id) \
+        sql = "INSERT INTO search_news_articles (identifier, title, pubdate, source, language, link, content, category) \
                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % ( identifier, title, date, newsp, "ESP", link, content, category)
 
         try:

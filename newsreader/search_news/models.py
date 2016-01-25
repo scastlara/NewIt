@@ -16,14 +16,16 @@ class Category(models.Model):
 
 # TABLES FOR ARTICLES
 class Articles(models.Model):
-    identifier = models.IntegerField(primary_key=True)
-    pubdate    = models.DateField()
-    title      = models.TextField()
-    language   = models.CharField(max_length=3)
-    content    = models.TextField()
-    category   = models.ForeignKey(
-        "Category",
-    )
+    identifier  = models.IntegerField(primary_key=True)
+    pubdate     = models.DateField()
+    title       = models.TextField()
+    language    = models.CharField(max_length=3)
+    content     = models.TextField()
+    category    = models.CharField(max_length=10)
+    #     "Category",
+    #     on_delete = models.CASCADE,
+    #     db_column='category'
+    # )
     link       = models.URLField()
     source     = models.CharField(max_length=10)
     bookmarked = models.BooleanField()

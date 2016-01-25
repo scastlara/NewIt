@@ -25,9 +25,10 @@ def index_view(request):
         if form.is_valid():
             # Get what the user wrote:
             search_term = form.cleaned_data['sterm']
-            news = []
+            news = list()
             if len(search_term) > 0:
-                for p in Articles.objects.raw (' SELECT * FROM search_news_articles '):               
+                for p in Articles.objects.raw (' SELECT * FROM search_news_articles \
+                                                 WHERE MATCH(title) AGAINST("%s")' % (search_term)):
                 	news.append(p.title) ### AQUI ES ON ESTIC! PRINTA L'ULTIM! CAL FER UN APPEND!
 
             # Here we would do magic (MySQL search) and we will return something that will go to
