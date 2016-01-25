@@ -3,6 +3,7 @@
 #--------
 from django.shortcuts import render
 from .forms import SearchForm
+from .models import Articles
 
 '''
 Here we define what GELPI (aka L'HOME)
@@ -24,13 +25,14 @@ def index_view(request):
         if form.is_valid():
             # Get what the user wrote:
             search_term = form.cleaned_data['sterm']
-            
+            news = []
             if len(search_term) > 0:
-                string = "has buscado algo"
+                for p in Articles.objects.raw (' SELECT * FROM search_news_articles '):               
+                	news.append(p.title) ### AQUI ES ON ESTIC! PRINTA L'ULTIM! CAL FER UN APPEND!
 
             # Here we would do magic (MySQL search) and we will return something that will go to
             # the template =D
-            return render(request, 'search_news/index.html', {'form': form, 'content': string, 'term' : search_term} )
+            return render(request, 'search_news/index.html', {'form': form, 'content': string, 'news': news,	 'term' : search_term} )
 
     else:
         form = SearchForm()

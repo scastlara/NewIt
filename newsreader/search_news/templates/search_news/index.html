@@ -14,5 +14,9 @@
     {% if term %}
         <h4>BUSCASTE ESTO WEY:</h4>
         <p> {{ term }}
+        {% for item in news %}
+            <h3> {{ item }} </h3>
+        {% endfor %}
+        
     {% endif %}
 {% endblock content %}
