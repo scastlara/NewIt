@@ -17,7 +17,7 @@ class Category(models.Model):
 # TABLES FOR ARTICLES
 class Articles(models.Model):
     identifier  = models.IntegerField(primary_key=True)
-    pubdate     = models.DateField()
+    pubdate     = models.DateTimeField()
     title       = models.TextField()
     language    = models.CharField(max_length=3)
     content     = models.TextField()

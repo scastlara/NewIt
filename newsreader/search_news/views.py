@@ -39,6 +39,8 @@ def index_view(request):
             elif category != "All" and len(category) > 0:
                 sql_query += ' WHERE category = "%s"' % (category)
 
+            sql_query += ' ORDER BY pubdate DESC'
+
             for article in Articles.objects.raw (sql_query):
             	news.append(article)
 
