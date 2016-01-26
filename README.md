@@ -39,6 +39,8 @@ See: http://semver.org/
 - [ ] [ OPTIONAL ] Tweak CSS and javascript to have responsive desing (so it can be used on phones).
 
 ### Application
+- [ ] *BUG* Search keywords with quotes don't work.
+- [ ] Implement search modifyiers +palabra -esta_no "literal" 
 - [ ] Drop down menu to choose category (using another GET request parameter).  
 - [ ] Basic DB search implementation using the GET request.
 - [ ] Implement User login view + template.
