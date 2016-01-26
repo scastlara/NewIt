@@ -1,6 +1,6 @@
-#--------
+#----------------------------------------------------------------
 # MODULES
-#--------
+#----------------------------------------------------------------
 from django.shortcuts import render
 from .forms import SearchForm
 from .models import Articles
@@ -10,15 +10,18 @@ Here we define what GELPI (aka L'HOME)
 calls 'controllers'. Each user input will go
 to a specific 'function' (aka, view) inside the variable request.
 Then, the view will 'answer' the user with an HttpResponse,
-calling a template
+calling a template.
 '''
 
-#--------
+#----------------------------------------------------------------
 # VIEWS
-#--------
-
+#----------------------------------------------------------------
+'''
+INDEX VIEW: Here we have all the pages in which there are news displayed.
+    PROBLEMS: The logic of this functions is completely crap
+              Someone fix it pls
+'''
 def index_view(request):
-
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
@@ -48,14 +51,17 @@ def index_view(request):
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'form': form, 'error': error} )
-            # Here we would do magic (MySQL search) and we will return something that will go to
-            # the template =D
-
     else:
         form = SearchForm()
 
     return render(request, 'search_news/index.html', {'content': string, 'form': form})
 
+
+#------------------------------------------------
+'''
+REGISTER VIEW: Register form.
+    PROBLEMS: We need to create it.
+'''
 def register_view(request):
     string = "This is a user register page. Congratulations"
 
