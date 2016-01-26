@@ -85,7 +85,7 @@ DATABASES = {
        'PORT': '3306',
        'OPTIONS': {
            "init_command": "SET storage_engine=MYISAM",
-       } 
+       }
     }
 }
 
@@ -108,7 +108,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
