@@ -4,6 +4,17 @@ import os
 '''
 This file has the info needed to create web forms
 '''
+
+
+'''
+This implementation is awful. We are reading a static file that is a mirror of a file
+located in bin/. No way we are going to be famous with this implementation.
+
+A better approach would be to do a query to the MySQL database using Django models
+and add to the set_of_cat all the categories found in the DB table 'Category'.
+Someone do it PLS.
+'''
+
 def get_categories():
     script_path = os.path.abspath(__file__)
     script_path = script_path.replace("forms.py", "")
