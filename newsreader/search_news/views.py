@@ -18,7 +18,6 @@ calling a template
 #--------
 
 def index_view(request):
-    string = "Esto es content que viene de index_view() en views.py y se envia a la template base.html"
 
     if request.method == "GET":
         form = SearchForm(request.GET)
@@ -44,9 +43,13 @@ def index_view(request):
             for article in Articles.objects.raw (sql_query):
             	news.append(article)
 
+            if news:
+                return render(request, 'search_news/index.html', {'form': form, 'term' : search_term, 'category': category, 'news': news} )
+            else:
+                error = "No results for %s in category %s" % (search_term, category)
+                return render(request, 'search_news/index.html', {'form': form, 'error': error} )
             # Here we would do magic (MySQL search) and we will return something that will go to
             # the template =D
-            return render(request, 'search_news/index.html', {'form': form, 'content': sql_query, 'news': news, 'term' : search_term} )
 
     else:
         form = SearchForm()
