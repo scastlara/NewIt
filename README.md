@@ -39,8 +39,12 @@ See: http://semver.org/
 - [ ] [ OPTIONAL ] Tweak CSS and javascript to have responsive desing (so it can be used on phones).
 
 ### Application
-- [ ] *BUG* Search keywords with quotes don't work.
-- [ ] Implement search modifyiers +palabra -esta_no "literal" 
+- [ ] **BUG** Search keywords with quotes don't work.
+- [ ] **BUG** Searches with small words don't work e.g: PP. Increase min-size and add stopwords.
+    - See:
+        - http://stackoverflow.com/questions/8301586/mysql-full-text-search-search-for-short-words
+        - http://www.ranks.nl/stopwords/spanish
+- [ ] Implement search modifyiers +palabra -esta_no "literal"
 - [ ] Drop down menu to choose category (using another GET request parameter).  
 - [ ] Basic DB search implementation using the GET request.
 - [ ] Implement User login view + template.
