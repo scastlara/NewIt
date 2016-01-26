@@ -46,11 +46,11 @@ def read_rss(link):
 Changes the date to a format suitable for MySQL
 '''
 def date_changer(date):
-	month_dict={ 'Jan':'01','Feb':'02','Mar':'03','Apr':'04','May':'05','Jun':'06','Jul':'07','Aug':'08','Sep':'09','Oct':'10','Nov':'11','Dec':'12'}
-	date = date.split(" ")
-	sergio_date = date[4].split(":")[0] + date[4].split(":")[1]
-	new_date = date[3]+"-"+month_dict[date[2]]+"-"+date[1]+" "+date[4]
-	return (new_date,sergio_date)
+    month_dict={ 'Jan':'01','Feb':'02','Mar':'03','Apr':'04','May':'05','Jun':'06','Jul':'07','Aug':'08','Sep':'09','Oct':'10','Nov':'11','Dec':'12'}
+    date = date.split(" ")
+    sergio_date = date[4].split(":")[0] + date[4].split(":")[1]
+    new_date = date[3]+"-"+month_dict[date[2]]+"-"+date[1]+" "+date[4]
+    return (new_date,sergio_date)
 
 
 # ---------------------------------------------
@@ -71,7 +71,6 @@ def read_sources():
             continue
         codes[line] = i
         i += 1
-    sys.stderr.write(str(codes) + "\n")
     return(codes)
 
 
@@ -139,15 +138,9 @@ def add_entries(data, category):
         title   = title.replace("'", "")
         content = content.replace("'", "")
 
-        # SQL QUERY TO ADD DATA TO DB
-        #sql =  "INSERT INTO search_news_articles (identifier, title, pubdate, source, language, link, content, category_id) \
-        #        VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') \
-        #       SELECT * FROM (SELECT '%s') AS tmp \
-        #       WHERE NOT EXISTS ( \
-        #            SELECT identifier FROM search_news_articles WHERE identifier = '%s' \
-        #       );" % ( identifier, title, date, newsp, "ESP", link, content, category, identifier, identifier)
-        sql = "INSERT INTO search_news_articles (identifier, title, pubdate, source, language, link, content, category) \
-               VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')" % ( identifier, title, date, newsp, "ESP", link, content, category)
+        sql = "INSERT INTO  search_news_articles (identifier, title, pubdate, source, language, link, content, category) \
+               VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') \
+               ON DUPLICATE KEY UPDATE link=link;" % ( identifier, title, date, newsp, "ESP", link, content, category)
 
         try:
             cursor.execute(sql)
@@ -172,7 +165,6 @@ def read_feeds(filename):
         feed_elem = line.split()
         feed_tup  = (feed_elem[0], feed_elem[1])
         my_feeds.append(feed_tup)
-        print(feed_tup)
     return(my_feeds)
 
 
@@ -188,10 +180,10 @@ def add_categories(cat):
     cursor.execute('SET character_set_connection=utf8;')
 
     sql =  "INSERT INTO search_news_category (category) \
-           SELECT * FROM (SELECT '%s') AS tmp \
-           WHERE NOT EXISTS ( \
+            SELECT * FROM (SELECT '%s') AS tmp \
+            WHERE NOT EXISTS ( \
                 SELECT category FROM search_news_category WHERE category = '%s' \
-           );" % (cat, cat)
+            );" % (cat, cat)
     try:
         cursor.execute(sql)
         db.commit()
@@ -209,11 +201,10 @@ def add_categories(cat):
 # ---------------------------------------------
 
 # GET SCRIPT PATH
-script_path = os.path.realpath(__file__)
-script_path = script_path.replace("rss_getter.py", "")
+script_path = os.path.dirname( os.path.abspath(__file__) )
 
 # GET FEEDS WITH CATEGORIES
-feed_path   = script_path + "feeds.tbl"
+feed_path   = script_path + "/feeds.tbl"
 all_feeds  = read_feeds(feed_path)
 
 # UPLOAD FEEDS TO DB
