@@ -19,9 +19,13 @@
             </h2>
 
             {% for item in news %}
-                <h3> <a href="{{ item.link }}"> {{ item.title }} </a> </h3>
-                <p> {{ item.pubdate }} </p>
-                 {% autoescape off %} {{ item.content }} {% endautoescape %}
+            <div class="wrapper">
+                <div class="small-news">
+                    <a href="{{ item.link }}"> {{ item.title }} </a>
+                    <p> {{ item.pubdate }} </p>
+                    {% autoescape off %} {{ item.content }} {% endautoescape %}
+                </div>
+            </div>
             {% endfor %}
         {% endif %}
     {% endif %}
