@@ -17,12 +17,12 @@ See: http://semver.org/
 ### Models and Database
 
 - [ ] Improve Database design to increase performance.
-- [ ] Check if Data-Types and constrains are correct.
-- [ ] Learn how to check if a record exist before uplading it and change rss_getter.py to do that.
+- [x] Check if Data-Types and constrains are correct.
+- [x] Learn how to check if a record exist before uplading it and change rss_getter.py to do that.
     - See: http://stackoverflow.com/questions/10369042/how-to-check-if-record-exists-if-not-insert
 - [x] Change rss_getter.py to work with the new database.
-- [ ] Learn how to do Full text search using SQL.
-- [ ] Learn how to do the queries on Django
+- [x] Learn how to do Full text search using SQL.
+- [x] Learn how to do the queries on Django
     - Full text search over multiple columns is not possible using Django models.
      However, one can execute SQL queries and map the results to Django Models. See: https://docs.djangoproject.com/en/dev/topics/db/sql/
 
@@ -44,11 +44,12 @@ See: http://semver.org/
     - See:
         - http://stackoverflow.com/questions/8301586/mysql-full-text-search-search-for-short-words
         - http://www.ranks.nl/stopwords/spanish
-- [ ] Implement search modifyiers +palabra -esta_no "literal"
-- [ ] Drop down menu to choose category (using another GET request parameter).  
-- [ ] Basic DB search implementation using the GET request.
+- [ ] Implement search modifiers +palabra -esta_no "literal"
+- [x] Drop down menu to choose category (using another GET request parameter).  
+- [x] Basic DB search implementation using the GET request.
 - [ ] Implement User login view + template.
 - [ ] Implement a way to sign up in our application.
+- [ ] User subscriptions and user settings.
 - [ ] Create view + template for user settings (user management before this).
 - [ ] [ OPTIONAL ] Integrate Javascript word clouds for categories? news read by the user? search terms?
 - [ ] [ OPTIONAL ] Implement a way to add or request the addition of new RSS sources.
