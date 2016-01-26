@@ -16,6 +16,7 @@
         <p> {{ term }}
         {% for item in news %}
             <h3> <a href="{{ item.link }}"> {{ item.title }} </a> </h3>
+            <p> {{ item.pubdate }} </p>
              {% autoescape off %} {{ item.content }} {% endautoescape %}
         {% endfor %}
 
