@@ -52,3 +52,8 @@ def index_view(request):
         form = SearchForm()
 
     return render(request, 'search_news/index.html', {'content': string, 'form': form})
+
+def register_view(request):
+    string = "This is a user register page. Congratulations"
+
+    return render(request, 'search_news/register.html', {'string' : string })
