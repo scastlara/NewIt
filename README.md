@@ -149,6 +149,8 @@ Add this to your settings.py
 }
 ```
 
+Run this on your MySQL:
+
 ```sql
 ALTER TABLE search_news_articles ADD FULLTEXT(title);
 ALTER TABLE search_news_articles ADD FULLTEXT(content);
