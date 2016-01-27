@@ -4,10 +4,10 @@
 import feedparser
 import codecs
 import MySQLdb
+import datetime
 import time
 import sys
 import os
-
 
 # ---------------------------------------------
 # FUNCTIONS
@@ -146,7 +146,8 @@ def add_entries(data, category):
             cursor.execute(sql)
             db.commit()
             sys.stderr.write('Adding article to database: ' + identifier + '  ok\n')
-        except MySQLdb.ProgrammingError, e:
+        except MySQLdb.Error as e:
+            db.rollback()
             sys.stderr.write('Adding article to database: ' + identifier + '  not ok\n')
             sys.stderr.write('\tWarning %s' %(e) )
 
@@ -188,27 +189,33 @@ def add_categories(cat):
         cursor.execute(sql)
         db.commit()
         sys.stderr.write('Adding category to database: ' + cat + '  ok\n')
-    except MySQLdb.ProgrammingError, e:
+    except MySQLdb.ProgrammingError as e:
         sys.stderr.write('Adding category to database: ' + cat + '  not ok\n')
         sys.stderr.write('\tWarning %s' %(e) )
 
     db.close()
 
+def main():
+    # GET SCRIPT PATH
+    script_path = os.path.dirname( os.path.abspath(__file__) )
+
+    # GET FEEDS WITH CATEGORIES
+    feed_path   = script_path + "/feeds.tbl"
+    all_feeds  = read_feeds(feed_path)
+
+    # UPLOAD FEEDS TO DB
+    for feed in all_feeds:
+        feed_obj = read_rss(feed[0])
+        add_categories(feed[1])
+        add_entries(feed_obj, feed[1])
 
 
 # ---------------------------------------------
 # MAIN PROGRAM
 # ---------------------------------------------
 
-# GET SCRIPT PATH
-script_path = os.path.dirname( os.path.abspath(__file__) )
-
-# GET FEEDS WITH CATEGORIES
-feed_path   = script_path + "/feeds.tbl"
-all_feeds  = read_feeds(feed_path)
-
-# UPLOAD FEEDS TO DB
-for feed in all_feeds:
-    feed_obj = read_rss(feed[0])
-    add_categories(feed[1])
-    add_entries(feed_obj, feed[1])
+while True:
+    sys.stderr.write("\n## STARTING JOB AT %s\n" % datetime.datetime.now().time())
+    main()
+    time.sleep(7200)
+    sys.stderr.write("\n# ----- \n")
