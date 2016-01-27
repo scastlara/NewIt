@@ -127,13 +127,18 @@ h1 {
 .big-news {
     height: auto;
     cursor: pointer;
-    border-color: black;
     width: 70%;
 }
 
 .wrapper {
     border-style: solid;
     margin-bottom: 5%;
-    border-color: black;
     width : 75%;
+}
+
+.small-news img {
+    max-width: 30%;
+    max-height: 30%;
+    width: auto;
+    height: auto
 }
