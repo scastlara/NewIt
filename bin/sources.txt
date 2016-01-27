@@ -1,3 +1,5 @@
 # SOURCES
 # We will put here all the news sources
+# We should use our database instead of this crap
 ELDIARIO
+LAMAREA

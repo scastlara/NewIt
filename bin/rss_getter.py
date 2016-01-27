@@ -92,7 +92,6 @@ def get_ID(title, source, date, source_codes):
         else:
             break
 
-    sys.stderr.write("Source: " + str(source_codes[source]) + " Title: " + str(title_code) + " Date:" + str(date) + "\n")
     final_code = str()
     final_code = str(source_codes[source]) + str(title_code) + str(date)
     return(final_code)
@@ -104,7 +103,7 @@ Uploads the News/articles to our MySQL database. Right now it uses the module My
 We may need to change it to PyMySQL, depending on the configuration of GELPI's server.
 It is a very big function. It needs refactoring.
 '''
-def add_entries(data, category):
+def add_entries(data, category, source):
 
     # CONNECT TO DATABASE
     db     = MySQLdb.connect("localhost","root","5961", "news")
@@ -123,7 +122,6 @@ def add_entries(data, category):
         time.sleep(1)
         title   = article.title
         date   = article.published
-        newsp   = "ELDIARIO"
         content = article.description
         link    = article.link
 
@@ -132,7 +130,7 @@ def add_entries(data, category):
         date = date_tuple[0]
 
         # GET ID FOR DATABASE
-        identifier = get_ID(title, newsp, date_tuple[1], source_codes)
+        identifier = get_ID(title, source, date_tuple[1], source_codes)
 
         # REMOVE SINGLE QUOTES
         title   = title.replace("'", "")
@@ -140,16 +138,18 @@ def add_entries(data, category):
 
         sql = "INSERT INTO  search_news_articles (identifier, title, pubdate, source, language, link, content, category) \
                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') \
-               ON DUPLICATE KEY UPDATE link=link;" % ( identifier, title, date, newsp, "ESP", link, content, category)
+               ON DUPLICATE KEY UPDATE link=link;" % ( identifier, title, date, source, "ESP", link, content, category)
 
         try:
             cursor.execute(sql)
             db.commit()
-            sys.stderr.write('Adding article to database: ' + identifier + '  ok\n')
+            sys.stderr.write('# Adding article to database: ' + identifier + '  ok\n')
+            sys.stderr.write('# \tdate: %s\n# \tsource: %s\n# \tcategory: %s\n\n' % (date, source, category))
         except MySQLdb.Error as e:
             db.rollback()
             sys.stderr.write('Adding article to database: ' + identifier + '  not ok\n')
-            sys.stderr.write('\tWarning %s' %(e) )
+            sys.stderr.write('# \tdate: %s\n# \tsource: %s\n# \tcategory: %s\n\n' % (date, source, category))
+            sys.stderr.write('#\n \tWarning %s\n' %(e) )
 
     db.close()
 
@@ -164,7 +164,7 @@ def read_feeds(filename):
     for line in fd:
         line      = line.strip()
         feed_elem = line.split()
-        feed_tup  = (feed_elem[0], feed_elem[1])
+        feed_tup  = (feed_elem[0], feed_elem[1], feed_elem[2])
         my_feeds.append(feed_tup)
     return(my_feeds)
 
@@ -207,7 +207,7 @@ def main():
     for feed in all_feeds:
         feed_obj = read_rss(feed[0])
         add_categories(feed[1])
-        add_entries(feed_obj, feed[1])
+        add_entries(feed_obj, feed[1], feed[2])
 
 
 # ---------------------------------------------
