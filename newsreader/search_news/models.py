@@ -23,10 +23,6 @@ class Articles(models.Model):
     language    = models.CharField(max_length=3)
     content     = models.TextField()
     category    = models.CharField(max_length=10)
-    #     "Category",
-    #     on_delete = models.CASCADE,
-    #     db_column='category'
-    # )
     link       = models.URLField()
     source     = models.CharField(max_length=10)
     bookmarked = models.BooleanField()

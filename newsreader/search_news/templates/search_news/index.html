@@ -23,6 +23,7 @@
                 <div class="small-news">
                     <a href="{{ item.link }}"> {{ item.title }} </a>
                     <p> {{ item.pubdate }} </p>
+                    <p> {{ item.source }}  </p>
                     {% autoescape off %} {{ item.content }} {% endautoescape %}
                 </div>
             </div>
