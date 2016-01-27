@@ -16,7 +16,10 @@ See: http://semver.org/
 
 ### Models and Database
 
-- [ ] Improve Database design to increase performance.
+- [ ] [**IMPORTANT**] Add a table with all the source links and names (link it to our articles table).
+- [ ] [**IMPORTANT**] Add a table with all the categories (link it to our articles table).
+- [ ] [**IMPORTANT**] Design the queries to be done (remember that each user will have only a set of sources).
+- [x] Improve Database design to increase performance. * Performance seems to be good enough*
 - [x] Check if Data-Types and constrains are correct.
 - [x] Learn how to check if a record exist before uplading it and change rss_getter.py to do that.
     - See: http://stackoverflow.com/questions/10369042/how-to-check-if-record-exists-if-not-insert
