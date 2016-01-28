@@ -10,6 +10,6 @@ $('.close-overlay').click(function(){
     $('.news-overlay').hide(250);
 });
 
-$("#content").click(function() {
+$("#sidebar").click(function() {
     $('.news-overlay').hide(250);
 });
