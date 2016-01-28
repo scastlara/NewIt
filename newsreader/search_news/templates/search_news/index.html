@@ -1,4 +1,5 @@
 {% extends 'search_news/base.html' %}
+{% load staticfiles %}
 
 {% block content %}
 
@@ -21,7 +22,7 @@
             {% for item in news %}
 
             <div class="small-news">
-                <a href="{{ item.link }}"> {{ item.title }} </a>
+                <h1> {{ item.title }} </h1>
                 <p> {{ item.pubdate }} </p>
                 <p> {{ item.source }}  </p>
                 <p> {{ item.category }} </p>
@@ -29,7 +30,16 @@
 
             <div class="news-overlay">
                 <span class="close-overlay">x</span>
-                <a href="{{ item.link }}"> {{ item.title }} </a>
+
+                <h1>
+                    <a href="{{ item.link }}"><img id="link" src="{% static 'search_news/Images/link.svg' %}"/ width="6%" height="6%"></a>
+                    {{ item.title }}
+                </h1>
+                <a    href="#"
+                      title="Click to share this post on Twitter"
+                      onclick="window.open('http://twitter.com/home?status={{item.link}}+via+@BlueTea','name','width=600,height=400')">
+                      <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
+                </a> <br>
                 <p> {{ item.pubdate }} </p>
                 <p> {{ item.source }}  </p>
                 <p> {{ item.category }} </p>

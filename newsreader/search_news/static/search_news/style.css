@@ -204,15 +204,18 @@ h1 {
 /* OVERLAY THINGS */
 .news-overlay {
     display: none;
-    height: 80%;
+    height: 75%;
     width: 60%;
     position: fixed;
     top: 30px;
     right: 0;
     z-index: 9999;
     background: #333333;
-    padding: 20px;
-    opacity: 0.95;
+    padding-left: 5%;
+    padding-top: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    overflow: scroll;
     overflow-y: scroll;
 }
 
@@ -228,15 +231,61 @@ h1 {
     color: #aaa;
     position: absolute;
     top: 0;
-    right:2px
+    left:2px
 }
 
 .small-news {
-    height: 40%;
+    height: 20%;
     overflow: hidden;
     cursor: pointer;
-    border-color: black;
+    box-shadow: 10px 10px 5px #888888;
     width: 70%;
-    border-style: solid;
-    margin: 10%;
+    margin: 5%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+}
+
+
+/* STYLE FOR NEWS SMALL BOX */
+.small-news h1 {
+    font-size: 18;
+}
+
+.small-news p {
+    font-size: 14;
+}
+
+/* STYLE FOR NEWS OVERLAY */
+.news-overlay h1 {
+    line-height:1.5;
+    color: #EAEAEA;
+}
+
+.news-overlay a {
+    line-height:1.5;
+    color: white;
+}
+
+.news-overlay p {
+    line-height:1.5;
+    color: #EAEAEA;
+}
+
+
+img#link {
+    border-radius: 50%;
+    -webkit-transition: -webkit-transform .2s ease-in-out;
+    transition: transform .2s ease-in-out
+}
+img#link:hover {
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg);
+}
+
+img#twitter {
+
+}
+
+img#twitter:hover {
+    opacity: 0.6;
 }
