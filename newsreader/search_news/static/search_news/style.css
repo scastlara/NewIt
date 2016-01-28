@@ -116,14 +116,6 @@ h1 {
 }
 
 
-.small-news {
-    height: 40%;
-    overflow: hidden;
-    cursor: pointer;
-    border-color: black;
-    width: 70%;
-}
-
 .big-news {
     height: auto;
     cursor: pointer;
@@ -207,3 +199,44 @@ h1 {
   }
 }
 /* END OF BACK TO TOP */
+
+
+/* OVERLAY THINGS */
+.news-overlay {
+    display: none;
+    height: 80%;
+    width: 60%;
+    position: fixed;
+    top: 30px;
+    right: 0;
+    z-index: 9999;
+    background: #333333;
+    padding: 20px;
+    opacity: 0.95;
+    overflow-y: scroll;
+}
+
+.close-overlay, #click {
+    cursor:
+    pointer;
+}
+
+.close-overlay {
+    font-size:16px;
+    font-weight: bold;
+    padding:20px;
+    color: #aaa;
+    position: absolute;
+    top: 0;
+    right:2px
+}
+
+.small-news {
+    height: 40%;
+    overflow: hidden;
+    cursor: pointer;
+    border-color: black;
+    width: 70%;
+    border-style: solid;
+    margin: 10%;
+}

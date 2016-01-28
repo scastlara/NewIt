@@ -19,14 +19,23 @@
             </h2>
 
             {% for item in news %}
-            <div class="wrapper">
-                <div class="small-news">
-                    <a href="{{ item.link }}"> {{ item.title }} </a>
-                    <p> {{ item.pubdate }} </p>
-                    <p> {{ item.source }}  </p>
-                    {% autoescape off %} {{ item.content }} {% endautoescape %}
-                </div>
+
+            <div class="small-news">
+                <a href="{{ item.link }}"> {{ item.title }} </a>
+                <p> {{ item.pubdate }} </p>
+                <p> {{ item.source }}  </p>
+                <p> {{ item.category }} </p>
             </div>
+
+            <div class="news-overlay">
+                <span class="close-overlay">x</span>
+                <a href="{{ item.link }}"> {{ item.title }} </a>
+                <p> {{ item.pubdate }} </p>
+                <p> {{ item.source }}  </p>
+                <p> {{ item.category }} </p>
+                {% autoescape off %} {{ item.content }} {% endautoescape %}
+            </div>
+
             {% endfor %}
         {% endif %}
     {% endif %}
