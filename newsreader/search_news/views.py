@@ -4,6 +4,10 @@
 from django.shortcuts import render
 from .forms import SearchForm
 from .models import Articles
+from django.shortcuts import render_to_response
+from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import UserCreationForm
+from django.core.context_processors import csrf
 
 '''
 Here we define what GELPI (aka L'HOME)
@@ -57,12 +61,25 @@ def index_view(request):
     return render(request, 'search_news/index.html', {'content': string, 'form': form})
 
 
-#------------------------------------------------
-'''
-REGISTER VIEW: Register form.
-    PROBLEMS: We need to create it.
-'''
-def register_view(request):
-    string = "This is a user register page. Congratulations"
 
-    return render(request, 'search_news/register.html', {'string' : string })
+
+def register(request):
+     if request.method == 'POST':
+         form = UserCreationForm(request.POST)
+         if form.is_valid():
+             form.save()
+             return HttpResponseRedirect('/accounts/register/complete')
+     else:
+         form = UserCreationForm()
+     token = {}
+     token.update(csrf(request))
+     token['form'] = form
+
+     return render_to_response('registration/registration_form.html', token)
+
+def registration_complete(request):
+     return render_to_response('registration/registration_complete.html')
+
+def loggedin(request):
+    return render_to_response('registration/loggedin.html',
+                              {'username': request.user.username})
