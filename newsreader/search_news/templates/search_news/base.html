@@ -31,8 +31,14 @@
         <img src="{% static 'search_news/Images/cutre.jpg' %}", alt="mec">
 	<h1 class="title"> EL NOTISIARIO </h1>
 
-    <a href="/accounts/login">Sign In</a>
-    <a href="/accounts/register">Sign Up</a>
+    {% if user.is_authenticated %}
+        {{ user }} <br>
+        <a href="/accounts/logout">Log out</a>
+    {% else %}
+        <a href="/accounts/login">Sign In</a>
+        <a href="/accounts/register">Sign Up</a>
+    {% endif %}
+
 
     </div>
     <div id="content">
