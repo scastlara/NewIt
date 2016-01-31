@@ -8,6 +8,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.context_processors import csrf
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 '''
 Here we define what GELPI (aka L'HOME)
@@ -16,6 +17,44 @@ to a specific 'function' (aka, view) inside the variable request.
 Then, the view will 'answer' the user with an HttpResponse,
 calling a template.
 '''
+
+#----------------------------------------------------------------
+# FUNCTIONS
+#----------------------------------------------------------------
+
+def search_news(search_term, category):
+    news = list()
+    sql_query = 'SELECT * FROM search_news_article'
+
+    if len(search_term) > 0:
+        sql_query += ' WHERE (MATCH(title) AGAINST("%s") \
+                      OR MATCH(content) AGAINST("%s") )' % (search_term, search_term)
+        if category != "All":
+            sql_query += ' AND category = "%s"' % (category)
+    elif category != "All" and len(category) > 0:
+        sql_query += ' WHERE category = "%s"' % (category)
+
+    sql_query += ' ORDER BY pubdate DESC limit 100'
+
+    for article in Article.objects.raw (sql_query):
+        news.append(article)
+
+    return news
+
+def paginate_news(request, news):
+    paginator = Paginator(news, 20)
+    page = request.GET.get('page')
+
+    try:
+        news = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        news = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        news = paginator.page(paginator.num_pages)
+
+    return news
 
 #----------------------------------------------------------------
 # VIEWS
@@ -29,28 +68,13 @@ def index_view(request):
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
-            # Get what the user wrote:
             search_term = form.cleaned_data['sterm']
             category    = form.cleaned_data['categ']
-            news = list()
 
-
-            sql_query = 'SELECT * FROM search_news_article'
-
-            if len(search_term) > 0:
-                sql_query += ' WHERE (MATCH(title) AGAINST("%s") \
-                              OR MATCH(content) AGAINST("%s") )' % (search_term, search_term)
-                if category != "All":
-                    sql_query += ' AND category = "%s"' % (category)
-            elif category != "All" and len(category) > 0:
-                sql_query += ' WHERE category = "%s"' % (category)
-
-            sql_query += ' ORDER BY pubdate DESC'
-
-            for article in Article.objects.raw (sql_query):
-            	news.append(article)
+            news = search_news(search_term, category)
 
             if news:
+                news = paginate_news(request, news)
                 return render(request, 'search_news/index.html', {'form': form, 'term' : search_term, 'category': category, 'news': news} )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
@@ -59,8 +83,6 @@ def index_view(request):
         form = SearchForm()
 
     return render(request, 'search_news/index.html', {'content': string, 'form': form})
-
-
 
 
 def register(request):

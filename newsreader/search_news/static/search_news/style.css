@@ -261,6 +261,21 @@ h1 {
     color: #EAEAEA;
 }
 
+.news-overlay h2 {
+    line-height:1.5;
+    color: #EAEAEA;
+}
+
+.news-overlay h3 {
+    line-height:1.5;
+    color: #EAEAEA;
+}
+
+.news-overlay h4 {
+    line-height:1.5;
+    color: #EAEAEA;
+}
+
 .news-overlay a {
     line-height:1.5;
     color: white;

@@ -32,7 +32,7 @@
                 <span class="close-overlay">x</span>
 
                 <h1>
-                    <a href="{{ item.link }}"><img id="link" src="{% static 'search_news/Images/link.svg' %}"/ width="6%" height="6%"></a>
+                    <a href="{{ item.link }}" target="_blank"><img id="link" src="{% static 'search_news/Images/link.svg' %}"/ width="6%" height="6%"></a>
                     {{ item.title }}
                 </h1>
                 <a    href="#"
@@ -43,12 +43,29 @@
                 <p> {{ item.pubdate }} </p>
                 <p> {{ item.source }}  </p>
                 <p> {{ item.category }} </p>
-                {% autoescape off %} {{ item.content }} {% endautoescape %}
+                <p> {% autoescape off %} {{ item.content }} {% endautoescape %} </p>
             </div>
 
             {% endfor %}
+
+            <div class="pagination">
+                <span class="step-links">
+                    {% if news.has_previous %}
+                        <a href="?sterm={{ term }}&categ={{ category }}&page={{ news.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ news.number }} of {{ news.paginator.num_pages }}.
+                    </span>
+
+                    {% if news.has_next %}
+                        <a href="?sterm={{ term }}&categ={{ category }}&page={{ news.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
         {% endif %}
     {% endif %}
+
 
     <a href="#0" class="cd-top">Top</a>
 
