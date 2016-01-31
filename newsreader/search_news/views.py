@@ -3,7 +3,7 @@
 #----------------------------------------------------------------
 from django.shortcuts import render
 from .forms import SearchForm
-from .models import Articles
+from .models import Article
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
@@ -35,7 +35,7 @@ def index_view(request):
             news = list()
 
 
-            sql_query = 'SELECT * FROM search_news_articles'
+            sql_query = 'SELECT * FROM search_news_article'
 
             if len(search_term) > 0:
                 sql_query += ' WHERE (MATCH(title) AGAINST("%s") \
@@ -47,7 +47,7 @@ def index_view(request):
 
             sql_query += ' ORDER BY pubdate DESC'
 
-            for article in Articles.objects.raw (sql_query):
+            for article in Article.objects.raw (sql_query):
             	news.append(article)
 
             if news:

@@ -22,15 +22,38 @@ for line in fd:
     line = line.strip()
     if line[0] == "#":
         continue
-    link, category, sourcename = line.split("|")
+    link, category, sourcename, lang = line.split("|")
 
-    sql = "INSERT INTO  search_news_sources (link, name, category) \
-           VALUES ('%s', '%s', '%s') \
-           ON DUPLICATE KEY UPDATE link=link;" % (link, category, sourcename)
+    # ADD FEEDS TO DATABASE
+    sql_sources = "INSERT INTO  search_news_feed (link, name, category, language) \
+                   VALUES ('%s', '%s', '%s', '%s') \
+                   ON DUPLICATE KEY UPDATE link=link;" % (link, category, sourcename, lang)
     try:
-        cursor.execute(sql)
+        cursor.execute(sql_sources)
         db.commit()
-        sys.stderr.write("Adding source to DB:\n%s\n%s\n%s\n\n" % (link, sourcename, category))
+        sys.stderr.write("Adding feed to DB:\n%s\n%s\n%s\n\n" % (link, sourcename, category))
     except Exception as e:
         db.rollback()
         raise Exception("Can't upload data to database for some reason %s" % e)
+
+    # ADD CATEGORIES TO DATABASE
+    sql_category = "INSERT INTO  search_news_category (category) \
+                   VALUES ('%s') \
+                   ON DUPLICATE KEY UPDATE category=category;" % (category)
+    try:
+        cursor.execute(sql_category)
+        db.commit()
+        sys.stderr.write("Adding category to DB:\n%s\n\n" % (category))
+    except Exception as e:
+        db.rollback()
+        raise Exception("Can't upload data to database for some reason %s" % e)
+
+    # ADD SOURCES TO DATABASE
+    sql_source = "INSERT INTO  search_news_source (name) \
+                   VALUES ('%s')" % (sourcename)
+
+    try:
+        cursor.execute(sql_source)
+        sys.stderr.write("Adding source to DB:\n%s\n\n" % (sourcename))
+    except Exception as e:
+        sys.stderr.write("Source %s already exists\n" % sourcename)

@@ -1,38 +1,38 @@
-http://eldiario.es.feedsportal.com/politica/rss|Politica|ElDiario.es
-http://eldiario.es.feedsportal.com/economia/rss|Economia|ElDiario.es
-http://www.eldiario.es/rss/section/10838/|Cultura|ElDiario.es
-http://www.eldiario.es/rss/opinion/|Opinion|ElDiario.es
-http://www.eldiario.es/rss/section/4000/|Internacional|ElDiario.es
-http://ep00.epimg.net/rss/politica/portada.xml|Politica|El Pais
-http://ep00.epimg.net/rss/internacional/portada.xml|Internacional|El Pais
-http://ep00.epimg.net/rss/elpais/opinion.xml|Opinion|El Pais
-http://ep00.epimg.net/rss/economia/portada.xml|Economia|El Pais
-http://ep00.epimg.net/rss/tecnologia/portada.xml|Tecnologia|El Pais
-http://ep00.epimg.net/rss/cultura/portada.xml|Cultura|El Pais
-http://ep00.epimg.net/rss/deportes/portada.xml|Deportes|El Pais
-http://estaticos.elmundo.es/elmundo/rss/economia.xml|Economia|El Mundo
-http://estaticos.elmundo.es/elmundo/rss/cultura.xml|Cultura|El Mundo
-http://estaticos.elmundo.es/elmundodeporte/rss/portada.xml|Deportes|El Mundo
-http://estaticos.elmundo.es/elmundo/rss/espana.xml|Politica|El Mundo
-http://estaticos.elmundo.es/elmundo/rss/internacional.xml|Internacional|El Mundo
-http://20minutos.feedsportal.com/c/32489/f/492690/index.rss|Economia|20 Minutos
-http://20minutos.feedsportal.com/c/32489/f/478286/index.rss|Deportes|20 Minutos
-http://20minutos.feedsportal.com/c/32489/f/492689/index.rss|Internacional|20 Minutos
-http://www.elperiodico.com/es/rss/opinion/rss.xml|Opinion|El Periodico
-http://www.elperiodico.com/es/rss/politica/rss.xml|Politica|El Periodico
-http://www.elperiodico.com/es/rss/economia/rss.xml|Economia|El Periodico
-http://www.elperiodico.com/es/rss/ocio-y-cultura/rss.xml|Cultura|El Periodico
-http://www.elperiodico.com/es/rss/internacional/rss.xml|Internacional|El Periodico
-http://www.abc.es/rss/feeds/abc_opinioncompleto.xml|Opinion|ABC
-http://www.abc.es/rss/feeds/abc_Economia.xml|Economia|ABC
-http://www.abc.es/rss/feeds/abc_Cultura.xml|Cultura|ABC
-http://www.abc.es/rss/feeds/abc_Internacional.xml|Internacional|ABC
-http://www.abc.es/rss/feeds/abc_Deportes.xml|Deportes|ABC
-http://expansion.feedsportal.com/rss/portada.xml|Economia|Expansion
-http://www.eleconomista.es/rss/rss-economia.php|Economia|elEconomista
-http://www.ara.cat/rss/politica/|Politica|ARA
-http://www.ara.cat/rss/cultura/|Cultura|ARA
-http://www.ara.cat/rss/economia/|Economia|ARA
-http://www.ara.cat/rss/esports/|Deportes|ARA
-http://feeds.weblogssl.com/xataka2|Tecnologia|Xataka
-http://es.engadget.com/tag/features/rss.xml|Tecnología|Engadget
+http://eldiario.es.feedsportal.com/politica/rss|Politica|ElDiario.es|ESP
+http://eldiario.es.feedsportal.com/economia/rss|Economia|ElDiario.es|ESP
+http://www.eldiario.es/rss/section/10838/|Cultura|ElDiario.es|ESP
+http://www.eldiario.es/rss/opinion/|Opinion|ElDiario.es|ESP
+http://www.eldiario.es/rss/section/4000/|Internacional|ElDiario.es|ESP
+http://ep00.epimg.net/rss/politica/portada.xml|Politica|El Pais|ESP
+http://ep00.epimg.net/rss/internacional/portada.xml|Internacional|El Pais|ESP
+http://ep00.epimg.net/rss/elpais/opinion.xml|Opinion|El Pais|ESP
+http://ep00.epimg.net/rss/economia/portada.xml|Economia|El Pais|ESP
+http://ep00.epimg.net/rss/tecnologia/portada.xml|Tecnologia|El Pais|ESP
+http://ep00.epimg.net/rss/cultura/portada.xml|Cultura|El Pais|ESP
+http://ep00.epimg.net/rss/deportes/portada.xml|Deportes|El Pais|ESP
+http://estaticos.elmundo.es/elmundo/rss/economia.xml|Economia|El Mundo|ESP
+http://estaticos.elmundo.es/elmundo/rss/cultura.xml|Cultura|El Mundo|ESP
+http://estaticos.elmundo.es/elmundodeporte/rss/portada.xml|Deportes|El Mundo|ESP
+http://estaticos.elmundo.es/elmundo/rss/espana.xml|Politica|El Mundo|ESP
+http://estaticos.elmundo.es/elmundo/rss/internacional.xml|Internacional|El Mundo|ESP
+http://20minutos.feedsportal.com/c/32489/f/492690/index.rss|Economia|20 Minutos|ESP
+http://20minutos.feedsportal.com/c/32489/f/478286/index.rss|Deportes|20 Minutos|ESP
+http://20minutos.feedsportal.com/c/32489/f/492689/index.rss|Internacional|20 Minutos|ESP
+http://www.elperiodico.com/es/rss/opinion/rss.xml|Opinion|El Periodico|ESP
+http://www.elperiodico.com/es/rss/politica/rss.xml|Politica|El Periodico|ESP
+http://www.elperiodico.com/es/rss/economia/rss.xml|Economia|El Periodico|ESP
+http://www.elperiodico.com/es/rss/ocio-y-cultura/rss.xml|Cultura|El Periodico|ESP
+http://www.elperiodico.com/es/rss/internacional/rss.xml|Internacional|El Periodico|ESP
+http://www.abc.es/rss/feeds/abc_opinioncompleto.xml|Opinion|ABC|ESP
+http://www.abc.es/rss/feeds/abc_Economia.xml|Economia|ABC|ESP
+http://www.abc.es/rss/feeds/abc_Cultura.xml|Cultura|ABC|ESP
+http://www.abc.es/rss/feeds/abc_Internacional.xml|Internacional|ABC|ESP
+http://www.abc.es/rss/feeds/abc_Deportes.xml|Deportes|ABC|ESP
+http://expansion.feedsportal.com/rss/portada.xml|Economia|Expansion|ESP
+http://www.eleconomista.es/rss/rss-economia.php|Economia|elEconomista|ESP
+http://www.ara.cat/rss/politica/|Politica|ARA|CAT
+http://www.ara.cat/rss/cultura/|Cultura|ARA|CAT
+http://www.ara.cat/rss/economia/|Economia|ARA|CAT
+http://www.ara.cat/rss/esports/|Deportes|ARA|CAT
+http://feeds.weblogssl.com/xataka2|Tecnologia|Xataka|ESP
+http://es.engadget.com/tag/features/rss.xml|Tecnologia|Engadget|ESP

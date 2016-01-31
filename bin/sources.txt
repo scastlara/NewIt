@@ -1,5 +1,16 @@
 # SOURCES
 # We will put here all the news sources
 # We should use our database instead of this crap
-ELDIARIO
-LAMAREA
+20 Minutos
+ABC
+ARA
+ElDiario.es
+elEconomista
+El Mundo
+El País
+El Periódico
+Expansión
+La Marea
+La Razón
+Sport
+Xataka
