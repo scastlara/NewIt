@@ -1,5 +1,5 @@
 from django import forms
-import os
+from search_news.models import Category
 
 '''
 This file has the info needed to create web forms
@@ -16,17 +16,10 @@ Someone do it PLS.
 '''
 
 def get_categories():
-    script_path = os.path.abspath(__file__)
-    script_path = script_path.replace("forms.py", "")
-    path = script_path + "static/feeds.tbl"
-    file = open(path, "r")
     set_of_cat = set()
-    for line in file:
-        line     = line.strip()
-        elements = line.split()
-        set_of_cat.add(elements[1])
-
-    # Add All choice
+    all_categories = list(Category.objects.values_list('category'))
+    for cat in all_categories:
+        set_of_cat.add(cat[0])
     set_of_cat.add("All")
 
     list_of_cats = list()
