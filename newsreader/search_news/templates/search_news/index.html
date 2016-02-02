@@ -3,11 +3,11 @@
 
 {% block content %}
 
-    <h4> ¿Qué te interesa? </h4>
+    <h1> ¿Qué te interesa? </h1>
     <form action="" method="get">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Busca" class="search_button"/>
+        <p> {{ form.categ }} </p>
+        <p> {{ form.sterm }} <input type="submit" value="Busca" class="search_button"/> </p>
     </form>
 
     {% if error %}
@@ -37,7 +37,7 @@
                 </h1>
                 <a    href="#"
                       title="Click to share this post on Twitter"
-                      onclick="window.open('http://twitter.com/home?status={{item.link}}+via+@BlueTea','name','width=600,height=400')">
+                      onclick="window.open('http://twitter.com/home?status={{item.link}}+via+@NewIt','name','width=600,height=400')">
                       <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
                 </a> <br>
                 <p> {{ item.pubdate }} </p>

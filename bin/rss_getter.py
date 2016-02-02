@@ -58,7 +58,7 @@ Uploads the News/articles to our MySQL database. Right now it uses the module My
 We may need to change it to PyMySQL, depending on the configuration of GELPI's server.
 It is a very big function. It needs refactoring.
 '''
-def add_entry(feed, category, source, language):
+def add_entry(feed, category, source, language, logfile):
     db     = MySQLdb.connect("localhost","root","5961", "news")
     cursor = db.cursor()
     db.set_character_set('utf8')
@@ -79,18 +79,18 @@ def add_entry(feed, category, source, language):
 
         sql = "INSERT INTO  search_news_article (title, pubdate, source, language, link, content, category) \
                VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s') \
-               ON DUPLICATE KEY UPDATE link=link;" % (title, date, source, language, link, content, category)
+               ON DUPLICATE KEY UPDATE content='%s';" % (title, date, source, language, link, content, category, content)
 
         try:
             cursor.execute(sql)
             db.commit()
-            sys.stderr.write('# Adding article to database: ' + link + '  ok\n')
-            sys.stderr.write('# \tdate: %s\n# \tsource: %s\n# \tcategory: %s\n\n' % (date, source, category))
+            logfile.write('# Adding article to database: ' + link + '  ok\n')
+            logfile.write('# \tdate: %s\n# \tsource: %s\n# \tcategory: %s\n\n' % (date, source, category))
         except MySQLdb.Error as e:
             db.rollback()
-            sys.stderr.write('Adding article to database: ' + link + '  not ok\n')
-            sys.stderr.write('# \tdate: %s\n# \tsource: %s\n# \tcategory: %s\n\n' % (date, source, category))
-            sys.stderr.write('#\n \tWarning %s\n' %(e) )
+            logfile.write('Adding article to database: ' + link + '  not ok\n')
+            logfile.write('# \tdate: %s\n# \tsource: %s\n# \tcategory: %s\n\n' % (date, source, category))
+            logfile.write('#\n \tWarning %s\n' %(e) )
 
     db.close()
 
@@ -114,7 +114,7 @@ def read_feeds(database, cursor):
 # ---------------------------------------------
 # MAIN PROGRAM
 # ---------------------------------------------
-def main():
+def main(logfile):
 
     # CONNECT TO DATABASE
     db     = MySQLdb.connect("localhost","root","5961", "news")
@@ -134,11 +134,12 @@ def main():
         feed_obj = read_rss(feed[0])
         # Need to check if feed is correct!!
         # (feedobject, category, source, language)
-        add_entry(feed_obj, feed[1], feed[2], feed[3])
+        add_entry(feed_obj, feed[1], feed[2], feed[3], logfile)
 
 
 while True:
-    sys.stderr.write("\n## STARTING JOB AT %s\n" % datetime.datetime.now().time())
-    main()
+    fh = codecs.open("rss_getter.log", "a", "utf-8")
+    fh.write("\n## STARTING JOB AT %s\n" % datetime.datetime.now().time())
+    main(fh)
     time.sleep(7200)
     sys.stderr.write("\n# ----- \n")
