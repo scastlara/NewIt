@@ -31,5 +31,5 @@ def get_categories():
     return(sorted(list_of_cats))
 
 class SearchForm(forms.Form):
-    sterm = forms.CharField(label='', max_length=100, required=False)
+    sterm = forms.CharField(label='', max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'search', 'placeholder': 'Search...'}))
     categ = forms.ChoiceField(label='', choices=get_categories(), required=False)
