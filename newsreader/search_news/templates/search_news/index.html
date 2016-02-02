@@ -7,7 +7,7 @@
     <form action="" method="get">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="¡Busca!" />
+        <input type="submit" value="Busca" class="search_button"/>
     </form>
 
     {% if error %}

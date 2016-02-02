@@ -50,7 +50,7 @@
 
 
 #header a:link, #header a:visited {
-    background-color: #f44336;
+    background-color: #6084D6;
     color: white;
     padding: 14px 25px;
     text-align: center;
@@ -63,7 +63,7 @@
 }
 
 #header a:hover, #header a:active {
-    background-color: red;
+    background-color: #809EE2;
 }
 
 input[type=text].search {
@@ -77,6 +77,22 @@ input[type=text].search {
     background-position: 10px 10px;
     background-repeat: no-repeat;
     padding: 12px 10px 12px 55px;
+}
+
+input[type=submit].search_button {
+    padding:5px 15px;
+    background: #6084D6;
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    color: white;
+    width: 100px;
+    height: 40px;
+}
+
+input[type=submit].search_button:hover {
+    background: #809EE2;
 }
 
 #content {
@@ -125,7 +141,7 @@ input[type=text].search {
   text-transform: uppercase;
 }
 #menu li a:hover {
-    color: #f44336;
+    color: #6084D6;
 }
 
 h1 {
