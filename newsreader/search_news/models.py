@@ -13,7 +13,7 @@ class Category(models.Model):
 
 
 class Article(models.Model):
-    link       = models.URLField(primary_key=True)
+    link        = models.URLField(primary_key=True)
     pubdate     = models.DateTimeField()
     title       = models.TextField()
     language    = models.CharField(max_length=3)
@@ -31,7 +31,7 @@ class Feed(models.Model):
 
 
 class Source(models.Model):
-    name = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=20, primary_key=True)
 
 
 class Search_Subscription(models.Model):
@@ -40,11 +40,11 @@ class Search_Subscription(models.Model):
     category = models.CharField(max_length=20) # Category -> category
 
 
-class Feed_Subscription(models.Model):
+class Source_Subscription(models.Model):
     username = models.CharField(max_length=30) # auth_user -> username
     source   = models.CharField(max_length=20) # Sources -> name
 
 
 class Bookmark(models.Model):
     username = models.CharField(max_length=30)
-    article  = models.IntegerField(primary_key=False)
+    article  = models.URLField(primary_key=False)
