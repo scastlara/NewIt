@@ -5,7 +5,7 @@
 
 <meta charset="utf-8">
 <head>
-    <title> News Reader </title>
+    <title> NewIt! </title>
 </head>
 
 <body>
@@ -29,15 +29,17 @@
   </div>
     <div id="header">
         <img src="{% static 'search_news/Images/cutre.jpg' %}", alt="mec">
-	<h1 class="title"> EL NOTISIARIO </h1>
+	<h1 class="title"> NewIt! </h1>
 
+      <div id="user">
     {% if user.is_authenticated %}
-        {{ user }} <br>
         <a href="/accounts/logout">Log out</a>
+        <div id="username">{{ user }}</div> 
     {% else %}
         <a href="/accounts/login">Sign In</a>
         <a href="/accounts/register">Sign Up</a>
     {% endif %}
+      </div>
 
 
     </div>
@@ -49,9 +51,7 @@
       </div>
     </div>
 
-<footer id="footer">
-  <p> copyright </p>
-</footer>
+
 
 <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>-->
 <script src="{% static 'search_news/js/jquery.js' %}"></script>
