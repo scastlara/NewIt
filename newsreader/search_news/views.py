@@ -27,14 +27,18 @@ def search_news(search_term, category):
     sql_query = 'SELECT * FROM search_news_article'
 
     if len(search_term) > 0:
-        sql_query += ' WHERE (MATCH(title) AGAINST("%s") \
-                      OR MATCH(content) AGAINST("%s") )' % (search_term, search_term)
+        search_term = "+" + search_term
+        search_term = search_term.replace(" ", " +")
+        search_term = search_term.replace("'", "\"")
+
+        sql_query += ' WHERE (MATCH(title) AGAINST(\'%s\' IN BOOLEAN MODE) \
+                       OR MATCH(content)   AGAINST(\'%s\' IN BOOLEAN MODE) )' % (search_term, search_term)
         if category != "All":
             sql_query += ' AND category = "%s"' % (category)
     elif category != "All" and len(category) > 0:
         sql_query += ' WHERE category = "%s"' % (category)
 
-    sql_query += ' ORDER BY pubdate DESC limit 100'
+    sql_query += ' ORDER BY pubdate DESC'
 
     for article in Article.objects.raw (sql_query):
         news.append(article)
@@ -72,10 +76,10 @@ def index_view(request):
             category    = form.cleaned_data['categ']
 
             news = search_news(search_term, category)
-
             if news:
-                news = paginate_news(request, news)
-                return render(request, 'search_news/index.html', {'form': form, 'term' : search_term, 'category': category, 'news': news} )
+                count = len(news)
+                news  = paginate_news(request, news)
+                return render(request, 'search_news/index.html', {'form': form, 'term' : search_term, 'category': category, 'news': news, 'count': count} )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'form': form, 'error': error} )
