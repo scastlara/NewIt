@@ -1,0 +1,56 @@
+<h1>TABLES</h1>
+
+
+<h3>Article</h3>
+<p>Contains the articles and all the information relative to each specific article.</p>
+
+<h3>Source</h3>
+<p>Information about the sources (newspapers). Each newspaper could have several Feeds, thus the separation between the concepts "Feed" and "Source".
+However, all the feeds coming from the same newspaper will share some information (homepage, logo...). This information will be added here in the form of news tables,
+although we have not decided yet what will be important to store. That's why it has only one column for now.</p>
+
+<h3>Category</h3>
+
+<p>Hand-curated categories. Each feed (Feed, not Source!) will have a specific category assigned by us. We started working with these information in a plain text file, but we ended
+up uploading it in the DB for convenience. The drop-down menu in the search engine queries this table to get all the available categories, allowing the user to choose.</p>
+
+<h3>Feed</h3>
+<p>These are the links from which the RSS come from. As said before, each newspaper will have several feeds, and each of them will have a category, a language, etc. The
+application that uploads articles to the DBs queries this table.</p>
+
+<h3>Bookmark</h3>
+<p>In this table we store the users and their bookmarks. Each user will have several entries in this table (as much as bookmarks). The primary key is not important here,
+it's just an autoincrement integer. If one article appears at least once in this table, the boolean Bookmark from the table article will be set to True.</p>
+
+<h3>Feed_Subscription</h3>
+<p>Each user will be able to subscribe to several newspapers (all by default). This table will store all the subscriptions for each user. Again, the primary key is an autoincrement
+integer and each user will appear several times in this table (that's how we avoid having lists in columns).</p>
+
+<h3>Search Subscription</h3>
+<p>Our applications revolves around searches instead of sources. Users will be able to <b>subscribe</b> to searches they keep doing. Each search is defined by a
+keyword and a category. These "subscriptions" will be stored in this table. Again, we use an auto-increment integer to avoid lists.</p>
+
+    Example:
+    <table style="width:100%">
+        <tr>
+            <td>1</td>
+            <td>Paco</td>
+            <td>Rajoy</td>
+            <td>Política</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Paco</td>
+            <td>Messi</td>
+            <td>Deportes</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Paco</td>
+            <td>Podemos</td>
+            <td>Opinion</td>
+        </tr>
+    </table>
+
+<h3>Auth_user</h3>
+<p>User information (passwords, permissions, email...)</p>
