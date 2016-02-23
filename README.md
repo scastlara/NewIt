@@ -158,3 +158,9 @@ Run this on your MySQL:
 ALTER TABLE search_news_articles ADD FULLTEXT(title);
 ALTER TABLE search_news_articles ADD FULLTEXT(content);
 ```
+
+### Enter Mysql in the Server:
+``` mysql
+mysql -u dbw13 -p
+```
+password: dbw2016
