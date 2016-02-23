@@ -4,6 +4,7 @@
 from django.shortcuts import render
 from .forms import SearchForm
 from .models import Article
+from .models import Search_Subscription
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
@@ -74,12 +75,27 @@ def index_view(request):
         if form.is_valid():
             search_term = form.cleaned_data['sterm']
             category    = form.cleaned_data['categ']
+            is_subs     = None
+            if request.user.is_authenticated():
+                # Check if user is subscribed to this search!
+                try:
+                    sub = Search_Subscription.objects.get(
+                        username = request.user.username,
+                        keyword  = search_term,
+                        category = category
+                    )
+                    is_subs = True
+                except:
+                    is_subs = False
+
 
             news = search_news(search_term, category)
             if news:
                 count = len(news)
                 news  = paginate_news(request, news)
-                return render(request, 'search_news/index.html', {'form': form, 'term' : search_term, 'category': category, 'news': news, 'count': count} )
+                return render(request, 'search_news/index.html', {'form'    : form,     'term'   : search_term,
+                                                                  'category': category, 'news'   : news,
+                                                                  'count'   : count,    'is_subs': is_subs } )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'form': form, 'error': error} )
@@ -87,6 +103,18 @@ def index_view(request):
         form = SearchForm()
 
     return render(request, 'search_news/index.html', {'content': string, 'form': form})
+
+
+def subscribed(request):
+    username = None
+    if request.method == "POST" and request.user.is_authenticated():
+        username = request.user.username
+        if "sub" in request.POST:
+            sterm    = request.POST.get("sub_sterm", "")
+            category = request.POST.get("sub_category", "")
+            subscription = Search_Subscription(username=username, keyword=sterm, category=category)
+            subscription.save()
+            return render(request, 'search_news/subscribed.html', {'sterm': sterm, 'category': category })
 
 
 def register(request):
