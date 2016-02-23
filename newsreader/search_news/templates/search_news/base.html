@@ -10,19 +10,76 @@
 
 <body>
 
-  <div id="sidebar">
-      <ul id="menu">
-          <li><a href="/">Subscriptions</a></li>
-          <li><a href="http://www.ub.edu/web/ub/galeries/imatges/noticies/2013/11/Josep_Abril.JPG_72440206.jpg">Perl is awesome</a></li>
-      </ul>
+
+  <aside class="sidebar-left-collapse">
+
+    <a href="/" class="company-logo" ><img src="{% static 'search_news/Images/newit_logo.jpg' %}", alt="mec"></a>
+
+    <div class="sidebar-links">
+
+      <div class="link-blue selected">
+
+        <a href="#">
+          <i class="fa fa-picture-o"></i>Subscriptions
+        </a>
+
+        <ul class="sub-links">
+          <li><a href="#">Aqui</a></li>
+          <li><a href="#">Van</a></li>
+          <li><a href="#">Las diferentes</a></li>
+          <li><a href="#">Subscriptions</a></li>
+        </ul>
+
+      </div>
+
+      <div class="link-blue">
+
+        <a href="#">
+          <i class="fa fa-heart-o"></i>Feeds
+        </a>
+
+        <ul class="sub-links">
+          <li><a href="#">Eldiario.es</a></li>
+          <li><a href="#">La Razón</a></li>
+          <li><a href="#">Xataka</a></li>
+          <li><a href="#">SuperPop</a></li>
+        </ul>
+
+      </div>
+
+      <div class="link-blue">
+
+        <a href="#">
+          <i class="fa fa-keyboard-o"></i>Bookmarks
+        </a>
+
+        <ul class="sub-links">
+          <li><a href="#">My Bookmarks</a></li>
+          <li><a href="#">Edit Bookmarks</a></li>
+        </ul>
+
+      </div>
+
+      <div class="link-blue">
+
+        <a href="#">
+          <i class="fa fa-map-marker"></i>Account
+        </a>
+
+        <ul class="sub-links">
+          <li><a href="#">Subscription Manager</a></li>
+          <li><a href="#">Feeds Manager </a></li>
+          <li><a href="#">Settings</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+
+      </div>
+
+    </div>
+
+  </aside>
 
 
-
-
-  </div>
-
-  <div id="header">
-      <a href="/"><img src="{% static 'search_news/Images/cutre.jpg' %}", alt="mec"></a>
       <div id="user">
             {% if user.is_authenticated %}
                 <a href="/accounts/logout">Log out</a> </li>
@@ -32,7 +89,7 @@
                 <a href="/accounts/register">Sign Up</a>
             {% endif %}
       </div>
-  </div>
+ 
 
 
 
@@ -52,6 +109,22 @@
 <script src="{% static 'search_news/js/expand.js' %}"></script>
 <script src="{% static 'search_news/js/backtop.js' %}"></script>
 <script src="{% static 'search_news/js/overlay.js' %}"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script>
+
+    $(function () {
+
+      var links = $('.sidebar-links > div');
+
+      links.on('click', function () {
+
+        links.removeClass('selected');
+        $(this).addClass('selected');
+
+      });
+    });
+
+  </script>
 </body>
 
 </html>
