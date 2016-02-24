@@ -3,7 +3,7 @@
 
 {% block content %}
 
-    <h1> ¿Qué te interesa? </h1>
+    <h1> {{ diario }} </h1>
     <form action="" method="get">
         {% csrf_token %}
         <p> {{ form.categ }} </p>
