@@ -154,6 +154,7 @@ def loggedin(request):
                               {'username': request.user.username})
 
 def user_subscriptions(request):
+    msg = ""
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
     if request.method == "POST":
