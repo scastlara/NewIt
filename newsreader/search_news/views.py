@@ -73,9 +73,10 @@ def index_view(request):
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
-            search_term = form.cleaned_data['sterm']
-            category    = form.cleaned_data['categ']
-            is_subs     = None
+            search_term   = form.cleaned_data['sterm']
+            category      = form.cleaned_data['categ']
+            is_subs       = None
+            subscriptions = None
             if request.user.is_authenticated():
                 # Check if user is subscribed to this search!
                 try:
@@ -88,14 +89,22 @@ def index_view(request):
                 except:
                     is_subs = False
 
+                try:
+                    subscriptions = Search_Subscription.objects.filter(
+                        username = request.user.username
+                    )
+                except:
+                    subscriptions = False
+
 
             news = search_news(search_term, category)
             if news:
                 count = len(news)
                 news  = paginate_news(request, news)
-                return render(request, 'search_news/index.html', {'form'    : form,     'term'   : search_term,
-                                                                  'category': category, 'news'   : news,
-                                                                  'count'   : count,    'is_subs': is_subs } )
+                return render(request, 'search_news/index.html', {'form'    : form,     'term'          : search_term,
+                                                                  'category': category, 'news'          : news,
+                                                                  'count'   : count,    'subscriptions' : subscriptions,
+                                                                  'is_subs' : is_subs } )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'form': form, 'error': error} )

@@ -87,3 +87,13 @@
   <p> copyright </p>
 </footer>
 {% endblock content %}
+
+{% block s_subs %}
+
+{% if subscriptions %}
+    {% for sub in subscriptions %}
+        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+    {% endfor %}
+{% endif %}
+
+{% endblock s_subs %}
