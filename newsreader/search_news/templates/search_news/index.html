@@ -47,7 +47,7 @@
                 {% if term %} {{ term }} {% endif %}
                 {{ category }}
             </h2>
-            {% if user.is_authenticated%}
+            {% if user.is_authenticated %}
                 {% if not is_subs %}
                     {% if term or category %}
                         <form action="{% url 'subscribed' %}" method="POST">
@@ -117,3 +117,13 @@
 
 
 {% endblock content %}
+
+{% block s_subs %}
+
+{% if subscriptions %}
+    {% for sub in subscriptions %}
+        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+    {% endfor %}
+{% endif %}
+
+{% endblock s_subs %}

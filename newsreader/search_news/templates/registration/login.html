@@ -1,32 +1,58 @@
-{% extends "search_news/base.html" %}
-{% block title %}
-Log In
-{% endblock %}
+<html>
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'search_news/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 
+<meta charset="utf-8">
+
+
+<head>
+    <title> NewIt! </title>
+</head>
+
+<body>
 
 {% block content %}
 
-<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+<form method="post" action="{% url 'django.contrib.auth.views.login' %}" id="signup">
 {% csrf_token %}
 
 {% if form.errors %}
     <p>Your Username or Password were not entered correctly. Please try again.</p>
 {% endif %}
 
-<table>
+
+<div class="header">    
+    <h3>Sign In</h3>        
+    <p>Sign in and enter NewIt!</p>    
+</div>
+        <div class="sep"></div>
+
+        <div class="inputs">
+<br>
 <tr>
     <td>{{ form.username.label_tag }}</td>
     <td>{{ form.username }}</td>
     <td>{{ form.username.errors }}</td>
 </tr>
+<br>
 <tr>
     <td>{{ form.password.label_tag }}</td>
     <td>{{ form.password }}</td>
     <td>{{ form.password.errors }}</td>
 </tr>
-</table>
+<br>
+<br>
 
-<input type="submit" value="login" />
-</form>
+<input id="submit" type="submit" value="Log in" />
+<br>
+<div class="sep"></div>
+<div id="user" >
+	<p style="font-size: 12px"> If you are not registered, please register, if you want special content!</p>
+    <a href="/accounts/register" style="margin-left: 150px; margin-right: 150px; margin-top: 5px">Register</a>
+</div>
+
+</div>
+    </form>
 
 {% endblock %}
