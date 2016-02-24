@@ -75,6 +75,17 @@ def paginate_news(request, news):
 
     return news
 
+
+def get_user_subscriptions(user):
+    subscriptions = None
+    try:
+        subscriptions = Search_Subscription.objects.filter(
+            username = user
+        )
+    except:
+        subscriptions = False
+    return subscriptions
+
 #----------------------------------------------------------------
 # VIEWS
 #----------------------------------------------------------------
@@ -103,12 +114,7 @@ def index_view(request, diario=None):
                 except:
                     is_subs = False
 
-                try:
-                    subscriptions = Search_Subscription.objects.filter(
-                        username = request.user.username
-                    )
-                except:
-                    subscriptions = False
+                subscriptions = get_user_subscriptions(request.user.username)
 
             if diario != None:
                 try:
@@ -169,5 +175,27 @@ def registration_complete(request):
 def loggedin(request):
     return render_to_response('registration/loggedin.html',
                               {'username': request.user.username})
-#def cutre(request,):
- #   return render(request, 'search_news/index.html', {'diario': diario})
+
+
+def user_subscriptions(request):
+    msg = ""
+    if request.user.is_authenticated():
+        subscriptions = get_user_subscriptions(request.user.username)
+    if request.method == "POST":
+        for sub, value in request.POST.items():
+            if not sub.startswith('s_'):
+                continue
+            else:
+                if value == "1":
+                    continue
+                msg = "Changes saved."
+                elements = sub[2:].split("||") # starts from [2:] to omit "s_"
+                sterm    = elements[0]
+                category = elements[1]
+                Search_Subscription.objects.filter(
+                    username=request.user.username,
+                    keyword=sterm,
+                    category=category
+                ).delete()
+    return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg })
+

@@ -13,4 +13,6 @@ urlpatterns = [
     url(r'^accounts/loggedin/$', views.loggedin),
     url(r'^subscribed$', views.subscribed, name='subscribed'),
     url(r'^news/(?P<diario>.+)/$', views.index_view),
+    url(r'^accounts/search_subscritions/$', views.user_subscriptions, name="user_subscriptions"),
+
 ]
