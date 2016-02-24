@@ -2,11 +2,9 @@
 # MODULES
 #----------------------------------------------------------------
 from django.shortcuts import render
-from django.http import Http404  
 from .forms import SearchForm
 from .models import Article
 from .models import Search_Subscription
-from .models import Source
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
@@ -25,10 +23,9 @@ calling a template.
 # FUNCTIONS
 #----------------------------------------------------------------
 
-def search_news(search_term, category, diario):
+def search_news(search_term, category):
     news = list()
     sql_query = 'SELECT * FROM search_news_article'
-
 
     if len(search_term) > 0:
         search_term = "+" + search_term
@@ -39,24 +36,13 @@ def search_news(search_term, category, diario):
                        OR MATCH(content)   AGAINST(\'%s\' IN BOOLEAN MODE) )' % (search_term, search_term)
         if category != "All":
             sql_query += ' AND category = "%s"' % (category)
-        if diario != None:
-            sql_query += ' AND source = "%s"' % (diario)
-
     elif category != "All" and len(category) > 0:
         sql_query += ' WHERE category = "%s"' % (category)
-        if diario != None:
-            sql_query += ' AND source = "%s"' % (diario)
-
-    elif diario != None:
-            sql_query += ' WHERE source = "%s"' % (diario)
-
 
     sql_query += ' ORDER BY pubdate DESC'
 
     for article in Article.objects.raw (sql_query):
         news.append(article)
-
-
 
     return news
 
@@ -86,6 +72,7 @@ def get_user_subscriptions(user):
         subscriptions = False
     return subscriptions
 
+
 #----------------------------------------------------------------
 # VIEWS
 #----------------------------------------------------------------
@@ -94,7 +81,7 @@ INDEX VIEW: Here we have all the pages in which there are news displayed.
     PROBLEMS: The logic of this functions is completely crap
               Someone fix it pls
 '''
-def index_view(request, diario=None):
+def index_view(request):
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
@@ -116,24 +103,15 @@ def index_view(request, diario=None):
 
                 subscriptions = get_user_subscriptions(request.user.username)
 
-            if diario != None:
-                try:
-                    sub = Source.objects.get(
-                    name = diario
-                    )  
-                except Exception as m:
-                    raise Http404  
 
-
-
-            news = search_news(search_term, category, diario)
+            news = search_news(search_term, category)
             if news:
                 count = len(news)
                 news  = paginate_news(request, news)
                 return render(request, 'search_news/index.html', {'form'    : form,     'term'          : search_term,
                                                                   'category': category, 'news'          : news,
                                                                   'count'   : count,    'subscriptions' : subscriptions,
-                                                                  'is_subs' : is_subs,  'diario'        : diario } )
+                                                                  'is_subs' : is_subs } )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'form': form, 'error': error} )
@@ -176,7 +154,6 @@ def loggedin(request):
     return render_to_response('registration/loggedin.html',
                               {'username': request.user.username})
 
-
 def user_subscriptions(request):
     msg = ""
     if request.user.is_authenticated():
@@ -198,4 +175,3 @@ def user_subscriptions(request):
                     category=category
                 ).delete()
     return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg })
-
