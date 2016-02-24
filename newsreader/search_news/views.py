@@ -156,4 +156,20 @@ def loggedin(request):
 def user_subscriptions(request):
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
-    return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions })
+    if request.method == "POST":
+        for sub, value in request.POST.items():
+            if not sub.startswith('s_'):
+                continue
+            else:
+                if value == "1":
+                    continue
+                msg = "Changes saved."
+                elements = sub[2:].split("||") # starts from [2:] to omit "s_"
+                sterm    = elements[0]
+                category = elements[1]
+                Search_Subscription.objects.filter(
+                    username=request.user.username,
+                    keyword=sterm,
+                    category=category
+                ).delete()
+    return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg })
