@@ -25,7 +25,20 @@
         <div class="inputs">
 <br>
 <tr>
-	<td>{{form.as_p}}</td>
+	<td>{{form.username.label_tag}}</td>
+	<td>{{ form.username }}</td>
+    <td>{{ form.username.errors }}</td>
+</tr>
+<br>
+<tr>
+    <td>{{ form.password1.label_tag }}</td>
+    <td>{{ form.password1 }}</td>
+    <td>{{ form.password1.errors }}</td>
+</tr>
+<tr>
+    <td>{{ form.password2.label_tag }}</td>
+    <td>{{ form.password2 }}</td>
+    <td>{{ form.password2.errors }}</td>
 </tr>
 <br>
 
