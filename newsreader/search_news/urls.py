@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^accounts/logout/$', lambda request: logout_then_login(request, "/"), name='logout'),
     url(r'^accounts/loggedin/$', views.loggedin),
     url(r'^subscribed$', views.subscribed, name='subscribed'),
+    url(r'^news/(?P<diario>.+)/$', views.index_view),
 ]
