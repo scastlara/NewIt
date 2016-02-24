@@ -1,9 +1,11 @@
 <html>
 {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{% static 'search_news/style.css' %}" />
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" href="{% static 'search_news/style.css' %}" />
 
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
     <title> NewIt! </title>
 </head>
@@ -110,6 +112,19 @@
 <script src="{% static 'search_news/js/backtop.js' %}"></script>
 <script src="{% static 'search_news/js/overlay.js' %}"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script>
+  
+    $(document).ready(function(e){
+      $('.search-panel .dropdown-menu').find('a').click(function(e) {
+          e.preventDefault();
+          var param = $(this).attr("href").replace("#","");
+          var concept = $(this).text();
+          $('.search-panel span#search_concept').text(concept);
+          $('.input-group #search_param').val(param);
+      });
+    });
+  </script>
   <script>
 
     $(function () {
@@ -125,6 +140,7 @@
     });
 
   </script>
-</body>
+
+  </body>
 
 </html>

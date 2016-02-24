@@ -3,12 +3,40 @@
 
 {% block content %}
 
-    <h1> ¿Qué te interesa? </h1>
-    <form action="" method="get">
-        {% csrf_token %}
-        <p> {{ form.categ }} </p>
-        <p> {{ form.sterm }} <input type="submit" value="Busca" class="search_button"/> </p>
-    </form>
+    
+    <div class="search_bar">
+    <div class="row">    
+        <div class="col-xs-10 col-xs-offset-0">
+            <div class="input-group">
+                <div class="input-group-btn search-panel">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <span id="search_concept">Select category... </span> <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#Todo" class="selected">Todo</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#Cultura">Cultura</a></li>
+                      <li><a href="#Deportes">Deportes</a></li>
+                      <li><a href="#Economia">Economia</a></li>
+                      <li><a href="#Internacional">Internacional</a></li>
+                      <li><a href="#Opinion">Opinion</a></li>
+                      <li><a href="#Politica">Politica</a></li>
+                      <li><a href="#Tecnologia">Tecnologia</a></li>
+                    </ul>
+                </div>
+                <form action="{% url 'index_view' %}" method="GET">
+                <input type="hidden" name="categ" id="search_param">         
+                <input type="text" class="form-control" name="sterm" placeholder="Search term...">
+
+                </form>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+
 
     {% if error %}
         {{ error }}
@@ -86,4 +114,6 @@
 <footer id="footer">
   <p> copyright </p>
 </footer>
+
+
 {% endblock content %}

@@ -34,9 +34,9 @@ def search_news(search_term, category):
 
         sql_query += ' WHERE (MATCH(title) AGAINST(\'%s\' IN BOOLEAN MODE) \
                        OR MATCH(content)   AGAINST(\'%s\' IN BOOLEAN MODE) )' % (search_term, search_term)
-        if category != "All":
+        if category != "":
             sql_query += ' AND category = "%s"' % (category)
-    elif category != "All" and len(category) > 0:
+    elif category != "" and len(category) > 0:
         sql_query += ' WHERE category = "%s"' % (category)
 
     sql_query += ' ORDER BY pubdate DESC'

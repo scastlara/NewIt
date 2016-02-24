@@ -66,6 +66,15 @@
     background-color: #809EE2;
 }
 
+.btn:hover, .btn:focus {
+    background: #6084D6 !important;
+    color:white !important;
+}
+
+
+
+
+
 input[type=text].search {
     width: 50%;
     box-sizing: border-box;
