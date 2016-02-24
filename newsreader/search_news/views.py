@@ -61,6 +61,17 @@ def paginate_news(request, news):
 
     return news
 
+
+def get_user_subscriptions(user):
+    subscriptions = None
+    try:
+        subscriptions = Search_Subscription.objects.filter(
+            username = user
+        )
+    except:
+        subscriptions = False
+    return subscriptions
+
 #----------------------------------------------------------------
 # VIEWS
 #----------------------------------------------------------------
@@ -89,12 +100,7 @@ def index_view(request):
                 except:
                     is_subs = False
 
-                try:
-                    subscriptions = Search_Subscription.objects.filter(
-                        username = request.user.username
-                    )
-                except:
-                    subscriptions = False
+                subscriptions = get_user_subscriptions(request.user.username)
 
 
             news = search_news(search_term, category)
@@ -146,3 +152,8 @@ def registration_complete(request):
 def loggedin(request):
     return render_to_response('registration/loggedin.html',
                               {'username': request.user.username})
+
+def user_subscriptions(request):
+    if request.user.is_authenticated():
+        subscriptions = get_user_subscriptions(request.user.username)
+    return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions })

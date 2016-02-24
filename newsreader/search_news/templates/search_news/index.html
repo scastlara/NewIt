@@ -19,7 +19,7 @@
                 {% if term %} {{ term }} {% endif %}
                 {{ category }}
             </h2>
-            {% if user.is_authenticated%}
+            {% if user.is_authenticated %}
                 {% if not is_subs %}
                     {% if term or category %}
                         <form action="{% url 'subscribed' %}" method="POST">
