@@ -1,0 +1,69 @@
+{% extends 'search_news/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+    {{msg}}
+        <h1>Feed Manager</h1>
+        <h4>{{ user }}</h4>
+
+
+        BLACK LIST: {{ black }}
+
+        <!-- PRINT ALL FEEDS -->
+        <form action="{% url 'feed_subscriptions' %}" method="POST">
+            {% csrf_token %}
+            <ul>
+            {% for item in all_feeds %}
+                <li>
+                    {{ item.name }}
+                    {% if item.name in black %}
+                        <input type="radio" name="s_{{item.name}}" value="1">YES
+                        <input type="radio" name="s_{{item.name}}" value="0" checked>NOPE
+                    {% else %}
+                        <input type="radio" name="s_{{item.name}}" value="1" checked>YES
+                        <input type="radio" name="s_{{item.name}}" value="0">NOPE
+                    {% endif %}
+                </li>
+
+            {% endfor %}
+            <input type="submit" data-inline="true" value="Save">
+            </ul>
+        </form>
+
+
+
+
+
+
+
+    {% else %}
+        ERROR: Log in.
+
+
+    {% endif %}
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{% block s_subs %}
+
+{% if subscriptions %}
+    {% for sub in subscriptions %}
+        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+    {% endfor %}
+{% endif %}
+
+{% endblock s_subs %}
