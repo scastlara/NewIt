@@ -329,19 +329,22 @@ input[type=submit].search_button:hover {
 /* OVERLAY THINGS */
 .news-overlay {
     display: none;
-    height: 75%;
-    width: 60%;
+    height: 90%;
+    width: 64%;
     position: fixed;
     top: 30px;
-    right: 0;
+    right: 18%;
     z-index: 9999;
-    background: #333333;
+    background: #e9eaed;
     padding-left: 5%;
     padding-top: 5%;
     padding-right: 5%;
     padding-bottom: 5%;
     overflow: scroll;
     overflow-y: scroll;
+    -webkit-box-shadow: 0px 0px 180px 120px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 180px 120px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 180px 120px rgba(0,0,0,0.75);
 }
 
 .close-overlay, #click {
@@ -353,10 +356,10 @@ input[type=submit].search_button:hover {
     font-size:16px;
     font-weight: bold;
     padding:20px;
-    color: #aaa;
-    position: absolute;
-    top: 0;
-    left:2px
+    color: black;
+    position: fixed;
+    top: 30px;
+    left: 18%;
 }
 
 .small-news {
@@ -383,32 +386,31 @@ input[type=submit].search_button:hover {
 /* STYLE FOR NEWS OVERLAY */
 .news-overlay h1 {
     line-height:1.5;
-    color: #EAEAEA;
+    color: black;
 }
 
 .news-overlay h2 {
     line-height:1.5;
-    color: #EAEAEA;
+    color: black;
 }
 
 .news-overlay h3 {
     line-height:1.5;
-    color: #EAEAEA;
+    color: black;
 }
 
 .news-overlay h4 {
     line-height:1.5;
-    color: #EAEAEA;
+    color: black;
 }
 
 .news-overlay a {
     line-height:1.5;
-    color: white;
 }
 
 .news-overlay p {
     line-height:1.5;
-    color: #EAEAEA;
+    color: black;
 }
 
 
@@ -442,8 +444,8 @@ img#twitter:hover {
 #signup {
     padding: 0px 25px 25px;
     background: #fff;
-    box-shadow: 
-        0px 0px 0px 5px rgba( 255,255,255,0.4 ), 
+    box-shadow:
+        0px 0px 0px 5px rgba( 255,255,255,0.4 ),
         0px 4px 20px rgba( 0,0,0,0.33 );
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -508,7 +510,7 @@ img#twitter:hover {
         #b9c5dd 0%,
         #a4b0cb);
     background: -webkit-gradient(
-        linear, left top, left bottom, 
+        linear, left top, left bottom,
         from(#b9c5dd),
         to(#a4b0cb));
     -moz-border-radius: 5px;
