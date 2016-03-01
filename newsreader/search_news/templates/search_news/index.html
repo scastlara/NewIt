@@ -3,9 +3,9 @@
 
 {% block content %}
 
-    
+
     <div class="search_bar">
-    <div class="row">    
+    <div class="row">
         <div class="col-xs-10 col-xs-offset-0">
             <div class="input-group">
                 <div class="input-group-btn search-panel">
@@ -24,8 +24,8 @@
                       <li><a href="#Tecnologia">Tecnologia</a></li>
                     </ul>
                 </div>
-                <form action="{% url 'index_view' %}" method="GET">
-                <input type="hidden" name="categ" id="search_param">         
+                <form action="{{ request.path }}" method="GET">
+                <input type="hidden" name="categ" id="search_param">
                 <input type="text" class="form-control" name="sterm" placeholder="Search term...">
 
                 </form>
