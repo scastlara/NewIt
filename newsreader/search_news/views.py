@@ -204,5 +204,15 @@ def user_subscriptions(request):
 
 
 def user_bookmarks(request):
-    string = 'ta pata madra'
-    return render(request, 'search_news/user_bookmarks.html'{'string':string})
+    username = 'kk'
+    if request.user.is_authenticated():
+        bookmarked = Bookmark.objects.filter(username=request.user.username
+
+        )
+        string = 'ta pata madra'
+        return render(request, 'search_news/user_bookmarks.html',{'username' : username,
+                                                                  'string': string,
+                                                                  'bookmarked': bookmarked
+                                                                })
+
+     
