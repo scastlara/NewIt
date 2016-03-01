@@ -14,5 +14,6 @@ urlpatterns = [
     url(r'^subscribed$', views.subscribed, name='subscribed'),
     url(r'^news/(?P<diario>.+)/$', views.index_view),
     url(r'^accounts/search_subscritions/$', views.user_subscriptions, name="user_subscriptions"),
+    url(r'^accounts/feed_subscriptions/$',  views.feed_subscriptions, name="feed_subscriptions"),
 
 ]

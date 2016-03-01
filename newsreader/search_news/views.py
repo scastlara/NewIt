@@ -7,6 +7,7 @@ from .forms import SearchForm
 from .models import Article
 from .models import Search_Subscription
 from .models import Source
+from .models import Source_Subscription
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
@@ -183,6 +184,9 @@ def user_subscriptions(request):
     subscriptions = ""
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
+    else:
+        raise Http404
+
     if request.method == "POST":
         for sub, value in request.POST.items():
             if not sub.startswith('s_'):
@@ -200,3 +204,52 @@ def user_subscriptions(request):
                     category=category
                 ).delete()
     return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg })
+
+def feed_subscriptions(request):
+    msg = "HELLO, BEAUTIFUL"
+    black_list  = ""
+    black_names = list() # List of sources in black list
+    all_feeds  = ""
+
+    if request.user.is_authenticated():
+        subscriptions = get_user_subscriptions(request.user.username)
+        if request.method == "POST":
+            for feed, value in request.POST.items():
+                if not feed.startswith('s_'):
+                    continue
+                else:
+                    source = feed[2:]
+                    if value == "1":
+                        # Remove from black list if exists
+                        msg = source
+                        Source_Subscription.objects.filter(
+                            username = request.user.username,
+                            source   = source
+                            ).delete()
+
+                    else:
+                        # Add to black list if it doesn't exist
+                        Source_Subscription.objects.get_or_create(
+                            username = request.user.username,
+                            source   = source
+                        )
+
+
+        # Get user feed subscriptions
+        black_list = Source_Subscription.objects.filter(
+            username = request.user.username
+        )
+        all_feeds = Source.objects.all()
+
+        if black_list:
+            # We don't want some feeds
+            for black in black_list:
+                black_names.append(black.source)
+        else:
+            black_names = None
+
+    else:
+        raise Http404
+
+    return render(request, 'search_news/feed_subscriptions.html', {'msg': msg, 'black': black_names,
+                                                                   "all_feeds": all_feeds, 'subscriptions': subscriptions})
