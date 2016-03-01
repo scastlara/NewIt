@@ -352,6 +352,10 @@ input[type=submit].search_button:hover {
     pointer;
 }
 
+.close-overlay:hover {
+    opacity: 0.2;
+}
+
 .close-overlay {
     font-size:16px;
     font-weight: bold;
