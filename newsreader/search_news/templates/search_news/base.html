@@ -19,7 +19,7 @@
 
   <aside class="sidebar-left-collapse">
 
-    <a href="/" class="company-logo" ><img src="{% static 'search_news/Images/newit_logo.jpg' %}", alt="mec"></a>
+    <a href="/" class="company-logo" ><img src="{% static 'search_news/Images/newit_logo.png' %}", alt="mec"></a>
 
     <div class="sidebar-links">
 
@@ -73,7 +73,7 @@
 
         <ul class="sub-links">
           <li><a href="/accounts/search_subscritions/">Subscription Manager</a></li>
-          <li><a href="#">Feeds Manager </a></li>
+          <li><a href="/accounts/feed_subscriptions/">Feeds Manager</a></li>
           <li><a href="#">Settings</a></li>
           <li><a href="#">Logout</a></li>
         </ul>
@@ -118,7 +118,7 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script>
-  
+
     $(document).ready(function(e){
       $('.search-panel .dropdown-menu').find('a').click(function(e) {
           e.preventDefault();
