@@ -97,13 +97,16 @@ INDEX VIEW: Here we have all the pages in which there are news displayed.
               Someone fix it pls
 '''
 def index_view(request, diario=None):
+    subscriptions = None
+    if request.user.is_authenticated():
+        subscriptions = get_user_subscriptions(request.user.username)
+
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
             search_term   = form.cleaned_data['sterm']
             category      = form.cleaned_data['categ']
             is_subs       = None
-            subscriptions = None
             if request.user.is_authenticated():
                 # Check if user is subscribed to this search!
                 try:
@@ -116,8 +119,6 @@ def index_view(request, diario=None):
                 except:
                     is_subs = False
 
-                subscriptions = get_user_subscriptions(request.user.username)
-
             if diario != None:
                 try:
                     sub = Source.objects.get(
@@ -126,23 +127,21 @@ def index_view(request, diario=None):
                 except Exception as m:
                     raise Http404
 
-
-
             news = search_news(search_term, category, diario)
             if news:
                 count = len(news)
                 news  = paginate_news(request, news)
-                return render(request, 'search_news/index.html', {'form'    : form,     'term'          : search_term,
-                                                                  'category': category, 'news'          : news,
-                                                                  'count'   : count,    'subscriptions' : subscriptions,
-                                                                  'is_subs' : is_subs,  'diario'        : diario } )
+                return render(request, 'search_news/index.html', {'term'    : search_term, 'diario'        : diario,
+                                                                  'category': category,    'news'          : news,
+                                                                  'count'   : count,       'subscriptions' : subscriptions,
+                                                                  'is_subs' : is_subs,   } )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
-                return render(request, 'search_news/index.html', {'form': form, 'error': error} )
+                return render(request, 'search_news/index.html', {'error': error} )
     else:
         form = SearchForm()
 
-    return render(request, 'search_news/index.html', {'content': string, 'form': form})
+    return render(request, 'search_news/index.html', )
 
 
 def subscribed(request):
