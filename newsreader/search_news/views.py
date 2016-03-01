@@ -129,6 +129,10 @@ def index_view(request, diario=None):
         if form.is_valid():
             search_term   = form.cleaned_data['sterm']
             category      = form.cleaned_data['categ']
+
+            if category == "Todo":
+                category = ""
+
             is_subs       = None
             if request.user.is_authenticated():
                 # Check if user is subscribed to this search!
@@ -157,10 +161,12 @@ def index_view(request, diario=None):
                 return render(request, 'search_news/index.html', {'term'    : search_term, 'diario'        : diario,
                                                                   'category': category,    'news'          : news,
                                                                   'count'   : count,       'subscriptions' : subscriptions,
-                                                                  'is_subs' : is_subs,   } )
+                                                                  'is_subs' : is_subs,      'request'      : request} )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'error': error} )
+        else:
+            raise Http404
     else:
         form = SearchForm()
 
