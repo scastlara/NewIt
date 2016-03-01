@@ -7,6 +7,7 @@ from .forms import SearchForm
 from .models import Article
 from .models import Search_Subscription
 from .models import Source
+from .models import Bookmark ###
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
@@ -200,3 +201,8 @@ def user_subscriptions(request):
                     category=category
                 ).delete()
     return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg })
+
+
+def user_bookmarks(request):
+    string = 'ta pata madra'
+    return render(request, 'search_news/user_bookmarks.html'{'string':string})

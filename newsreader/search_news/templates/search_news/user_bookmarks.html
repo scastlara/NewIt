@@ -1,0 +1,69 @@
+{% extends 'search_news/base.html' %}
+{% extends 'search_news/base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        <h1>Subscription Manager</h1>
+        <h2>User: {{ user }}</h2>
+        {% if subscriptions %}
+            <h2>Search Subscriptions</h2>
+            {% if message %}
+                {{ message }}
+            {% endif %}
+            <ul>
+            <form action="{% url 'user_subscriptions' %}" method="POST">
+                {% csrf_token %}
+                {% for sub in subscriptions %}
+                    <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+                    <input type="radio" name="s_{{sub.keyword}}||{{sub.category}}" value="1" checked>YES
+                    <input type="radio" name="s_{{sub.keyword}}||{{sub.category}}" value="0">NOPE
+                {% endfor %}
+                <br>
+                <input type="submit" data-inline="true" value="Save">
+            </form>
+            </ul>
+        {% else %}
+        {% if message %}
+            {{ message }}
+        {% endif %}
+            <p>You're not subscribed to anything</p>
+
+        {% endif %}
+
+
+
+
+
+
+
+    {% else %}
+        ERROR: Log in.
+
+
+    {% endif %}
+
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{% block s_subs %}
+
+{% if subscriptions %}
+    {% for sub in subscriptions %}
+        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+    {% endfor %}
+{% endif %}
+
+{% endblock s_subs %}
