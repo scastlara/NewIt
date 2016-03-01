@@ -26,7 +26,7 @@ calling a template.
 # FUNCTIONS
 #----------------------------------------------------------------
 
-def search_news(search_term, category, diario):
+def search_news(search_term, category, diario, black_names):
     news = list()
     sql_query = 'SELECT * FROM search_news_article'
 
@@ -43,15 +43,26 @@ def search_news(search_term, category, diario):
 
         if diario != None:
             sql_query += ' AND source = "%s"' % (diario)
+        elif black_names:
+            for black in black_names:
+                sql_query += ' AND NOT source = "%s"' % (black)
+
 
     elif category != "" and len(category) > 0:
 
         sql_query += ' WHERE category = "%s"' % (category)
         if diario != None:
             sql_query += ' AND source = "%s"' % (diario)
+        elif black_names:
+            for black in black_names:
+                sql_query += ' AND NOT source = "%s"' % (black)
 
     elif diario != None:
             sql_query += ' WHERE source = "%s"' % (diario)
+    elif black_names:
+        sql_query += ' WHERE NOT source = "%s"  ' % black_names[0]
+        for black in black_names[1:]:
+            sql_query += ' AND NOT source = "%s"' % (black)
 
 
     sql_query += ' ORDER BY pubdate DESC'
@@ -99,8 +110,19 @@ INDEX VIEW: Here we have all the pages in which there are news displayed.
 '''
 def index_view(request, diario=None):
     subscriptions = None
+    black_list    = None
+    black_names   = list()
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
+        black_list = Source_Subscription.objects.filter(
+            username = request.user.username
+        )
+        if black_list:
+            # We don't want some feeds
+            for black in black_list:
+                black_names.append(black.source)
+        else:
+            black_names = None
 
     if request.method == "GET":
         form = SearchForm(request.GET)
@@ -128,7 +150,7 @@ def index_view(request, diario=None):
                 except Exception as m:
                     raise Http404
 
-            news = search_news(search_term, category, diario)
+            news = search_news(search_term, category, diario, black_names)
             if news:
                 count = len(news)
                 news  = paginate_news(request, news)
