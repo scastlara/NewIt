@@ -172,7 +172,7 @@ def index_view(request, diario=None):
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'error': error} )
         else:
-            raise Http404
+            return render(request, 'search_news/error404.html') 
     else:
         form = SearchForm()
 
@@ -219,7 +219,7 @@ def user_subscriptions(request):
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
     else:
-        raise Http404
+        return render(request, 'search_news/error404.html') 
 
     if request.method == "POST":
         for sub, value in request.POST.items():
@@ -281,7 +281,7 @@ def feed_subscriptions(request):
             black_names = None
 
     else:
-        raise Http404
+        return render(request, 'search_news/error404.html') 
 
     return render(request, 'search_news/feed_subscriptions.html', {'black': black_names,
                                                                    "all_feeds": all_feeds, 'subscriptions': subscriptions})
