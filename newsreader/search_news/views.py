@@ -125,7 +125,7 @@ def index_view(request, diario=None):
             for black in black_list:
                 black_names.append(black.source)
         else:
-            black_names = None
+            black_names = list()
 
 
     if request.method == "GET":
@@ -157,7 +157,7 @@ def index_view(request, diario=None):
                     name = diario
                     )
                 except Exception as m:
-                    return render(request, 'search_news/error404.html') 
+                    return render(request, 'search_news/error404.html')
 
             news = search_news(search_term, category, diario, black_names)
             if news:
@@ -166,8 +166,8 @@ def index_view(request, diario=None):
                 return render(request, 'search_news/index.html', {'term'    : search_term, 'diario'        : diario,
                                                                   'category': category,    'news'          : news,
                                                                   'count'   : count,       'subscriptions' : subscriptions,
-                                                                  'is_subs' : is_subs,      'request'      : request,
-                                                                  'feeds'   : feeds, "black_list" : black_names}  )
+                                                                  'is_subs' : is_subs,     'request'       : request,
+                                                                  'feeds'   : feeds,       "black_list"    : black_names}  )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'error': error} )
@@ -240,7 +240,6 @@ def user_subscriptions(request):
     return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg })
 
 def feed_subscriptions(request):
-    msg = "HELLO, BEAUTIFUL"
     black_list  = ""
     black_names = list() # List of sources in black list
     all_feeds  = ""
@@ -268,7 +267,6 @@ def feed_subscriptions(request):
                             source   = source
                         )
 
-
         # Get user feed subscriptions
         black_list = Source_Subscription.objects.filter(
             username = request.user.username
@@ -285,8 +283,9 @@ def feed_subscriptions(request):
     else:
         return render(request, 'search_news/error404.html') 
 
-    return render(request, 'search_news/feed_subscriptions.html', {'msg': msg, 'black': black_names,
+    return render(request, 'search_news/feed_subscriptions.html', {'black': black_names,
                                                                    "all_feeds": all_feeds, 'subscriptions': subscriptions})
+
 
 def user_bookmarks(request):
     if request.user.is_authenticated():
