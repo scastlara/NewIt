@@ -19,3 +19,12 @@ $(document).keyup(function(e) {
         $('.news-overlay').hide(250);
     }
 });
+
+$('html').click(function() {
+ //your stuf
+    $('.news-overlay').hide(250);
+ });
+
+ $('.news-overlay').click(function(event){
+     event.stopPropagation();
+ });
