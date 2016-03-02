@@ -16,8 +16,14 @@
                 {% csrf_token %}
                 {% for sub in subscriptions %}
                     <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
-                    <input type="radio" name="s_{{sub.keyword}}||{{sub.category}}" value="1" checked>YES
-                    <input type="radio" name="s_{{sub.keyword}}||{{sub.category}}" value="0">NOPE
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default active">
+                            <input type="radio" name="s_{{sub.keyword}}||{{sub.category}}" value="1" checked>YES
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="s_{{sub.keyword}}||{{sub.category}}" value="0">NOPE
+                        </label>
+                    </div>
                 {% endfor %}
                 <br>
                 <input type="submit" data-inline="true" value="Save">

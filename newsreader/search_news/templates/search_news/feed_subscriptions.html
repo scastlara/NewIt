@@ -19,11 +19,22 @@
                 <li>
                     {{ item.name }}
                     {% if item.name in black %}
-                        <input type="radio" name="s_{{item.name}}" value="1">YES
-                        <input type="radio" name="s_{{item.name}}" value="0" checked>NOPE
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default">
+                            <input type="radio" name="s_{{item.name}}" value="1">YES
+                        </label>
+                        <label class="btn btn-default active">
+                            <input type="radio" name="s_{{item.name}}" value="0" checked>NOPE
+                        </label>
                     {% else %}
-                        <input type="radio" name="s_{{item.name}}" value="1" checked>YES
-                        <input type="radio" name="s_{{item.name}}" value="0">NOPE
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-default active">
+                            <input type="radio" name="s_{{item.name}}" value="1" checked>YES
+                        </label>
+                        <label class="btn btn-default">
+                            <input type="radio" name="s_{{item.name}}" value="0">NOPE
+                        </label>
+                    </div>
                     {% endif %}
                 </li>
 
