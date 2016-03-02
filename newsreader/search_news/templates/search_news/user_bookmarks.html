@@ -1,0 +1,16 @@
+{% extends 'search_news/base.html' %}
+
+bookmarked = {{ bookmarked }}
+
+
+{% block content %}
+
+You have saved this articles:
+<br>
+{% for item in bookmarked %}
+    <br>
+    <p>{{item.id}} {{item.username}} {{item.article}}</p>
+{% endfor %}
+
+{% endblock content %}
+

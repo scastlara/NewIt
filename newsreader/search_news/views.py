@@ -8,6 +8,7 @@ from .models import Article
 from .models import Search_Subscription
 from .models import Source
 from .models import Source_Subscription
+from .models import Bookmark ###
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
@@ -286,3 +287,23 @@ def feed_subscriptions(request):
 
     return render(request, 'search_news/feed_subscriptions.html', {'msg': msg, 'black': black_names,
                                                                    "all_feeds": all_feeds, 'subscriptions': subscriptions})
+
+def user_bookmarks(request):
+    if request.user.is_authenticated():
+        bookmarked = Bookmark.objects.filter(username=request.user.username
+        )
+
+        return render(request, 'search_news/user_bookmarks.html',{'bookmarked': bookmarked
+                                                                 })
+
+def user_booked(request):
+    if request.user.is_authenticated():
+        if request.method == "GET":
+            url = request.GET.get('art')
+            Bookmark.objects.get_or_create(
+                username = request.user.username,
+                article  = url
+            )
+        return render(request, 'search_news/user_booked.html',{
+                                                               'url' : url
+                                                              })
