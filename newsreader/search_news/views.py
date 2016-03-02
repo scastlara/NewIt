@@ -7,6 +7,7 @@ from .forms import SearchForm
 from .models import Article
 from .models import Search_Subscription
 from .models import Source
+from .models import Source_Subscription
 from .models import Bookmark ###
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -26,7 +27,7 @@ calling a template.
 # FUNCTIONS
 #----------------------------------------------------------------
 
-def search_news(search_term, category, diario):
+def search_news(search_term, category, diario, black_names):
     news = list()
     sql_query = 'SELECT * FROM search_news_article'
 
@@ -43,15 +44,26 @@ def search_news(search_term, category, diario):
 
         if diario != None:
             sql_query += ' AND source = "%s"' % (diario)
+        elif black_names:
+            for black in black_names:
+                sql_query += ' AND NOT source = "%s"' % (black)
+
 
     elif category != "" and len(category) > 0:
 
         sql_query += ' WHERE category = "%s"' % (category)
         if diario != None:
             sql_query += ' AND source = "%s"' % (diario)
+        elif black_names:
+            for black in black_names:
+                sql_query += ' AND NOT source = "%s"' % (black)
 
     elif diario != None:
             sql_query += ' WHERE source = "%s"' % (diario)
+    elif black_names:
+        sql_query += ' WHERE NOT source = "%s"  ' % black_names[0]
+        for black in black_names[1:]:
+            sql_query += ' AND NOT source = "%s"' % (black)
 
 
     sql_query += ' ORDER BY pubdate DESC'
@@ -99,14 +111,32 @@ INDEX VIEW: Here we have all the pages in which there are news displayed.
 '''
 def index_view(request, diario=None):
     subscriptions = None
+    black_list    = None
+    black_names   = list()
+    feeds         = Source.objects.all()
+
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
+        black_list = Source_Subscription.objects.filter(
+            username = request.user.username
+        )
+        if black_list:
+            # We don't want some feeds
+            for black in black_list:
+                black_names.append(black.source)
+        else:
+            black_names = None
+
 
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
             search_term   = form.cleaned_data['sterm']
             category      = form.cleaned_data['categ']
+
+            if category == "Todo":
+                category = ""
+
             is_subs       = None
             if request.user.is_authenticated():
                 # Check if user is subscribed to this search!
@@ -120,6 +150,7 @@ def index_view(request, diario=None):
                 except:
                     is_subs = False
 
+
             if diario != None:
                 try:
                     sub = Source.objects.get(
@@ -128,17 +159,20 @@ def index_view(request, diario=None):
                 except Exception as m:
                     return render(request, 'search_news/error404.html') 
 
-            news = search_news(search_term, category, diario)
+            news = search_news(search_term, category, diario, black_names)
             if news:
                 count = len(news)
                 news  = paginate_news(request, news)
                 return render(request, 'search_news/index.html', {'term'    : search_term, 'diario'        : diario,
                                                                   'category': category,    'news'          : news,
                                                                   'count'   : count,       'subscriptions' : subscriptions,
-                                                                  'is_subs' : is_subs,   } )
+                                                                  'is_subs' : is_subs,      'request'      : request,
+                                                                  'feeds'   : feeds, "black_list" : black_names}  )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'error': error} )
+        else:
+            raise Http404
     else:
         form = SearchForm()
 
@@ -184,6 +218,9 @@ def user_subscriptions(request):
     subscriptions = ""
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
+    else:
+        raise Http404
+
     if request.method == "POST":
         for sub, value in request.POST.items():
             if not sub.startswith('s_'):
@@ -202,17 +239,71 @@ def user_subscriptions(request):
                 ).delete()
     return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg })
 
+def feed_subscriptions(request):
+    msg = "HELLO, BEAUTIFUL"
+    black_list  = ""
+    black_names = list() # List of sources in black list
+    all_feeds  = ""
+
+    if request.user.is_authenticated():
+        subscriptions = get_user_subscriptions(request.user.username)
+        if request.method == "POST":
+            for feed, value in request.POST.items():
+                if not feed.startswith('s_'):
+                    continue
+                else:
+                    source = feed[2:]
+                    if value == "1":
+                        # Remove from black list if exists
+                        msg = source
+                        Source_Subscription.objects.filter(
+                            username = request.user.username,
+                            source   = source
+                            ).delete()
+
+                    else:
+                        # Add to black list if it doesn't exist
+                        Source_Subscription.objects.get_or_create(
+                            username = request.user.username,
+                            source   = source
+                        )
+
+
+        # Get user feed subscriptions
+        black_list = Source_Subscription.objects.filter(
+            username = request.user.username
+        )
+        all_feeds = Source.objects.all()
+
+        if black_list:
+            # We don't want some feeds
+            for black in black_list:
+                black_names.append(black.source)
+        else:
+            black_names = None
+
+    else:
+        raise Http404
+
+    return render(request, 'search_news/feed_subscriptions.html', {'msg': msg, 'black': black_names,
+                                                                   "all_feeds": all_feeds, 'subscriptions': subscriptions})
 
 def user_bookmarks(request):
-    username = 'kk'
     if request.user.is_authenticated():
         bookmarked = Bookmark.objects.filter(username=request.user.username
-
         )
-        string = 'ta pata madra'
-        return render(request, 'search_news/user_bookmarks.html',{'username' : username,
-                                                                  'string': string,
-                                                                  'bookmarked': bookmarked
-                                                                })
 
-     
+        return render(request, 'search_news/user_bookmarks.html',{'bookmarked': bookmarked
+                                                                 })
+
+def user_booked(request):
+    if request.user.is_authenticated():
+        if request.method == "GET":
+            url = request.GET.get('art')
+            Bookmark.objects.get_or_create(
+                username = request.user.username,
+                article  = url
+            )
+        return render(request, 'search_news/user_booked.html',{
+                                                               'url' : url
+                                                              })

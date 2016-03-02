@@ -1,0 +1,52 @@
+  body {
+       font-family: Open Sans;
+       /*font-size: 14px;*/
+       font-weight: normal;
+       line-height:1.8;
+       margin: 0;
+       min-width: 960px;
+       padding:2;
+       background-color:  #e6e6e6;
+  }
+#princ_error {
+  background-image: url('Images/error_copy.png'), url('Images/bona2.png');
+  background-position:center top, center bottom;
+  background-size: 25%, 18%;
+  background-repeat: no-repeat, no-repeat;
+}
+#logo_newit_error {
+  display: block;
+  margin: 0 auto;
+  width: 14%;
+  height: 14%;
+}
+#header_error {
+    float: none;
+    color: #262626;
+    width:100%;
+    height: 30px;
+    margin: 40 0 0;
+    text-align: center;
+    font-family: "Fixedsy";
+    font-style: oblique;
+}
+#header2_error {
+  color: #262626;
+  width:100%;
+  height: 30px;
+  margin: 0 0 0;
+  text-align: center;
+  font-style: oblique;
+}
+#error_error {
+  display: block;
+  margin: 0 auto;
+  width:30%;
+  height:auto;
+}
+img.center_error {
+    display: block;
+    margin: 0 auto;
+    width:50%;
+    height:50%;
+}

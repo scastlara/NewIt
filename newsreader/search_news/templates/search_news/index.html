@@ -3,11 +3,13 @@
 
 {% block content %}
 
-    
+
     <div class="search_bar">
-    <form action="{% url 'index_view' %}" method="GET">
+
+    <form action="{{ request.path }}" method="GET">
     <div class="row">    
         <div class="col-xs-8 col-xs-offset-0">
+
             <div class="input-group">
                 <div class="input-group-btn search-panel">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -27,6 +29,7 @@
                 </div>
                 
                 <input type="hidden" name="categ" id="search_param">         
+
                 <input type="text" class="form-control" name="sterm" placeholder="Search term...">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
@@ -72,7 +75,7 @@
             </div>
 
             <div class="news-overlay">
-                <span class="close-overlay">x</span>
+                <div class="close-overlay">x</div>
 
                 <h1>
                     <a href="{{ item.link }}" target="_blank"><img id="link" src="{% static 'search_news/Images/link.svg' %}"/ width="6%" height="6%"></a>
@@ -82,7 +85,19 @@
                       title="Click to share this post on Twitter"
                       onclick="window.open('http://twitter.com/home?status={{item.link}}+via+@NewIt','name','width=600,height=400')">
                       <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
-                </a> <br>
+                </a><br>
+                
+                {% if user.is_authenticated %}
+
+                    <button     href="#"
+                                name = "book"
+                                title="Click to save this article"
+                                onclick="window.open('/accounts/booked?art={{ item.link }}','booked','width=600,height=400')"
+                                type = "submit"
+                                method = "GET"
+                    >Save me!
+                    </button><br>
+                {% endif %}
                 <p> {{ item.pubdate }} </p>
                 <p> {{ item.source }}  </p>
                 <p> {{ item.category }} </p>
@@ -131,3 +146,13 @@
 {% endif %}
 
 {% endblock s_subs %}
+
+
+
+{% block f_subs %}
+    {% for feed in feeds %}
+        {% if feed.name not in black_list %}
+            <li><a href="/news/{{feed.name}}">{{feed.name}}</a></li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

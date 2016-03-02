@@ -19,7 +19,7 @@
 
   <aside class="sidebar-left-collapse">
 
-    <a href="/" class="company-logo" ><img src="{% static 'search_news/Images/newit_logo.jpg' %}", alt="mec"></a>
+    <a href="/" class="company-logo" ><img src="{% static 'search_news/Images/newit_logo.png' %}", alt="mec"></a>
 
     <div class="sidebar-links">
 
@@ -44,10 +44,8 @@
         </a>
 
         <ul class="sub-links">
-          <li><a href="#">Eldiario.es</a></li>
-          <li><a href="#">La Razón</a></li>
-          <li><a href="#">Xataka</a></li>
-          <li><a href="#">SuperPop</a></li>
+          {% block f_subs %}
+          {% endblock %}
         </ul>
 
       </div>
@@ -59,8 +57,7 @@
         </a>
 
         <ul class="sub-links">
-          <li><a href="#">My Bookmarks</a></li>
-          <li><a href="#">Edit Bookmarks</a></li>
+          <li><a href="accounts/bookmarks/">My Bookmarks</a></li>
         </ul>
 
       </div>
@@ -73,7 +70,7 @@
 
         <ul class="sub-links">
           <li><a href="/accounts/search_subscritions/">Subscription Manager</a></li>
-          <li><a href="#">Feeds Manager </a></li>
+          <li><a href="/accounts/feed_subscriptions/">Feeds Manager</a></li>
           <li><a href="#">Settings</a></li>
           <li><a href="#">Logout</a></li>
         </ul>
@@ -90,7 +87,7 @@
                 <a href="/accounts/logout">Log out</a> </li>
                 <div id="username">{{ user }}</div>
             {% else %}
-                <a href="/accounts/login">Sign In</a>
+                <a href="{% url 'login' %}">Sign In</a>
                 <a href="/accounts/register">Sign Up</a>
             {% endif %}
       </div>
@@ -119,7 +116,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <script>
-  
+
     $(document).ready(function(e){
       $('.search-panel .dropdown-menu').find('a').click(function(e) {
           e.preventDefault();
