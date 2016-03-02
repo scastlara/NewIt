@@ -112,6 +112,8 @@ def index_view(request, diario=None):
     subscriptions = None
     black_list    = None
     black_names   = list()
+    feeds         = Source.objects.all()
+
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
         black_list = Source_Subscription.objects.filter(
@@ -123,6 +125,7 @@ def index_view(request, diario=None):
                 black_names.append(black.source)
         else:
             black_names = None
+
 
     if request.method == "GET":
         form = SearchForm(request.GET)
@@ -146,6 +149,7 @@ def index_view(request, diario=None):
                 except:
                     is_subs = False
 
+
             if diario != None:
                 try:
                     sub = Source.objects.get(
@@ -161,7 +165,8 @@ def index_view(request, diario=None):
                 return render(request, 'search_news/index.html', {'term'    : search_term, 'diario'        : diario,
                                                                   'category': category,    'news'          : news,
                                                                   'count'   : count,       'subscriptions' : subscriptions,
-                                                                  'is_subs' : is_subs,      'request'      : request} )
+                                                                  'is_subs' : is_subs,      'request'      : request,
+                                                                  'feeds'   : feeds, "black_list" : black_names}  )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'error': error} )
