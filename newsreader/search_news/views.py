@@ -157,7 +157,7 @@ def index_view(request, diario=None):
                     name = diario
                     )
                 except Exception as m:
-                    raise Http404
+                    return render(request, 'search_news/error404.html') 
 
             news = search_news(search_term, category, diario, black_names)
             if news:

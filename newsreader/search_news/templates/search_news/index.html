@@ -5,15 +5,18 @@
 
 
     <div class="search_bar">
-    <div class="row">
-        <div class="col-xs-10 col-xs-offset-0">
+
+    <form action="{{ request.path }}" method="GET">
+    <div class="row">    
+        <div class="col-xs-8 col-xs-offset-0">
+
             <div class="input-group">
                 <div class="input-group-btn search-panel">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                         <span id="search_concept">Select category... </span> <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#Todo" class="selected">Todo</a></li>
+                      <li><a href="#" class="selected">Todo</a></li>
                       <li class="divider"></li>
                       <li><a href="#Cultura">Cultura</a></li>
                       <li><a href="#Deportes">Deportes</a></li>
@@ -24,17 +27,18 @@
                       <li><a href="#Tecnologia">Tecnologia</a></li>
                     </ul>
                 </div>
-                <form action="{{ request.path }}" method="GET">
-                <input type="hidden" name="categ" id="search_param">
-                <input type="text" class="form-control" name="sterm" placeholder="Search term...">
+                
+                <input type="hidden" name="categ" id="search_param">         
 
-                </form>
+                <input type="text" class="form-control" name="sterm" placeholder="Search term...">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                    <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
+                
             </div>
         </div>
     </div>
+    </form>
     </div>
 
 
@@ -43,7 +47,7 @@
     {% else %}
 
         {% if news %}
-            <h2>{{count}} Noticias:
+            <h2>{{count}} News:
                 {% if term %} {{ term }} {% endif %}
                 {{ category }}
             </h2>
@@ -100,32 +104,35 @@
                 <p> {% autoescape off %} {{ item.content }} {% endautoescape %} </p>
             </div>
 
-            {% endfor %}
+            {% endfor %} 
 
-            <div class="pagination">
-                <span class="step-links">
-                    {% if news.has_previous %}
-                        <a href="?sterm={{ term }}&categ={{ category }}&page={{ news.previous_page_number }}">previous</a>
+            <ul class="pagination">
+                {% if news.has_previous %}
+                    <li><a href="?sterm={{ term }}&categ={{ category }}&page={{ news.previous_page_number }}" class="prev">&laquo</a></li>
+                {% endif %}
+                {% with uprange=news.number|add:"4" dwrange=news.number|add:"-4" %}
+                {% for pag in news.paginator.page_range %}
+                    {% if pag == news.number %}
+                        <li><a href="#" class="active">{{ pag }}</a></li>
                     {% endif %}
-
-                    <span class="current">
-                        Page {{ news.number }} of {{ news.paginator.num_pages }}.
-                    </span>
-
-                    {% if news.has_next %}
-                        <a href="?sterm={{ term }}&categ={{ category }}&page={{ news.next_page_number }}">next</a>
+                    {% if pag < uprange and pag > dwrange and pag != news.number %}
+                        <li> <a href="?sterm={{ term }}&categ={{ category }}&page={{ pag }}" class="page gradient">{{ pag }}</a></li>
                     {% endif %}
-                </span>
-            </div>
+                {% endfor %}
+                {% endwith %}
+
+                {% if news.has_next %}
+                    <li><a href="?sterm={{ term }}&categ={{ category }}&page={{ news.next_page_number }}" class="next">&raquo;</a></li>
+                {% endif %}
+
+            </ul>
+            
         {% endif %}
     {% endif %}
 
 
     <a href="#0" class="cd-top">Top</a>
 
-<footer id="footer">
-  <p> copyright </p>
-</footer>
 
 
 {% endblock content %}

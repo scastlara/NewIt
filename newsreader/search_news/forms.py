@@ -32,4 +32,4 @@ def get_categories():
 
 class SearchForm(forms.Form):
     categ = forms.ChoiceField(label='', choices=get_categories(), required=False)
-    sterm = forms.CharField(label='', max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'search', 'placeholder': 'Search...'}))
+    sterm = forms.CharField(label='', max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'class', 'placeholder': 'Search...'}))
