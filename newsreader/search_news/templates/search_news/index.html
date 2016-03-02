@@ -81,7 +81,19 @@
                       title="Click to share this post on Twitter"
                       onclick="window.open('http://twitter.com/home?status={{item.link}}+via+@NewIt','name','width=600,height=400')">
                       <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
-                </a> <br>
+                </a><br>
+                
+                {% if user.is_authenticated %}
+
+                    <button     href="#"
+                                name = "book"
+                                title="Click to save this article"
+                                onclick="window.open('/accounts/booked?art={{ item.link }}','booked','width=600,height=400')"
+                                type = "submit"
+                                method = "GET"
+                    >Save me!
+                    </button><br>
+                {% endif %}
                 <p> {{ item.pubdate }} </p>
                 <p> {{ item.source }}  </p>
                 <p> {{ item.category }} </p>

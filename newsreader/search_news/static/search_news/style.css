@@ -430,9 +430,9 @@ img#twitter:hover {
     opacity: 0.6;
 }
 
-#===================================================================
-#                      LOGIN LOGOUT STYLES
-#===================================================================
+/*===================================================================
+//                      LOGIN LOGOUT STYLES
+//===================================================================*/
 .container {
     width: 406px;
     max-width: 406px;
@@ -531,3 +531,18 @@ img#twitter:hover {
     position: static;
     clear: both;
 }
+
+/*===================================================================
+//                      BOOKMARK STYLES
+//===================================================================*/
+.freddie {
+    background-position: right; 
+    height: 100%;
+    width: 100%;
+    background-image: url('Images/bookmarked.jpg');
+    background-size:35%;
+    background-repeat: no-repeat;
+    background-color: white;
+}
+
+

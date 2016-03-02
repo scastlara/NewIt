@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^news/(?P<diario>.+)/$', views.index_view),
     url(r'^accounts/search_subscritions/$', views.user_subscriptions, name="user_subscriptions"),
     url(r'^accounts/bookmarks/$', views.user_bookmarks, name ="user_bookmarks"),
+    url(r'^accounts/booked/$', views.user_booked, name ="user_booked"),
 ]

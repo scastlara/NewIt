@@ -204,15 +204,21 @@ def user_subscriptions(request):
 
 
 def user_bookmarks(request):
-    username = 'kk'
     if request.user.is_authenticated():
         bookmarked = Bookmark.objects.filter(username=request.user.username
-
         )
-        string = 'ta pata madra'
-        return render(request, 'search_news/user_bookmarks.html',{'username' : username,
-                                                                  'string': string,
-                                                                  'bookmarked': bookmarked
-                                                                })
+        
+        return render(request, 'search_news/user_bookmarks.html',{'bookmarked': bookmarked
+                                                                 })
 
-     
+def user_booked(request):
+    if request.user.is_authenticated():
+        if request.method == "GET":
+            url = request.GET.get('art')
+            Bookmark.objects.get_or_create(
+                username = request.user.username,
+                article  = url
+            )
+        return render(request, 'search_news/user_booked.html',{
+                                                               'url' : url
+                                                              })
