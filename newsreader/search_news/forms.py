@@ -20,7 +20,7 @@ def get_categories():
     all_categories = list(Category.objects.values_list('category'))
     for cat in all_categories:
         set_of_cat.add(cat[0])
-    set_of_cat.add("All")
+    set_of_cat.add("Todo")
 
     list_of_cats = list()
     for element in set_of_cat:
