@@ -104,6 +104,7 @@
   width: 180px;
   height: 100%;
   padding: 20px 0;
+  overflow-y: scroll;
 }
 
 /* -- Logo settings -- */
@@ -167,11 +168,11 @@
   font-weight: bold;
   line-height: 24px;
   margin: 0;
-  transition: 0.4s;
+  transition: 0.6s;
 }
 
 .sidebar-links div.selected ul.sub-links {
-  max-height: 150px;
+  max-height: 4000px;
   padding: 12px 0px 12px 30px;
 }
 
