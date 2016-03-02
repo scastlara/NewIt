@@ -20,7 +20,7 @@ def get_categories():
     all_categories = list(Category.objects.values_list('category'))
     for cat in all_categories:
         set_of_cat.add(cat[0])
-    set_of_cat.add("All")
+    set_of_cat.add("Todo")
 
     list_of_cats = list()
     for element in set_of_cat:
@@ -32,4 +32,4 @@ def get_categories():
 
 class SearchForm(forms.Form):
     categ = forms.ChoiceField(label='', choices=get_categories(), required=False)
-    sterm = forms.CharField(label='', max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'search', 'placeholder': 'Search...'}))
+    sterm = forms.CharField(label='', max_length=100, required=False, widget=forms.TextInput(attrs={'class': 'class', 'placeholder': 'Search...'}))

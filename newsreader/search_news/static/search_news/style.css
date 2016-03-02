@@ -71,39 +71,11 @@
     color:white !important;
 }
 
-
-
-
-
-input[type=text].search {
-    width: 50%;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url('/static/search_news/Images/search_icon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 10px 12px 55px;
+.glyphicon-search {
+  padding: 3px 0px;
 }
 
-input[type=submit].search_button {
-    padding:5px 15px;
-    background: #6084D6;
-    border:0 none;
-    cursor:pointer;
-    -webkit-border-radius: 4px;
-    font-size: 16;
-    border-radius: 4px;
-    color: white;
-    width: 100px;
-    height: 50px;
-}
 
-input[type=submit].search_button:hover {
-    background: #809EE2;
-}
 
 #content {
     margin: 0;
@@ -430,9 +402,23 @@ img#twitter:hover {
     opacity: 0.6;
 }
 
-#===================================================================
+/* ------ PAGINEITOOOOOOOOR ---- plus! --- */
+
+ul.pagination {
+margin-left: 270px;
+}
+.pagination a.active {
+  background: #6084D6;
+  color: white;
+}
+.pagination a:active a:hover {
+  outline: none;
+  background: #6084D6;
+}
+
+/*===================================================================
 #                      LOGIN LOGOUT STYLES
-#===================================================================
+#===================================================================*/
 .container {
     width: 406px;
     max-width: 406px;
