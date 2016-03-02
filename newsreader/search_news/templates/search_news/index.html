@@ -7,7 +7,7 @@
     <div class="search_bar">
 
     <form action="{{ request.path }}" method="GET">
-    <div class="row">    
+    <div class="row">
         <div class="col-xs-8 col-xs-offset-0">
 
             <div class="input-group">
@@ -27,14 +27,14 @@
                       <li><a href="#Tecnologia">Tecnologia</a></li>
                     </ul>
                 </div>
-                
-                <input type="hidden" name="categ" id="search_param">         
+
+                <input type="hidden" name="categ" id="search_param">
 
                 <input type="text" class="form-control" name="sterm" placeholder="Search term...">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                 </span>
-                
+
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@
                       onclick="window.open('http://twitter.com/home?status={{item.link}}+via+@NewIt','name','width=600,height=400')">
                       <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
                 </a><br>
-                
+
                 {% if user.is_authenticated %}
 
                     <button     href="#"
@@ -104,7 +104,7 @@
                 <p> {% autoescape off %} {{ item.content }} {% endautoescape %} </p>
             </div>
 
-            {% endfor %} 
+            {% endfor %}
 
             <ul class="pagination">
                 {% if news.has_previous %}
@@ -126,7 +126,7 @@
                 {% endif %}
 
             </ul>
-            
+
         {% endif %}
     {% endif %}
 
