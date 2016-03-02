@@ -18,7 +18,7 @@
 
   <aside class="sidebar-left-collapse">
 
-    <a href="/" class="company-logo" ><img src="{% static 'search_news/Images/newit_logo.png' %}", alt="mec"></a>
+    <a href="{% url 'index_view' %}" class="company-logo" ><img src="{% static 'search_news/Images/newit_logo.png' %}", alt="mec"></a>
 
     <div class="sidebar-links">
 
@@ -56,7 +56,7 @@
         </a>
 
         <ul class="sub-links">
-          <li><a href="accounts/bookmarks/">My Bookmarks</a></li>
+          <li><a href="{% url 'user_bookmarks' %}">My Bookmarks</a></li>
         </ul>
 
       </div>
@@ -68,8 +68,8 @@
         </a>
 
         <ul class="sub-links">
-          <li><a href="/accounts/search_subscritions/">Subscription Manager</a></li>
-          <li><a href="/accounts/feed_subscriptions/">Feeds Manager</a></li>
+          <li><a href="{% url 'user_subscriptions' %}">Subscription Manager</a></li>
+          <li><a href="{% url 'feed_subscriptions' %}">Feeds Manager</a></li>
           <li><a href="#">Settings</a></li>
           <li><a href="#">Logout</a></li>
         </ul>
@@ -83,11 +83,11 @@
 
       <div id="user">
             {% if user.is_authenticated %}
-                <a href="/accounts/logout">Log out</a> </li>
+                <a href="{% url 'logout' %}">Log out</a> </li>
                 <div id="username">{{ user }}</div>
             {% else %}
                 <a href="{% url 'login' %}">Sign In</a>
-                <a href="/accounts/register">Sign Up</a>
+                <a href="{% url 'register' %}">Sign Up</a>
             {% endif %}
       </div>
 

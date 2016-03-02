@@ -15,7 +15,8 @@
             <form action="{% url 'user_subscriptions' %}" method="POST">
                 {% csrf_token %}
                 {% for sub in subscriptions %}
-                    <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+                    
+                    <li><a href="{% url 'index_view' %}?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
                     <div class="btn-group" data-toggle="buttons">
                         <label class="btn btn-default active">
                             <input type="radio" name="s_{{sub.keyword}}||{{sub.category}}" value="1" checked>YES
@@ -24,6 +25,7 @@
                             <input type="radio" name="s_{{sub.keyword}}||{{sub.category}}" value="0">NOPE
                         </label>
                     </div>
+
                 {% endfor %}
                 <br>
                 <input type="submit" data-inline="true" value="Save">
@@ -67,7 +69,7 @@
 
 {% if subscriptions %}
     {% for sub in subscriptions %}
-        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+        <li><a href="{% url 'index_view' %}?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
     {% endfor %}
 {% endif %}
 

@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<form action="/accounts/register/" method="post" id="signup">{% csrf_token %}
+<form action="{% url 'register' %}" method="post" id="signup">{% csrf_token %}
 {% csrf_token %}
 
 {% if form.errors %}
@@ -47,7 +47,7 @@
 <div class="sep"></div>
 <div id="user" >
 	<p style="font-size: 12px"> If you are registered, please log in and enjoy!</p>
-    <a href="/accounts/login" style="margin-left: 150px; margin-right: 150px; margin-top: 5px">Log in</a>
+    <a href="{% url 'login' %}" style="margin-left: 150px; margin-right: 150px; margin-top: 5px">Log in</a>
 </div>
 
 </div>
