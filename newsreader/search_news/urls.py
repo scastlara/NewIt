@@ -8,7 +8,7 @@ urlpatterns = [
         # Registration URLs
     url(r'^accounts/register/$', views.register, name='register'),
     url(r'^accounts/register/complete/$', views.registration_complete),
-    url(r'^accounts/login/$', login),
+    url(r'^accounts/login/$', login, name ='login'),
     url(r'^accounts/logout/$', lambda request: logout_then_login(request, "/"), name='logout'),
     url(r'^accounts/loggedin/$', views.loggedin),
     url(r'^subscribed$', views.subscribed, name='subscribed'),
