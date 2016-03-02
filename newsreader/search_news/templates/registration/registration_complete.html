@@ -1,5 +1,6 @@
 {% extends "search_news/base.html" %}
 
+
 {% block title %}
 You are Registered
 {% endblock %}
@@ -7,6 +8,5 @@ You are Registered
 {% block content %}
 
    <h2>Thank you for Registering</h2>   
-   <meta http-equiv="refresh" content="0; URL='/accounts/login'" />
-
- {% endblock %}
+   <meta http-equiv="refresh" content="0; URL={% url 'login' %}" />
+{% endblock %}

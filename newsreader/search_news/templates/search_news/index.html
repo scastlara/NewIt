@@ -92,7 +92,7 @@
                     <button     href="#"
                                 name = "book"
                                 title="Click to save this article"
-                                onclick="window.open('/accounts/booked?art={{ item.link }}','booked','width=600,height=400')"
+                                onclick="window.open(`{% url 'user_booked' %}?art={{ item.link }}`,'booked','width=600,height=400')"
                                 type = "submit"
                                 method = "GET"
                     >Save me!
@@ -141,7 +141,7 @@
 
 {% if subscriptions %}
     {% for sub in subscriptions %}
-        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+        <li><a href="{% url 'index_view' %}?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
     {% endfor %}
 {% endif %}
 
@@ -152,7 +152,7 @@
 {% block f_subs %}
     {% for feed in feeds %}
         {% if feed.name not in black_list %}
-            <li><a href="/news/{{feed.name}}">{{feed.name}}</a></li>
+            <li><a href="{% url 'news' diario=feed.name %}">{{feed.name}}</a></li>
         {% endif %}
     {% endfor %}
 {% endblock %}
