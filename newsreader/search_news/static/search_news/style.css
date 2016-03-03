@@ -378,23 +378,16 @@
     padding-bottom: 2%;
 }
 
-.bookmark {
-  background: none;
-  height: 100px;
-  width: 80px;
-  border: none;
-  position: static;
-  float: right;
-  right: 23%;
-  bottom: 10px;
 
-}
 
-.bookmark img {
+.book {
   height: 100px;
   width: 100px;
   display: block;
-  margin-right: 10px;
+  float: right;
+  right: 23%;
+  bottom: 10px;
+  cursor: pointer;
 }
 
 

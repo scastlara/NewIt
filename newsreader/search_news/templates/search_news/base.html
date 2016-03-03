@@ -164,6 +164,31 @@
         });
     });
 
+    $(function(){ /* on document load */
+        $('.book').click(function(){ /* click handler for images */
+            if($(this).attr('src') === "{% static 'search_news/Images/bookmark_icon_up.png' %}"){ /* check source */
+                $(this).attr('src',"{% static 'search_news/Images/bookmark_full_up.png' %}"); /* change source     */
+            } else {
+                $(this).attr('src',"{% static 'search_news/Images/bookmark_icon_up.png' %}");
+            }
+
+        });
+    });
+
+    $(function() {
+        $('.book').click(function() {
+            var mydata = { name : $(this).attr("data-id"), csrfmiddlewaretoken: '{{ csrf_token }}'}
+            var saveData = $.ajax({
+                type: 'POST',
+                data: mydata,
+                dataType: "text",
+                url: '{% url "user_booked" %}',
+                cache:false
+            });
+
+        });
+    });
+
   </script>
 
   </body>

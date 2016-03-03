@@ -348,7 +348,7 @@ def user_bookmarks(request):
             for row in bookmarked:
                 name = Article.objects.filter(link = row.article)
                 if name:
-                    user_articles.append(name)                    
+                    user_articles.append(name)
         return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles,'subscriptions':subscriptions, 'feeds':feeds, 'black_list':black_names})
 
 
@@ -358,11 +358,24 @@ def user_bookmarks(request):
 
 def user_booked(request):
     if request.user.is_authenticated():
-            url = request.GET.get('art')
-            Bookmark.objects.get_or_create(
-                username = request.user.username,
-                article  = url
-            )
+        if request.is_ajax() or request.method == 'POST':
+            for name, url in request.POST.items():
+                if name != "name":
+                    continue
+                try:
+                    print("HOLA")
+                    book = Bookmark.objects.get(
+                        username = request.user.username,
+                        article  = url
+                    )
+                    book.delete()
+                except:
+                    print("HOLA2")
+                    Bookmark.objects.get_or_create(
+                        username = request.user.username,
+                        article  = url
+                    )
+
             return render(request, 'search_news/user_booked.html',{
                                                                'url' : url
                                                               })

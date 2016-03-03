@@ -102,22 +102,9 @@
             <div class="news-overlay">
                 <div class="close-overlay">x</div>
                 {% if user.is_authenticated and item.link not in bookmarks %}
-
-                    <button     href="#"
-                                name = "book"
-                                title="Click to save this article"
-                                onclick="window.open(`{% url 'user_booked' %}?art={{ item.link }}`,'booked','width=600,height=400')"
-                                type = "submit"
-                                method = "GET"
-                                class="bookmark"
-                    ><img src="{% static 'search_news/Images/bookmark_icon_up.png' %}">
-                    </button><br>
+                    <img class="book" src="{% static 'search_news/Images/bookmark_icon_up.png' %}" data-id="{{ item.link }}"><br>
                 {% elif user.is_authenticated and item.link in bookmarks %}
-                    <button     href="#"
-                                type = "submit"
-                                class="bookmark"
-                    ><img src="{% static 'search_news/Images/bookmark_full_up.png' %}">
-                    </button><br>
+                    <img class="book" src="{% static 'search_news/Images/bookmark_full_up.png' %}" data-id="{{ item.link }}"><br>
                 {% endif %}
                 <br><br>
                 <h1>
