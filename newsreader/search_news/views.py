@@ -341,12 +341,13 @@ def user_bookmarks(request):
                         ).delete()
         bookmarked = Bookmark.objects.filter(username=request.user.username)
 
-        user_articles = ''
-        if bookmarked is None:
-            user_articles = list()
+
+        user_articles = list()
+        if bookmarked:
             for row in bookmarked:
                 name = Article.objects.filter(link = row.article)
-                user_articles.append(name)                    
+                if name:
+                    user_articles.append(name)                    
         return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles})
 
     else:
