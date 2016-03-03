@@ -157,11 +157,11 @@ def index_view(request, diario=None):
                 except:
                     is_subs = False
 
-
-            if diario != None:
+            diario_row = None
+            if diario is not None:
                 try:
-                    sub = Source.objects.get(
-                    name = diario
+                    diario_row = Source.objects.get(
+                        name = diario
                     )
                 except Exception as m:
                     return render(request, 'search_news/error404.html')
@@ -175,7 +175,7 @@ def index_view(request, diario=None):
                                                                   'count'   : count,       'subscriptions' : subscriptions,
                                                                   'is_subs' : is_subs,     'request'       : request,
                                                                   'feeds'   : feeds,       "black_list"    : black_names,
-                                                                  'bookmarks': bookmarks}  )
+                                                                  'bookmarks': bookmarks,  'diario_row'    : diario_row}  )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'error': error} )
@@ -314,7 +314,7 @@ def feed_subscriptions(request):
 
 
 def user_bookmarks(request):
-    if request.user.is_authenticated():                                               
+    if request.user.is_authenticated():
 
         if request.method == "POST":
             for article, value in request.POST.items():
@@ -331,7 +331,7 @@ def user_bookmarks(request):
         user_articles = list()
         for row in bookmarked:
             name = Article.objects.filter(link = row.article)
-            user_articles.append(name)                    
+            user_articles.append(name)
         return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles})
     else:
         return render(request, 'search_news/error404.html')
@@ -349,4 +349,3 @@ def user_booked(request):
                                                               })
     else:
         return render(request, 'search_news/error404.html')
-
