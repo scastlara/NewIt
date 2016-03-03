@@ -68,10 +68,15 @@
         </a>
 
         <ul class="sub-links">
-          <li><a href="{% url 'user_subscriptions' %}">Subscription Manager</a></li>
-          <li><a href="{% url 'feed_subscriptions' %}">Feeds Manager</a></li>
-          <li><a href="#">Settings</a></li>
-          <li><a href="#">Logout</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'user_subscriptions' %}">Subscription Manager</a></li>
+                <li><a href="{% url 'feed_subscriptions' %}">Feeds Manager</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Sign in</a></li>
+                <li><a href="{% url 'register' %}">Sign up</a></li>
+            {% endif %}
         </ul>
 
       </div>
@@ -86,8 +91,8 @@
                 <a href="{% url 'logout' %}">Log out</a> </li>
                 <div id="username">{{ user }}</div>
             {% else %}
-                <a href="{% url 'login' %}">Sign In</a>
                 <a href="{% url 'register' %}">Sign Up</a>
+                <a href="{% url 'login' %}">Sign In</a>
             {% endif %}
       </div>
 
