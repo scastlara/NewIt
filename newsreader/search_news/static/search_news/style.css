@@ -656,6 +656,16 @@ margin-left: 270px;
 
 
 }
+
+#subtitle_index{
+    font-size: 16px;
+    font-family: Garamond;
+    font-style: italic;
+    color: #333333;
+}
+#subtitle_index a {
+    color: #333333;
+}
 #footer a {
 	color: #5E5C5C;
 }
