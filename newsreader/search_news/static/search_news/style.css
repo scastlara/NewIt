@@ -98,6 +98,7 @@
     margin-left:240px;
     width: 80%;
     height: auto;
+    min-height: 1000px;
 }
 
 #text_content {
@@ -263,7 +264,7 @@
   height: 40px;
   width: 40px;
   position: fixed;
-  bottom: 40px;
+  bottom: 100px;
   right: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   /* image replacement properties */
@@ -298,7 +299,7 @@
 @media only screen and (min-width: 768px) {
   .cd-top {
     right: 20px;
-    bottom: 20px;
+    bottom: 60px;
   }
 }
 @media only screen and (min-width: 1024px) {
@@ -306,7 +307,7 @@
     height: 60px;
     width: 60px;
     right: 30px;
-    bottom: 30px;
+    bottom: 65px;
   }
 }
 /* END OF BACK TO TOP */
@@ -323,7 +324,7 @@
     z-index: 9999;
     background: #e9eaed;
     padding-left: 5%;
-    padding-top: 5%;
+    padding-top: 0%;
     padding-right: 5%;
     padding-bottom: 5%;
     overflow: scroll;
@@ -368,16 +369,18 @@
   height: 100px;
   width: 80px;
   border: none;
-  position: fixed;
-  top: 2px;
+  position: static;
+  float: right;
   right: 23%;
+  bottom: 10px;
+
 }
 
 .bookmark img {
   height: 100px;
   width: 100px;
   display: block;
-  margin: 0 auto;
+  margin-right: 10px;
 }
 
 
@@ -581,7 +584,6 @@ margin-left: 270px;
 .search_subs {
     height: 20%;
     background: white;
-
     overflow: hidden;
     box-shadow: 10px 10px 5px #888888;
     width: 70%;
@@ -597,10 +599,34 @@ margin-left: 270px;
     margin-top: 5%;
 }
 
+.logo_feed {
+    display: inline-block;
+    vertical-align: middle;
+    height: auto;
+    margin-top: 20px;
+    width: 30%;
+    margin-left: 35px;
+}
 
+.newhome {
+    display: inline-block;
+    vertical-align: middle;
+    height: auto;
+    margin-top: 20px;
+    width: 5%;
+    text-decoration: none;
+    border: 0;
+}
 
+.newhome:hover {
+    opacity: 0.5;
+    text-decoration: none;
+    border: 0;
+}
 
-
+.logo_feed:hover {
+    opacity: 0.5;
+}
 
 
 .supertable {color: #444; width: 790px; padding: 0 10px 10px 10px; margin-top: 10px; border-spacing: 1rem; border-collapse: collapse;}
@@ -609,4 +635,34 @@ margin-left: 270px;
     border-color: #000;
     border-style: solid;
     font-size: 10px;
+}
+
+
+#footer {
+	text-align: center;
+	background-color: #cccccc;
+	width: 89%;
+	height: 40px;
+	overflow: hidden;
+}
+
+#footer p{
+
+	margin: 0px;
+	padding: 10px 0px 0px 0px;
+	text-align: center;
+	text-shadow: 1px 1px 0px #FFFFFF;
+	font-size: 13px;
+	color: #5E5C5C;
+
+
+}
+#footer a {
+	color: #5E5C5C;
+}
+
+.change_pass {
+    font-size: 13px;
+    color: #8f8f8f;
+
 }

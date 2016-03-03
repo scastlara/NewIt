@@ -13,15 +13,20 @@
 
             {% for item in all_feeds %}
                 <div class="search_subs">
-                    <b>{{ item.name }}</b>
+                    <a href="{{item.homepage}}"  target="_blank">
+                        <img class="newhome" src="{% static 'search_news/Images/news_home.png' %}"/>
+                    </a>
+                    <a href="{% url 'news' item.name %}">
+                        <img class="logo_feed" src="{% static 'search_news/Images/logos_sources/' %}{{item.logo}}"/>
+                    </a>
                     {% if item.name in black %}
                     <div class="search_button_subs">
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default">
-                                <input type="radio" name="s_{{item.name}}" value="1">YES
+                                <input type="radio" name="s_{{item.name}}" value="1">ON
                             </label>
                             <label class="btn btn-default active">
-                                <input type="radio" name="s_{{item.name}}" value="0" checked>NOPE
+                                <input type="radio" name="s_{{item.name}}" value="0" checked>OFF
                             </label>
                         </div>
                     </div>
@@ -29,10 +34,10 @@
                     <div class="search_button_subs">
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default active">
-                                <input type="radio" name="s_{{item.name}}" value="1" checked>YES
+                                <input type="radio" name="s_{{item.name}}" value="1" checked>ON
                             </label>
                             <label class="btn btn-default">
-                                <input type="radio" name="s_{{item.name}}" value="0">NOPE
+                                <input type="radio" name="s_{{item.name}}" value="0">OFF
                             </label>
                         </div>
                     </div>
