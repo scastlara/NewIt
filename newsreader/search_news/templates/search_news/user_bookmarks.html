@@ -7,34 +7,39 @@
         <h1>My Bookmarks</h1>
 
         <!-- PRINT ALL FEEDS -->
-        <form action="{% url 'user_bookmarks' %}" method="POST">
+        {% if user_articles %}
+            <form action="{% url 'user_bookmarks' %}" method="POST">
             {% csrf_token %}
+                    {% for article in user_articles %}
+                        {% for item in article %}
+                            <div class="search_subs">
+                                <b>{{item.title}}</b>
+                                <div class="search_button_subs">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="s_{{item.link}}" value="1" checked>YES
+                                        </label>
+                                        <label class="btn btn-default">
+                                            <input type="radio" name="s_{{item.link}}" value="0">NOPE
+                                        </label>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                {{item.source}}
+                                <br>
+                                {{item.pubdate}}
+                            </div>
+                        {% endfor %}
 
-            {% for article in user_articles %}
-                {% for item in article %}
-                <div class="search_subs">
-                    <b>{{item.title}}</b>
-                    <div class="search_button_subs">
-                        <div class="btn-group" data-toggle="buttons">
-                            <label class="btn btn-default active">
-                                <input type="radio" name="s_{{item.link}}" value="1" checked>YES
-                            </label>
-                            <label class="btn btn-default">
-                                <input type="radio" name="s_{{item.link}}" value="0">NOPE
-                            </label>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    {{item.source}}
-                    <br>
-                    {{item.pubdate}}
-                </div>
-                {% endfor %}
-            {% endfor %}
-            <input type="submit" data-inline="true" value="Save" class="sub_but">
-
+                    {% endfor %}
+                    <input type="submit" data-inline="true" value="Save" class="sub_but">
+        {% else %}
+            <p>You don't have any article saved in My Bookmarks.</p>
+        {% endif %}
+               
         </form>
+
 
 
 
@@ -66,8 +71,16 @@
 
 {% if subscriptions %}
     {% for sub in subscriptions %}
-        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+        <li class="sidebar_element"><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
     {% endfor %}
 {% endif %}
 
 {% endblock s_subs %}
+
+{% block f_subs %}
+    {% for feed in feeds %}
+        {% if feed.name not in black_list %}
+            <li class="sidebar_element"><a href="{% url 'news' diario=feed.name %}">{{feed.name}}</a></li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

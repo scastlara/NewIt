@@ -135,7 +135,7 @@
   height: 122px;
   margin: 0 auto;
   color:  #ffffff;
-  padding-left: 15px;
+  padding-left: 7px;
 }
 
 .company-logo img {
@@ -213,6 +213,12 @@
 
 .sidebar-links div.link-blue > a i.fa {
   color: #6084D6;
+}
+
+.sidebar-links ul.sub-links li.sidebar_element:hover a{
+  background-color: #6084D6;
+  color:white;
+  padding-left: 4px;
 }
 
 
