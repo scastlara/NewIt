@@ -24,7 +24,7 @@
     {% if user.is_authenticated %}
       <div class="link-blue">
 
-        <a href="#">
+        <a class="menu" href="#">
           <i class="fa fa-picture-o"></i>Subscriptions
         </a>
 
@@ -38,7 +38,7 @@
     {% endif %}
       <div class="link-blue">
 
-        <a href="#">
+        <a class="menu" href="#">
           <i class="fa fa-heart-o"></i>Feeds
         </a>
 
@@ -51,7 +51,7 @@
     {% if user.is_authenticated %}
       <div class="link-blue">
 
-        <a href="#">
+        <a class="menu" href="#">
           <i class="fa fa-keyboard-o"></i>Bookmarks
         </a>
 
@@ -63,7 +63,7 @@
     {% endif %}
       <div class="link-blue">
 
-        <a href="#">
+        <a class="menu" href="#">
           <i class="fa fa-map-marker"></i>Account
         </a>
 
@@ -159,9 +159,9 @@
             }
         });
 
-        $(links).click(function(e)
-            e.preventDefault()
-        )
+        $('.menu').click(function(e) {
+            e.preventDefault();
+        });
     });
 
   </script>
