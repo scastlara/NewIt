@@ -263,7 +263,7 @@
   height: 40px;
   width: 40px;
   position: fixed;
-  bottom: 40px;
+  bottom: 100px;
   right: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   /* image replacement properties */
@@ -298,7 +298,7 @@
 @media only screen and (min-width: 768px) {
   .cd-top {
     right: 20px;
-    bottom: 20px;
+    bottom: 60px;
   }
 }
 @media only screen and (min-width: 1024px) {
@@ -306,7 +306,7 @@
     height: 60px;
     width: 60px;
     right: 30px;
-    bottom: 30px;
+    bottom: 65px;
   }
 }
 /* END OF BACK TO TOP */
@@ -611,4 +611,28 @@ margin-left: 270px;
     border-color: #000;
     border-style: solid;
     font-size: 10px;
+}
+
+
+#footer {
+	text-align: center;
+	background-color: #cccccc;
+	width: 89%;
+	height: 40px;
+	overflow: hidden;
+}
+
+#footer p{
+
+	margin: 0px;
+	padding: 10px 0px 0px 0px;
+	text-align: center;
+	text-shadow: 1px 1px 0px #FFFFFF;
+	font-size: 13px;
+	color: #5E5C5C;
+
+
+}
+#footer a {
+	color: #5E5C5C;
 }
