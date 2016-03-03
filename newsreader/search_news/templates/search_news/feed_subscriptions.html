@@ -14,6 +14,7 @@
             {% for item in all_feeds %}
                 <div class="search_subs">
                     <b>{{ item.name }}</b>
+                    <img class="logo_feed" src="{% static 'search_news/Images/logos_sources/' %}{{item.logo}}"/>
                     {% if item.name in black %}
                     <div class="search_button_subs">
                         <div class="btn-group" data-toggle="buttons">
