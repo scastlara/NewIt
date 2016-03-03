@@ -71,7 +71,7 @@
             {% if user.is_authenticated %}
                 <li><a href="{% url 'user_subscriptions' %}">Subscription Manager</a></li>
                 <li><a href="{% url 'feed_subscriptions' %}">Feeds Manager</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="{% url 'change_password' %}">Change Password</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
                 <li><a href="{% url 'login' %}">Sign in</a></li>
