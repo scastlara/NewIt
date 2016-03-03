@@ -52,17 +52,22 @@
                 {{ category }}
             </h2>
             {% if user.is_authenticated %}
-                {% if not is_subs %}
-                    {% if term or category %}
+                {% if term or category %}
+                    {% if not is_subs %}
                         <form action="{% url 'subscribed' %}" method="POST">
                             {% csrf_token %}
                             <input name="sub_sterm" type="hidden" value="{{ term }}" />
                             <input name="sub_category" type="hidden" value="{{ category }}" />
                             <input name="sub" type="submit" value="Subscribe" />
                         </form>
+                    {% else %}
+                        <form action="{% url 'unsubscribed' %}" method="POST">
+                            {% csrf_token %}
+                            <input name="sub_sterm" type="hidden" value="{{ term }}" />
+                            <input name="sub_category" type="hidden" value="{{ category }}" />
+                            <input name="unsub" type="submit" value="Unsubscribe" />
+                        </form>
                     {% endif %}
-                {% else %}
-                    <h3> You're subscribed </h3>
                 {% endif %}
             {% endif %}
 

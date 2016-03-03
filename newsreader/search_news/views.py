@@ -172,7 +172,7 @@ def index_view(request, diario=None):
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'error': error} )
         else:
-            return render(request, 'search_news/error404.html') 
+            return render(request, 'search_news/error404.html')
     else:
         form = SearchForm()
 
@@ -189,6 +189,24 @@ def subscribed(request):
             subscription = Search_Subscription(username=username, keyword=sterm, category=category)
             subscription.save()
             return render(request, 'search_news/subscribed.html', {'sterm': sterm, 'category': category })
+    else:
+        return render(request, 'search_news/error404.html')
+
+def unsubscribed(request):
+    username = None
+    if request.method == "POST" and request.user.is_authenticated():
+        username = request.user.username
+        if "unsub" in request.POST:
+            sterm    = request.POST.get("sub_sterm", "")
+            category = request.POST.get("sub_category", "")
+            Search_Subscription.objects.filter(
+                username=username,
+                keyword=sterm,
+                category=category
+            ).delete()
+            return render(request, 'search_news/unsubscribed.html', {'sterm': sterm, 'category': category })
+    else:
+        return render(request, 'search_news/error404.html')
 
 
 def register(request):
@@ -219,7 +237,7 @@ def user_subscriptions(request):
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
     else:
-        return render(request, 'search_news/error404.html') 
+        return render(request, 'search_news/error404.html')
 
     if request.method == "POST":
         for sub, value in request.POST.items():
@@ -281,7 +299,7 @@ def feed_subscriptions(request):
             black_names = None
 
     else:
-        return render(request, 'search_news/error404.html') 
+        return render(request, 'search_news/error404.html')
 
     return render(request, 'search_news/feed_subscriptions.html', {'black': black_names,
                                                                    "all_feeds": all_feeds, 'subscriptions': subscriptions})

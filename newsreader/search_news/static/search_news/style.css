@@ -66,10 +66,8 @@
     background-color: #809EE2;
 }
 
-.btn:hover, .btn:focus {
-    background: #6084D6 !important;
-    color:white !important;
-}
+
+
 
 .glyphicon-search {
   padding: 3px 0px;
@@ -530,7 +528,7 @@ margin-left: 270px;
 //                      BOOKMARK STYLES
 //===================================================================*/
 .freddie {
-    background-position: right; 
+    background-position: right;
     height: 100%;
     width: 100%;
     background-image: url('Images/bookmarked.jpg');
@@ -538,5 +536,3 @@ margin-left: 270px;
     background-repeat: no-repeat;
     background-color: white;
 }
-
-
