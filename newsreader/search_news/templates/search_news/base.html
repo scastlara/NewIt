@@ -21,8 +21,8 @@
     <a href="{% url 'index_view' %}" class="company-logo" ><img src="{% static 'search_news/Images/newit_logo.png' %}", alt="mec"></a>
 
     <div class="sidebar-links">
-
-      <div class="link-blue selected">
+    {% if user.is_authenticated %}
+      <div class="link-blue">
 
         <a href="#">
           <i class="fa fa-picture-o"></i>Subscriptions
@@ -35,7 +35,7 @@
         </ul>
 
       </div>
-
+    {% endif %}
       <div class="link-blue">
 
         <a href="#">
@@ -48,7 +48,7 @@
         </ul>
 
       </div>
-
+    {% if user.is_authenticated %}
       <div class="link-blue">
 
         <a href="#">
@@ -56,11 +56,11 @@
         </a>
 
         <ul class="sub-links">
-          <li><a href="{% url 'user_bookmarks' %}">My Bookmarks</a></li>
+          <li  class="sidebar_element"><a href="{% url 'user_bookmarks' %}">My Bookmarks</a></li>
         </ul>
 
       </div>
-
+    {% endif %}
       <div class="link-blue">
 
         <a href="#">
@@ -69,13 +69,13 @@
 
         <ul class="sub-links">
             {% if user.is_authenticated %}
-                <li><a href="{% url 'user_subscriptions' %}">Subscription Manager</a></li>
-                <li><a href="{% url 'feed_subscriptions' %}">Feeds Manager</a></li>
-                <li><a href="{% url 'change_password' %}">Change Password</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li class="sidebar_element"><a href="{% url 'user_subscriptions' %}">Subscription Manager</a></li>
+                <li class="sidebar_element"><a href="{% url 'feed_subscriptions' %}">Feeds Manager</a></li>
+                <li class="sidebar_element"><a href="{% url 'change_password' %}">Change Password</a></li>
+                <li class="sidebar_element"><a href="{% url 'logout' %}">Logout</a></li>
             {% else %}
-                <li><a href="{% url 'login' %}">Sign in</a></li>
-                <li><a href="{% url 'register' %}">Sign up</a></li>
+                <li class="sidebar_element"><a href="{% url 'login' %}">Sign in</a></li>
+                <li class="sidebar_element"><a href="{% url 'register' %}">Sign up</a></li>
             {% endif %}
         </ul>
 
@@ -143,10 +143,12 @@
       var links = $('.sidebar-links > div');
 
       links.on('click', function () {
-
-        links.removeClass('selected');
-        $(this).addClass('selected');
-
+        if($(this).hasClass("selected")) {
+          $(this).removeClass('selected');
+        } else {
+          links.removeClass('selected');
+          $(this).addClass('selected');
+        }
       });
     });
 

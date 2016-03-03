@@ -78,7 +78,7 @@
 
 {% if subscriptions %}
     {% for sub in subscriptions %}
-        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+        <li class="sidebar_element"><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
     {% endfor %}
 {% endif %}
 
@@ -87,7 +87,7 @@
 {% block f_subs %}
     {% for feed in feeds %}
         {% if feed.name not in black_list %}
-            <li><a href="{% url 'news' diario=feed.name %}">{{feed.name}}</a></li>
+            <li class="sidebar_element"><a href="{% url 'news' diario=feed.name %}">{{feed.name}}</a></li>
         {% endif %}
     {% endfor %}
 {% endblock %}

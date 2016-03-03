@@ -207,6 +207,12 @@
   color: #6084D6;
 }
 
+.sidebar-links ul.sub-links li.sidebar_element:hover a{
+  background-color: #6084D6;
+  color:white;
+  padding-left: 4px;
+}
+
 
 
 /* Ni puta idea de que es el highlight */
