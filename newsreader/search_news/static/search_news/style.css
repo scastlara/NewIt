@@ -88,6 +88,8 @@
     margin-right: 30px;
 }
 
+
+
 #content {
     margin: 0;
     padding-right: 0% ;
@@ -359,6 +361,23 @@
     margin: 5%;
     padding-left: 2%;
     padding-bottom: 2%;
+}
+
+.bookmark {
+  background: none;
+  height: 100px;
+  width: 80px;
+  border: none;
+  position: fixed;
+  top: 2px;
+  right: 23%;
+}
+
+.bookmark img {
+  height: 100px;
+  width: 100px;
+  display: block;
+  margin: 0 auto;
 }
 
 
