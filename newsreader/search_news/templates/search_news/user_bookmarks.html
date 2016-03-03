@@ -7,35 +7,35 @@
         <h1>My Bookmarks</h1>
 
         <!-- PRINT ALL FEEDS -->
-        <form action="{% url 'user_bookmarks' %}" method="POST">
+        {% if user_articles %}
+            <form action="{% url 'user_bookmarks' %}" method="POST">
             {% csrf_token %}
-                {% for article in user_articles %}
+                    {% for article in user_articles %}
                         {% for item in article %}
-                        <div class="search_subs">
-                            <b>{{item.title}}</b>
-                            <div class="search_button_subs">
-                                <div class="btn-group" data-toggle="buttons">
-                                    <label class="btn btn-default active">
-                                        <input type="radio" name="s_{{item.link}}" value="1" checked>YES
-                                    </label>
-                                    <label class="btn btn-default">
-                                        <input type="radio" name="s_{{item.link}}" value="0">NOPE
-                                    </label>
+                            <div class="search_subs">
+                                <b>{{item.title}}</b>
+                                <div class="search_button_subs">
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="s_{{item.link}}" value="1" checked>YES
+                                        </label>
+                                        <label class="btn btn-default">
+                                            <input type="radio" name="s_{{item.link}}" value="0">NOPE
+                                        </label>
+                                    </div>
                                 </div>
+                                <br>
+                                <br>
+                                {{item.source}}
+                                <br>
+                                {{item.pubdate}}
                             </div>
-                            <br>
-                            <br>
-                            {{item.source}}
-                            <br>
-                            {{item.pubdate}}
-                        </div>
                         {% endfor %}
-                {% empty %}
-                    <p>You don't have any article saved in My Bookmarks.</p>
-                {% endfor %}
-                {{user_articles}}
-
-                <input type="submit" data-inline="true" value="Save" class="sub_but">
+                    {% endfor %}
+                    <input type="submit" data-inline="true" value="Save" class="sub_but">
+        {% else %}
+            <p>You don't have any article saved in My Bookmarks.</p>
+        {% endif %}
                
         </form>
 
