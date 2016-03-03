@@ -53,7 +53,7 @@
                 {% elif diario and term and not category %}
                 	{{diario}} - Results for "{{term}}"
                 {% elif diario and not term and not category %}
-                	{{diario}}
+                    <img class="logo_feed_2" src="{% static 'search_news/Images/logos_sources/' %}{{diario_row.logo}}"/>
                 {% elif term and category and not diario %}
                 	Results for "{{term}}" in {{category}}
                 {% elif term and not category and not diario %}
@@ -124,13 +124,15 @@
                     <a href="{{ item.link }}" target="_blank"><img id="link" src="{% static 'search_news/Images/link.svg' %}"/ width="6%" height="6%"></a>
                     {{ item.title }}
                 </h1>
-                <a    href="#"
-                      title="Click to share this post on Twitter"
-                      onclick="window.open('http://twitter.com/home?status={{item.link}}+via+@NewIt','name','width=600,height=400')">
-                      <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
-                </a><br>
 
-                <p id="subtitle_index"> <a href="{% url 'news' diario=item.source %}"> <b>{{ item.source }} </b></a>&nbsp;&nbsp;//&nbsp;&nbsp; <a href="{% url 'index_view'%}?categ={{item.category}}">{{ item.category }}</a> &nbsp;&nbsp;//&nbsp;&nbsp;  {{ item.pubdate }} </p>
+
+                <p id="subtitle_index"> <a href="{% url 'news' diario=item.source %}"> <b>{{ item.source }} </b></a>&nbsp;&nbsp;//&nbsp;&nbsp; <a href="{% url 'index_view'%}?categ={{item.category}}">{{ item.category }}</a> &nbsp;&nbsp;//&nbsp;&nbsp;  {{ item.pubdate }}
+                    <a  href="#"
+                          title="Click to share this post on Twitter"
+                          onclick="window.open('http://twitter.com/home?status={{item.link}}+via+@NewIt','name','width=600,height=400')">
+                          <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
+                    </a>
+                </p>
                 <p> {% autoescape off %} {{ item.content }} {% endautoescape %} </p>
             </div>
 

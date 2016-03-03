@@ -89,7 +89,15 @@
       <div id="user">
             {% if user.is_authenticated %}
                 <a href="{% url 'logout' %}">Log out</a> </li>
-                <div id="username">{{ user }}</div>
+                <div id="real_username">
+                    <div id="real_real_username">
+
+                        <b>{{ user }}</b>
+                    </div>
+                    <div id="pop">
+                    <img class="pop" src="{% static 'search_news/Images/pop.png' %}"/>
+                    </div>
+                </div>
             {% else %}
                 <a href="{% url 'register' %}">Sign Up</a>
                 <a href="{% url 'login' %}">Sign In</a>
