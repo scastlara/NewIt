@@ -109,13 +109,13 @@
                                 onclick="window.open(`{% url 'user_booked' %}?art={{ item.link }}`,'booked','width=600,height=400')"
                                 type = "submit"
                                 method = "GET"
-                                class="bookmark" 
+                                class="bookmark"
                     ><img src="{% static 'search_news/Images/bookmark_icon_up.png' %}">
                     </button><br>
                 {% elif user.is_authenticated and item.link in bookmarks %}
                     <button     href="#"
                                 type = "submit"
-                                class="bookmark" 
+                                class="bookmark"
                     ><img src="{% static 'search_news/Images/bookmark_full_up.png' %}">
                     </button><br>
                 {% endif %}
@@ -130,9 +130,7 @@
                       <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
                 </a><br>
 
-                <p> {{ item.pubdate }} </p>
-                <p> {{ item.source }}  </p>
-                <p> {{ item.category }} </p>
+                <p id="subtitle_index"> <a href="{% url 'news' diario=item.source %}"> <b>{{ item.source }} </b></a>&nbsp;&nbsp;//&nbsp;&nbsp; <a href="{% url 'index_view'%}?categ={{item.category}}">{{ item.category }}</a> &nbsp;&nbsp;//&nbsp;&nbsp;  {{ item.pubdate }} </p>
                 <p> {% autoescape off %} {{ item.content }} {% endautoescape %} </p>
             </div>
 
