@@ -3,6 +3,7 @@ from . import views
 from django.contrib.auth.views import logout_then_login
 from django.contrib.auth.views import login
 from django.contrib.auth.views import password_change, password_change_done
+
 urlpatterns = [
     url(r'^$', views.index_view, name='index_view'),
         # Registration URLs
