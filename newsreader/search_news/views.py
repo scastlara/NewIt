@@ -309,8 +309,15 @@ def user_bookmarks(request):
     if request.user.is_authenticated():
         bookmarked = Bookmark.objects.filter(username=request.user.username
         )
+        
+        user_articles = list()
+        for row in bookmarked:
+            name = Article.objects.filter(
+                link = row.article
+            )
+            user_articles.append(name)
 
-        return render(request, 'search_news/user_bookmarks.html',{'bookmarked': bookmarked
+        return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles
                                                                  })
 
 def user_booked(request):
