@@ -1,0 +1,30 @@
+ALTER TABLE search_news_source MODIFY logo VARCHAR(70);
+UPDATE search_news_source SET logo='search_news/Images/logos_sources/el_diario.png' WHERE name = 'ElDiario.es';
+UPDATE search_news_source SET logo='search_news/Images/logos_sources/el_pais.png' WHERE name = 'El Pais';
+UPDATE search_news_source SET logo='search_news/Images/logos_sources/el_mundo.jpg' WHERE name = 'El Mundo';
+UPDATE search_news_source SET logo='search_news/Images/logos_sources/20minutos.jpg' WHERE name = '20 Minutos';
+UPDATE search_news_source SET logo='search_news/Images/logos_sources/el_periodico.jpg' WHERE name = 'El Periodico';
+UPDATE search_news_source SET logo='search_news/Images/logos_sources/engadget.png' WHERE name = 'Engadget';
+UPDATE search_news_source SET logo='search_news/Images/logos_sources/expansion.jpg' WHERE name = 'Expansion';
+UPDATE search_news_source SET logo='search_news/Images/logos_sources/xataka.png' WHERE name = 'Xataka';
+UPDATE search_news_source SET logo ='search_news/Images/logos_sources/abc.jpg' WHERE name = 'ABC';
+UPDATE search_news_source SET logo ='search_news/Images/logos_sources/ara.jpg' WHERE name = 'ARA';
+UPDATE search_news_source SET logo ='search_news/Images/logos_sources/el_economista.png' WHERE name = 'elEconomista';
+UPDATE search_news_source SET homepage = 'http://www.20minutos.es' WHERE name ='20 Minutos';
+UPDATE search_news_source SET homepage = 'http://www.abc.es' WHERE name ='ABC';
+UPDATE search_news_source SET homepage = 'http://www.ara.cat' WHERE name ='ARA';
+UPDATE search_news_source SET homepage = 'http://www.eldiario.es' WHERE name ='ElDiario.es';
+UPDATE search_news_source SET homepage = 'http://www.eleconomista.es' WHERE name ='elEconomista';
+UPDATE search_news_source SET homepage = 'http://www.elmundo.es' WHERE name ='El Mundo';
+UPDATE search_news_source SET homepage = 'http://www.elpais.com' WHERE name ='El Pais';
+UPDATE search_news_source SET homepage = 'http://www.elperiodico.com/es/' WHERE name ='El Periodico';
+UPDATE search_news_source SET homepage = 'http://www.es.engadget.com' WHERE name ='Engadget';
+UPDATE search_news_source SET homepage = 'http://www.expansion.com' WHERE name ='Expansion';
+UPDATE search_news_source SET homepage = 'http://www.xataka.com' WHERE name ='Xataka';
+
+
+
+
+
+
+

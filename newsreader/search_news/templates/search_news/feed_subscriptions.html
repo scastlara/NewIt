@@ -5,42 +5,42 @@
 
     {% if user.is_authenticated %}
     {{msg}}
-        <h1>Feed Manager</h1>
-        <h4>{{ user }}</h4>
-
-
-        BLACK LIST: {{ black }}
+        <h1>Feeds Manager</h1>
 
         <!-- PRINT ALL FEEDS -->
         <form action="{% url 'feed_subscriptions' %}" method="POST">
             {% csrf_token %}
-            <ul>
+
             {% for item in all_feeds %}
-                <li>
-                    {{ item.name }}
+                <div class="search_subs">
+                    <b>{{ item.name }}</b>
                     {% if item.name in black %}
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default">
-                            <input type="radio" name="s_{{item.name}}" value="1">YES
-                        </label>
-                        <label class="btn btn-default active">
-                            <input type="radio" name="s_{{item.name}}" value="0" checked>NOPE
-                        </label>
+                    <div class="search_button_subs">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default">
+                                <input type="radio" name="s_{{item.name}}" value="1">YES
+                            </label>
+                            <label class="btn btn-default active">
+                                <input type="radio" name="s_{{item.name}}" value="0" checked>NOPE
+                            </label>
+                        </div>
+                    </div>
                     {% else %}
-                    <div class="btn-group" data-toggle="buttons">
-                        <label class="btn btn-default active">
-                            <input type="radio" name="s_{{item.name}}" value="1" checked>YES
-                        </label>
-                        <label class="btn btn-default">
-                            <input type="radio" name="s_{{item.name}}" value="0">NOPE
-                        </label>
+                    <div class="search_button_subs">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default active">
+                                <input type="radio" name="s_{{item.name}}" value="1" checked>YES
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="s_{{item.name}}" value="0">NOPE
+                            </label>
+                        </div>
                     </div>
                     {% endif %}
-                </li>
-
+                </div>
             {% endfor %}
-            <input type="submit" data-inline="true" value="Save">
-            </ul>
+            <input type="submit" data-inline="true" value="Save" class="sub_but">
+
         </form>
 
 
