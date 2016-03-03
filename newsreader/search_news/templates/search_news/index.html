@@ -48,7 +48,7 @@
 
         {% if news %}
             <h2>
-                {% if diario and term and category %} 
+                {% if diario and term and category %}
                 	{{diario}} - Results for "{{term}}" in {{category}}
                 {% elif diario and term and not category %}
                 	{{diario}} - Results for "{{term}}"
@@ -87,9 +87,9 @@
             {% endif %}
             <br>
             <p>
-            {% if count == 1 %} {{ count }} Article: 
+            {% if count == 1 %} {{ count }} Article:
             {% else %} {{ count }} Articles: {% endif %}
-            
+
             </p>
             {% for item in news %}
 
@@ -112,7 +112,7 @@
                       <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
                 </a><br>
 
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated and item.link not in bookmarks %}
 
                     <button     href="#"
                                 name = "book"

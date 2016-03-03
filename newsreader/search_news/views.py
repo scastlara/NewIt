@@ -114,18 +114,25 @@ def index_view(request, diario=None):
     black_list    = None
     black_names   = list()
     feeds         = Source.objects.all()
+    bookmarks     = list()
 
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
         black_list = Source_Subscription.objects.filter(
             username = request.user.username
         )
+        bookmark_rows = Bookmark.objects.filter(
+            username = request.user.username
+        )
+        if bookmark_rows:
+            for book_row in bookmark_rows:
+                bookmarks.append(book_row.article)
+
         if black_list:
             # We don't want some feeds
             for black in black_list:
                 black_names.append(black.source)
-        else:
-            black_names = list()
+
 
 
     if request.method == "GET":
@@ -167,7 +174,8 @@ def index_view(request, diario=None):
                                                                   'category': category,    'news'          : news,
                                                                   'count'   : count,       'subscriptions' : subscriptions,
                                                                   'is_subs' : is_subs,     'request'       : request,
-                                                                  'feeds'   : feeds,       "black_list"    : black_names}  )
+                                                                  'feeds'   : feeds,       "black_list"    : black_names,
+                                                                  'bookmarks': bookmarks}  )
             else:
                 error = "No results for %s in category %s" % (search_term, category)
                 return render(request, 'search_news/index.html', {'error': error} )
@@ -309,7 +317,7 @@ def user_bookmarks(request):
     if request.user.is_authenticated():
         bookmarked = Bookmark.objects.filter(username=request.user.username
         )
-        
+
         user_articles = list()
         for row in bookmarked:
             name = Article.objects.filter(
