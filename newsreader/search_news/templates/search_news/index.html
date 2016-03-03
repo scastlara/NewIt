@@ -47,10 +47,25 @@
     {% else %}
 
         {% if news %}
-            <h2>{{count}} News:
-                {% if term %} {{ term }} {% endif %}
-                {{ category }}
+            <h2>
+                {% if diario and term and category %} 
+                	{{diario}} - Results for "{{term}}" in {{category}}
+                {% elif diario and term and not category %}
+                	{{diario}} - Results for "{{term}}"
+                {% elif diario and not term and not category %}
+                	{{diario}}
+                {% elif term and category and not diario %}
+                	Results for "{{term}}" in {{category}}
+                {% elif term and not category and not diario %}
+                	Results for "{{term}}"
+                {% elif category and not term and not diario %}
+              		{{category}}
+              	{% else %}
+              		Home
+              	{% endif %}
+
             </h2>
+
             {% if user.is_authenticated %}
                 {% if term or category %}
                     {% if not is_subs %}
@@ -58,19 +73,24 @@
                             {% csrf_token %}
                             <input name="sub_sterm" type="hidden" value="{{ term }}" />
                             <input name="sub_category" type="hidden" value="{{ category }}" />
-                            <input name="sub" type="submit" value="Subscribe" />
+                            <button name="sub" type="submit" class="sub_but" >Subscribe!</button>
                         </form>
                     {% else %}
                         <form action="{% url 'unsubscribed' %}" method="POST">
                             {% csrf_token %}
                             <input name="sub_sterm" type="hidden" value="{{ term }}" />
                             <input name="sub_category" type="hidden" value="{{ category }}" />
-                            <input name="unsub" type="submit" value="Unsubscribe" />
+                            <button name="unsub" type="submit" class="sub_but" >Unsubscribe </button>
                         </form>
                     {% endif %}
                 {% endif %}
             {% endif %}
-
+            <br>
+            <p>
+            {% if count == 1 %} {{ count }} Article: 
+            {% else %} {{ count }} Articles: {% endif %}
+            
+            </p>
             {% for item in news %}
 
             <div class="small-news">
