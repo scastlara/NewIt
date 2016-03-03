@@ -542,10 +542,37 @@ margin-left: 270px;
 //===================================================================*/
 .freddie {
     background-position: right;
-    height: 100%;
-    width: 100%;
-    background-image: url('Images/bookmarked.jpg');
-    background-size:35%;
+    padding-top: 50px;
+    padding-left: 50px;
+    height: 400px;
+    width: 600px;
+    background-image: url('Images/bookmarked.png');
+    background-size:50%;
     background-repeat: no-repeat;
-    background-color: white;
+    background-color: #e9eaed;
+}
+
+.freddie-text {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.supertable {color: #444; width: 790px; padding: 0 10px 10px 10px; margin-top: 10px; border-spacing: 1rem; border-collapse: collapse;}
+.supertable td{
+    border-width: 1px 0; 
+    border-color: #000;
+    border-style: solid;
+    font-size: 10px;
 }
