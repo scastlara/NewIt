@@ -579,7 +579,10 @@ margin-left: 270px;
 }
 
 .logo_feed {
+    display: inline-block;
+    vertical-align: middle;
     height: auto;
+    margin-top: 20px;
     width: 30%;
 }
 
