@@ -101,6 +101,23 @@ def get_user_subscriptions(user):
         subscriptions = False
     return subscriptions
 
+def get_feeds():
+    feeds = Source.objects.all()
+    return feeds
+
+def get_black_list(user):
+    black_list = None
+    black_names = list()
+    black_list = Source_Subscription.objects.filter(username = user)
+    if black_list:
+        # We don't want some feeds
+        for black in black_list:
+            black_names.append(black.source)
+
+    return black_names
+
+
+
 #----------------------------------------------------------------
 # VIEWS
 #----------------------------------------------------------------
@@ -113,14 +130,12 @@ def index_view(request, diario=None):
     subscriptions = None
     black_list    = None
     black_names   = list()
-    feeds         = Source.objects.all()
+    feeds         = get_feeds()
     bookmarks     = list()
 
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
-        black_list = Source_Subscription.objects.filter(
-            username = request.user.username
-        )
+        black_names = get_black_list(request.user.username)
         bookmark_rows = Bookmark.objects.filter(
             username = request.user.username
         )
@@ -128,10 +143,7 @@ def index_view(request, diario=None):
             for book_row in bookmark_rows:
                 bookmarks.append(book_row.article)
 
-        if black_list:
-            # We don't want some feeds
-            for black in black_list:
-                black_names.append(black.source)
+
 
 
 
@@ -242,8 +254,13 @@ def loggedin(request):
 def user_subscriptions(request):
     msg = ""
     subscriptions = ""
+    feeds = list()
+    black_names = list()
     if request.user.is_authenticated():
         subscriptions = get_user_subscriptions(request.user.username)
+        feeds = get_feeds()
+        black_names = get_black_list(request.user.username)
+
     else:
         return render(request, 'search_news/error404.html')
 
@@ -263,7 +280,7 @@ def user_subscriptions(request):
                     keyword=sterm,
                     category=category
                 ).delete()
-    return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg })
+    return render(request, 'search_news/user_search.html', {'subscriptions': subscriptions, 'message': msg, 'feeds':feeds, 'black_list':black_names})
 
 def feed_subscriptions(request):
     black_list  = ""
@@ -294,27 +311,22 @@ def feed_subscriptions(request):
                         )
 
         # Get user feed subscriptions
-        black_list = Source_Subscription.objects.filter(
-            username = request.user.username
-        )
-        all_feeds = Source.objects.all()
 
-        if black_list:
-            # We don't want some feeds
-            for black in black_list:
-                black_names.append(black.source)
-        else:
-            black_names = None
+        feeds = get_feeds()
+        black_names = get_black_list(request.user.username)
 
     else:
         return render(request, 'search_news/error404.html')
 
-    return render(request, 'search_news/feed_subscriptions.html', {'black': black_names,
-                                                                   "all_feeds": all_feeds, 'subscriptions': subscriptions})
+    return render(request, 'search_news/feed_subscriptions.html', {'black_list': black_names,
+                                                                   'feeds': feeds, 'subscriptions': subscriptions})
 
 
 def user_bookmarks(request):
-    if request.user.is_authenticated():                                               
+    if request.user.is_authenticated():
+        subscriptions = get_user_subscriptions(request.user.username)
+        feeds = get_feeds()
+        black_names = get_black_list(request.user.username)                                            
 
         if request.method == "POST":
             for article, value in request.POST.items():
@@ -332,7 +344,7 @@ def user_bookmarks(request):
         for row in bookmarked:
             name = Article.objects.filter(link = row.article)
             user_articles.append(name)                    
-        return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles})
+        return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles,'subscriptions':subscriptions,'feeds':feeds,'black_list':black_names})
     else:
         return render(request, 'search_news/error404.html')
 

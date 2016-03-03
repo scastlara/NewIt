@@ -11,7 +11,7 @@
         <form action="{% url 'feed_subscriptions' %}" method="POST">
             {% csrf_token %}
 
-            {% for item in all_feeds %}
+            {% for item in feeds %}
                 <div class="search_subs">
                     <a href="{{item.homepage}}"  target="_blank">
                         <img class="newhome" src="{% static 'search_news/Images/news_home.png' %}"/>
@@ -19,7 +19,7 @@
                     <a href="{% url 'news' item.name %}">
                         <img class="logo_feed" src="{% static 'search_news/Images/logos_sources/' %}{{item.logo}}"/>
                     </a>
-                    {% if item.name in black %}
+                    {% if item.name in black_list %}
                     <div class="search_button_subs">
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default">
@@ -83,3 +83,11 @@
 {% endif %}
 
 {% endblock s_subs %}
+
+{% block f_subs %}
+    {% for feed in feeds %}
+        {% if feed.name not in black_list %}
+            <li><a href="{% url 'news' diario=feed.name %}">{{feed.name}}</a></li>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
