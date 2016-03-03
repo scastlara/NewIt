@@ -128,7 +128,7 @@
 <script src="{% static 'search_news/js/backtop.js' %}"></script>
 <script src="{% static 'search_news/js/overlay.js' %}"></script>
 
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
   <script>
@@ -150,14 +150,18 @@
 
       var links = $('.sidebar-links > div');
 
-      links.on('click', function () {
-        if($(this).hasClass("selected")) {
-          $(this).removeClass('selected');
-        } else {
-          links.removeClass('selected');
-          $(this).addClass('selected');
-        }
-      });
+         links.on('click', function () {
+            if($(this).hasClass("selected")) {
+                $(this).removeClass('selected');
+            } else {
+                links.removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+
+        $(links).click(function(e)
+            e.preventDefault()
+        )
     });
 
   </script>
