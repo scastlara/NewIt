@@ -3,8 +3,8 @@
 
 {% block content %}
     <meta http-equiv="refresh" content="1; URL={% url 'index_view' %}?sterm={{sterm}}&categ={{categ}}" />
-    {{ user }}
-    Te has DESsuscrito a esto: 
+    <p>{{ user }}</p>
+    <p>Succesfully unsubscribed to: 
     {{ sterm }}
-    {{ category }}
+    {{ category }}</p>
 {% endblock content %}
