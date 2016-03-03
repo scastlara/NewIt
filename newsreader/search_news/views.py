@@ -314,32 +314,37 @@ def feed_subscriptions(request):
 
 
 def user_bookmarks(request):
-    if request.user.is_authenticated():
-        bookmarked = Bookmark.objects.filter(username=request.user.username
-        )
+    if request.user.is_authenticated():                                               
 
+        if request.method == "POST":
+            for article, value in request.POST.items():
+                if not article.startswith('s_'):
+                    continue
+                else:
+                    url = article[2:]
+                    if value == "0":
+                        Bookmark.objects.filter(
+                            username = request.user.username,
+                            article = url
+                        ).delete()
+        bookmarked = Bookmark.objects.filter(username=request.user.username)
         user_articles = list()
         for row in bookmarked:
-            name = Article.objects.filter(
-                link = row.article
-            )
-            user_articles.append(name)
-
-        return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles
-                                                                 })
+            name = Article.objects.filter(link = row.article)
+            user_articles.append(name)                    
+        return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles})
     else:
         return render(request, 'search_news/error404.html')
 
 
 def user_booked(request):
     if request.user.is_authenticated():
-        if request.method == "GET":
             url = request.GET.get('art')
             Bookmark.objects.get_or_create(
                 username = request.user.username,
                 article  = url
             )
-        return render(request, 'search_news/user_booked.html',{
+            return render(request, 'search_news/user_booked.html',{
                                                                'url' : url
                                                               })
     else:

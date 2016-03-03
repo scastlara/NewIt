@@ -4,41 +4,37 @@
 {% block content %}
 
     {% if user.is_authenticated %}
-        <h1>Subscription Manager</h1>
-        {% if subscriptions %}
-            {% if message %}
-                {{ message }}
-            {% endif %}
-            <form action="{% url 'user_bookmarks' %}" method="POST">
-                {% csrf_token %}
-                {% for article in user_articles %}
-                    <div class="search_subs">
-                        <b>Article saved:</b> {{ article.link}}
-                        <div class="search_button_subs">
-                            <div class="btn-group" data-toggle="buttons">
-                                <label class="btn btn-default active">
-                                    <input type="radio" name="s_{{article.link}}" value="1" checked>YES
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="radio" name="s_{{article.link}}" value="0">NOPE
-                                </label>
-                            </div>
+        <h1>My Bookmarks</h1>
+
+        <!-- PRINT ALL FEEDS -->
+        <form action="{% url 'user_bookmarks' %}" method="POST">
+            {% csrf_token %}
+
+            {% for article in user_articles %}
+                {% for item in article %}
+                <div class="search_subs">
+                    <b>{{item.title}}</b>
+                    <div class="search_button_subs">
+                        <div class="btn-group" data-toggle="buttons">
+                            <label class="btn btn-default active">
+                                <input type="radio" name="s_{{item.link}}" value="1" checked>YES
+                            </label>
+                            <label class="btn btn-default">
+                                <input type="radio" name="s_{{item.link}}" value="0">NOPE
+                            </label>
                         </div>
-                        <br>
-                        <b>Title:</b> {{ article.title }}<br>
                     </div>
-
+                    <br>
+                    <br>
+                    {{item.source}}
+                    <br>
+                    {{item.pubdate}}
+                </div>
                 {% endfor %}
-                <br>
-                <input type="submit" data-inline="true" value="Save" class="sub_but">
-            </form>
-        {% else %}
-        {% if message %}
-            {{ message }}
-        {% endif %}
-            <p>You're not subscribed to anything</p>
+            {% endfor %}
+            <input type="submit" data-inline="true" value="Save" class="sub_but">
 
-        {% endif %}
+        </form>
 
 
 
@@ -70,7 +66,7 @@
 
 {% if subscriptions %}
     {% for sub in subscriptions %}
-        <li><a href="{% url 'index_view' %}?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
+        <li><a href="/?sterm={{ sub.keyword }}&categ={{ sub.category }}">{{ sub.keyword }} | {{ sub.category }}</a> </li>
     {% endfor %}
 {% endif %}
 
