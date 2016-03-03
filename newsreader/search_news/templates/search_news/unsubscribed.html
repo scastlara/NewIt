@@ -3,8 +3,14 @@
 
 {% block content %}
     <meta http-equiv="refresh" content="1; URL={% url 'index_view' %}?sterm={{sterm}}&categ={{categ}}" />
-    <p>{{ user }}</p>
-    <p>Succesfully unsubscribed to: 
-    {{ sterm }}
-    {{ category }}</p>
+    <h2>
+        You have unsubscribed to:
+        "{{ sterm }}" in
+        {% if category %}
+            {{category}}
+        {% else %}
+            Todo
+        {% endif %}
+    </h2>
+    <p>Redirecting...</p>
 {% endblock content %}
