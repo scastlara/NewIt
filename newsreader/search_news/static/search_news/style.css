@@ -536,3 +536,22 @@ margin-left: 270px;
     background-repeat: no-repeat;
     background-color: white;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+.supertable {color: #444; width: 790px; padding: 0 10px 10px 10px; margin-top: 10px; border-spacing: 1rem; border-collapse: collapse;}
+.supertable td{
+    border-width: 1px 0; 
+    border-color: #000;
+    border-style: solid;
+    font-size: 10px;
+}
