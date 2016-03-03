@@ -66,8 +66,10 @@
     background-color: #809EE2;
 }
 
-
-
+.btn:hover, .btn:focus {
+    background: #6084D6 !important;
+    color:white !important;
+}
 
 .glyphicon-search {
   padding: 3px 0px;
