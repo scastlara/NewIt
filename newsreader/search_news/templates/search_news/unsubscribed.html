@@ -2,8 +2,9 @@
 
 
 {% block content %}
-{{ user }}
-Te has DESsuscrito a esto: 
-{{ sterm }}
-{{ category }}
+    <meta http-equiv="refresh" content="1; URL={% url 'index_view' %}?sterm={{sterm}}&categ={{categ}}" />
+    {{ user }}
+    Te has DESsuscrito a esto: 
+    {{ sterm }}
+    {{ category }}
 {% endblock content %}

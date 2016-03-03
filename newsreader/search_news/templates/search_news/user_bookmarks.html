@@ -3,16 +3,18 @@
 {% extends 'search_news/base.html' %}
 {% load staticfiles %}
 
-bookmarked = {{ bookmarked }}
+user_articles = {{ user_articles }}
 
 
 {% block content %}
 
-You have saved this articles:
+<p> Hello <b>{{ user }}</b> you have saved this articles:</p>
 <br>
-{% for item in bookmarked %}
-    <br>
-    <p>{{item.id}} {{item.username}} {{item.article}}</p>
+{% for article in user_articles %}
+	{% for info in article%}
+    	<br>
+   		<p>{{info.title}} FROM {{info.source}} FOR {{info.pubdate}}</p>
+   	{% endfor %}
 {% endfor %}
 
 {% endblock content %}
