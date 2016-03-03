@@ -88,6 +88,8 @@
     margin-right: 30px;
 }
 
+
+
 #content {
     margin: 0;
     padding-right: 0% ;
@@ -321,7 +323,7 @@
     z-index: 9999;
     background: #e9eaed;
     padding-left: 5%;
-    padding-top: 5%;
+    padding-top: 0%;
     padding-right: 5%;
     padding-bottom: 5%;
     overflow: scroll;
@@ -359,6 +361,25 @@
     margin: 5%;
     padding-left: 2%;
     padding-bottom: 2%;
+}
+
+.bookmark {
+  background: none;
+  height: 100px;
+  width: 80px;
+  border: none;
+  position: static;
+  float: right;
+  right: 23%;
+  bottom: 10px;
+
+}
+
+.bookmark img {
+  height: 100px;
+  width: 100px;
+  display: block;
+  margin-right: 10px;
 }
 
 

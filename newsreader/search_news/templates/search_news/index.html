@@ -87,8 +87,8 @@
             {% endif %}
             <br>
             <p>
-            {% if count == 1 %} {{ count }} Article:
-            {% else %} {{ count }} Articles: {% endif %}
+            {% if count == 1 %} {{ count }} Story:
+            {% else %} {{ count }} Stories: {% endif %}
 
             </p>
             {% for item in news %}
@@ -101,7 +101,25 @@
 
             <div class="news-overlay">
                 <div class="close-overlay">x</div>
+                {% if user.is_authenticated and item.link not in bookmarks %}
 
+                    <button     href="#"
+                                name = "book"
+                                title="Click to save this article"
+                                onclick="window.open(`{% url 'user_booked' %}?art={{ item.link }}`,'booked','width=600,height=400')"
+                                type = "submit"
+                                method = "GET"
+                                class="bookmark" 
+                    ><img src="{% static 'search_news/Images/bookmark_icon_up.png' %}">
+                    </button><br>
+                {% elif user.is_authenticated and item.link in bookmarks %}
+                    <button     href="#"
+                                type = "submit"
+                                class="bookmark" 
+                    ><img src="{% static 'search_news/Images/bookmark_full_up.png' %}">
+                    </button><br>
+                {% endif %}
+                <br><br>
                 <h1>
                     <a href="{{ item.link }}" target="_blank"><img id="link" src="{% static 'search_news/Images/link.svg' %}"/ width="6%" height="6%"></a>
                     {{ item.title }}
@@ -112,17 +130,6 @@
                       <img id="twitter" src="{% static 'search_news/Images/tweet.png' %}"/ width="10%" height="7%">
                 </a><br>
 
-                {% if user.is_authenticated and item.link not in bookmarks %}
-
-                    <button     href="#"
-                                name = "book"
-                                title="Click to save this article"
-                                onclick="window.open(`{% url 'user_booked' %}?art={{ item.link }}`,'booked','width=600,height=400')"
-                                type = "submit"
-                                method = "GET"
-                    >Save me!
-                    </button><br>
-                {% endif %}
                 <p> {{ item.pubdate }} </p>
                 <p> {{ item.source }}  </p>
                 <p> {{ item.category }} </p>

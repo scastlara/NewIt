@@ -327,6 +327,9 @@ def user_bookmarks(request):
 
         return render(request, 'search_news/user_bookmarks.html',{'user_articles': user_articles
                                                                  })
+    else:
+        return render(request, 'search_news/error404.html')
+
 
 def user_booked(request):
     if request.user.is_authenticated():
@@ -339,3 +342,6 @@ def user_booked(request):
         return render(request, 'search_news/user_booked.html',{
                                                                'url' : url
                                                               })
+    else:
+        return render(request, 'search_news/error404.html')
+
