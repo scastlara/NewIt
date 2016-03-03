@@ -583,7 +583,6 @@ margin-left: 270px;
 .search_subs {
     height: 20%;
     background: white;
-
     overflow: hidden;
     box-shadow: 10px 10px 5px #888888;
     width: 70%;
@@ -605,11 +604,28 @@ margin-left: 270px;
     height: auto;
     margin-top: 20px;
     width: 30%;
+    margin-left: 35px;
 }
 
+.newhome {
+    display: inline-block;
+    vertical-align: middle;
+    height: auto;
+    margin-top: 20px;
+    width: 5%;
+    text-decoration: none;
+    border: 0;
+}
 
+.newhome:hover {
+    opacity: 0.5;
+    text-decoration: none;
+    border: 0;
+}
 
-
+.logo_feed:hover {
+    opacity: 0.5;
+}
 
 
 .supertable {color: #444; width: 790px; padding: 0 10px 10px 10px; margin-top: 10px; border-spacing: 1rem; border-collapse: collapse;}
