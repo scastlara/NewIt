@@ -540,12 +540,20 @@ margin-left: 270px;
 //===================================================================*/
 .freddie {
     background-position: right;
-    height: 100%;
-    width: 100%;
-    background-image: url('Images/bookmarked.jpg');
-    background-size:35%;
+    padding-top: 50px;
+    padding-left: 50px;
+    height: 400px;
+    width: 600px;
+    background-image: url('Images/bookmarked.png');
+    background-size:50%;
     background-repeat: no-repeat;
-    background-color: white;
+    background-color: #e9eaed;
+}
+
+.freddie-text {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
 }
 
 
