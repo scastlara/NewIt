@@ -323,7 +323,7 @@
     z-index: 9999;
     background: #e9eaed;
     padding-left: 5%;
-    padding-top: 5%;
+    padding-top: 0%;
     padding-right: 5%;
     padding-bottom: 5%;
     overflow: scroll;
@@ -368,16 +368,18 @@
   height: 100px;
   width: 80px;
   border: none;
-  position: fixed;
-  top: 2px;
+  position: static;
+  float: right;
   right: 23%;
+  bottom: 10px;
+
 }
 
 .bookmark img {
   height: 100px;
   width: 100px;
   display: block;
-  margin: 0 auto;
+  margin-right: 10px;
 }
 
 
