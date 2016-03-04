@@ -13,7 +13,7 @@
                     {% for article in user_articles %}
                         {% for item in article %}
                             <div class="search_subs_book">
-                                <b>{{item.title}}</b>
+                                <b><a href="{{ item.link }}">{{item.title}}</a></b>
                                 <div class="search_button_subs">
                                     <div class="btn-group" data-toggle="buttons">
                                         <label class="btn btn-default active">
@@ -26,7 +26,7 @@
                                 </div>
                                 <br>
                                 <br>
-                                {{item.source}}
+                                <a href="{% url 'news' item.source %}">{{item.source}}</a>
                                 <br>
                                 {{item.pubdate}}
                             </div>
@@ -37,7 +37,7 @@
         {% else %}
             <p>You don't have any article saved in My Bookmarks.</p>
         {% endif %}
-               
+
         </form>
 
 
