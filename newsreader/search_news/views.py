@@ -76,7 +76,7 @@ def search_news(search_term, category, diario, black_names):
     return news
 
 def paginate_news(request, news):
-    paginator = Paginator(news, 20)
+    paginator = Paginator(news, 15)
     page = request.GET.get('page')
 
     try:
@@ -234,7 +234,7 @@ def register(request):
          form = UserCreationForm(request.POST)
          if form.is_valid():
              form.save()
-             return HttpResponseRedirect('/accounts/register/complete')
+             return render(request, 'registration/registration_complete.html')
      else:
          form = UserCreationForm()
      token = {}
@@ -242,6 +242,8 @@ def register(request):
      token['form'] = form
 
      return render_to_response('registration/registration_form.html', token)
+
+
 
 def registration_complete(request):
      return render_to_response('registration/registration_complete.html')
@@ -396,3 +398,8 @@ def user_booked(request):
                                                               })
     else:
         return render(request, 'search_news/error404.html')
+
+
+
+def handler404(request):
+    return render(request, 'search_news/error404.html')

@@ -164,3 +164,11 @@ ALTER TABLE search_news_articles ADD FULLTEXT(content);
 mysql -u dbw13 -p
 ```
 password: dbw2016
+
+
+### REMOVE CACHE FROM Server
+> Do it each time you upload/change something
+
+```sh
+ yes | public_html/appnoticiosa/bin/remove_cache.sh
+ ```
