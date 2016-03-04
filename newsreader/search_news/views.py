@@ -76,7 +76,7 @@ def search_news(search_term, category, diario, black_names):
     return news
 
 def paginate_news(request, news):
-    paginator = Paginator(news, 20)
+    paginator = Paginator(news, 15)
     page = request.GET.get('page')
 
     try:
@@ -234,7 +234,7 @@ def register(request):
          form = UserCreationForm(request.POST)
          if form.is_valid():
              form.save()
-             return HttpResponseRedirect('/accounts/register/complete')
+             return render(request, 'registration/registration_complete.html')
      else:
          form = UserCreationForm()
      token = {}
@@ -242,6 +242,8 @@ def register(request):
      token['form'] = form
 
      return render_to_response('registration/registration_form.html', token)
+
+
 
 def registration_complete(request):
      return render_to_response('registration/registration_complete.html')
@@ -363,21 +365,41 @@ def user_booked(request):
                 if name != "name":
                     continue
                 try:
-                    print("HOLA")
+                    # Try to get the article
                     book = Bookmark.objects.get(
                         username = request.user.username,
                         article  = url
                     )
+                    # Delete it if it exists
                     book.delete()
+
+                    # Get it again (is it bookmarked by someone else?)
+                    try:
+                        book_after = Bookmark.objects.get(article = url)
+                    except:
+                        # No one has it, set to False
+                        art = Article.objects.get(link = url)
+                        art.bookmarked = False
+                        art.save()
+
                 except:
-                    print("HOLA2")
+                    # Create bookmark for user
                     Bookmark.objects.get_or_create(
                         username = request.user.username,
                         article  = url
                     )
+                    # Set article as bookmarked by someone
+                    article = Article.objects.get(link = url)
+                    article.bookmarked = True
+                    article.save()
 
             return render(request, 'search_news/user_booked.html',{
                                                                'url' : url
                                                               })
     else:
         return render(request, 'search_news/error404.html')
+
+
+
+def handler404(request):
+    return render(request, 'search_news/error404.html')

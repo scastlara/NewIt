@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^$', views.index_view, name='index_view'),
         # Registration URLs
     url(r'^accounts/register/$', views.register, name='register'),
-    url(r'^accounts/register/complete/$', views.registration_complete),
+    url(r'^accounts/register/complete/$', views.registration_complete, name="reg_complete"),
     url(r'^accounts/login/$', login, name ='login'),
     url(r'^accounts/logout/$', lambda request: logout_then_login(request, "/"), name='logout'),
     url(r'^accounts/loggedin/$', views.loggedin),
@@ -21,5 +21,7 @@ urlpatterns = [
     url(r'^accounts/feed_subscriptions/$',  views.feed_subscriptions, name="feed_subscriptions"),
     url(r'^accounts/bookmarks/$', views.user_bookmarks, name ="user_bookmarks"),
     url(r'^accounts/booked/$', views.user_booked, name ="user_booked"),
+    url(r'^', views.handler404, name="404")
+
 
 ]

@@ -23,10 +23,10 @@
                     <div class="search_button_subs">
                         <div class="btn-group" data-toggle="buttons">
                             <label class="btn btn-default">
-                                <input type="radio" name="s_{{item.name}}" value="1">ON
+                                <input type="radio" name="s_{{item.name}}" value="1">On
                             </label>
                             <label class="btn btn-default active">
-                                <input type="radio" name="s_{{item.name}}" value="0" checked>OFF
+                                <input type="radio" name="s_{{item.name}}" value="0" checked>Off
                             </label>
                         </div>
                     </div>
@@ -45,6 +45,9 @@
                 </div>
             {% endfor %}
             <input type="submit" data-inline="true" value="Save" class="sub_but">
+            <a href = "{% url 'index_view' %}">
+                <input type="button" data-inline="true" value="Cancel" class="sub_but">
+            </a>
 
         </form>
 
