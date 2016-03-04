@@ -112,8 +112,12 @@ def delete():
 	
 	# open a database connection
 	# be sure to change the host IP address, username, password and database name to match your own
-	connection = MySQLdb.connect (host = "frmc.mmb.pcb.ub.es", user = "dbw13", passwd = "dbw2016", db = "DBW13")
-
+	connection = None
+	cursor = None
+	try:
+		connection = MySQLdb.connect (host = "frmc.mmb.pcb.ub.es", user = "dbw13", passwd = "dbw2016", db = "DBW13")
+	except:
+		sys.stderr.write("El programa no ha entrado en mysql \n")
 	# prepare a cursor object using cursor() method
 	cursor = connection.cursor ()
 
