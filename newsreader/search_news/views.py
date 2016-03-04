@@ -14,6 +14,16 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.core.context_processors import csrf
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.auth.forms import (
+    PasswordChangeForm, PasswordResetForm
+)
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext as _
+from django.template.response import TemplateResponse
+from django.contrib.auth import (
+    REDIRECT_FIELD_NAME, get_user_model, update_session_auth_hash,
+)
+
 
 '''
 Here we define what GELPI (aka L'HOME)
@@ -403,3 +413,42 @@ def user_booked(request):
 
 def handler404(request):
     return render(request, 'search_news/error404.html')
+
+
+def password_change(request,
+                    template_name='registration/password_change_form.html',
+                    post_change_redirect=None,
+                    password_change_form=PasswordChangeForm,
+                    current_app=None, extra_context=None):
+    if post_change_redirect is None:
+        post_change_redirect = reverse('password_change_done')
+    else:
+        post_change_redirect = resolve_url(post_change_redirect)
+    if request.method == "POST":
+        form = password_change_form(user=request.user, data=request.POST)
+        print("REQUEST IS POST")
+        if form.is_valid():
+            print ("FORM IS VALID")
+            form.save()
+            # Updating the password logs out all other sessions for the user
+            # except the current one if
+            # django.contrib.auth.middleware.SessionAuthenticationMiddleware
+            # is enabled.
+            update_session_auth_hash(request, form.user)
+            return render(request, 'registration/password_change_done.html')
+        else:
+            print("FORM NOT VALID")
+    else:
+        print("NOT POST!")
+        form = password_change_form(user=request.user)
+    context = {
+        'form': form,
+        'title': _('Password change'),
+    }
+    if extra_context is not None:
+        context.update(extra_context)
+
+    if current_app is not None:
+        request.current_app = current_app
+
+    return TemplateResponse(request, template_name, context)
