@@ -94,8 +94,7 @@ def get_bookmarks():
 #####################################
 def delete():
 	
-	# SLEEP FOR 1 DAY
-	time.sleep(2592000)
+
 	
 	# Select the articles for deleting, they are as links in delete_list
 	delete_list = list()
