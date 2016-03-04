@@ -22,7 +22,7 @@ def get_articles():
 	artdate = {}
 	# open a database connection
 	# be sure to change the host IP address, username, password and database name to match your own
-	connection = MySQLdb.connect (host = "localhost", user = "dbw13", passwd = "DBW2016", db = "DBW13")
+	connection = MySQLdb.connect (host = "localhost", user = "dbw13", passwd = "dbw2016", db = "DBW13")
 
 	# prepare a cursor object using cursor() method
 	cursor = connection.cursor ()
@@ -60,7 +60,7 @@ def get_bookmarks():
 	bookmarked = list()
 	# open a database connection
 	# be sure to change the host IP address, username, password and database name to match your own
-	connection = MySQLdb.connect (host = "localhost", user = "dbw13", passwd = "DBW2016", db = "DBW13")
+	connection = MySQLdb.connect (host = "localhost", user = "dbw13", passwd = "dbw2016", db = "DBW13")
 
 	# prepare a cursor object using cursor() method
 	cursor = connection.cursor ()
@@ -112,7 +112,7 @@ def delete():
 	
 	# open a database connection
 	# be sure to change the host IP address, username, password and database name to match your own
-	connection = MySQLdb.connect (host = "localhost", user = "dbw13", passwd = "DBW2016", db = "DBW13")
+	connection = MySQLdb.connect (host = "localhost", user = "dbw13", passwd = "dbw2016", db = "DBW13")
 
 	# prepare a cursor object using cursor() method
 	cursor = connection.cursor ()
