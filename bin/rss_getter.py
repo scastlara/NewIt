@@ -59,7 +59,7 @@ We may need to change it to PyMySQL, depending on the configuration of GELPI's s
 It is a very big function. It needs refactoring.
 '''
 def add_entry(feed, category, source, language, logfile):
-    db     = MySQLdb.connect("localhost","root","5961", "news")
+    db     = MySQLdb.connect(host = "frmc.mmb.pcb.ub.es", user = "dbw13", passwd = "dbw2016", db = "DBW13")
     cursor = db.cursor()
     db.set_character_set('utf8')
     cursor.execute('SET NAMES utf8;')
@@ -117,7 +117,7 @@ def read_feeds(database, cursor):
 def main(logfile):
 
     # CONNECT TO DATABASE
-    db     = MySQLdb.connect("localhost","root","5961", "news")
+    db     = MySQLdb.connect(host = "frmc.mmb.pcb.ub.es", user = "dbw13", passwd = "dbw2016", db = "DBW13")
     cursor = db.cursor()
 
     # UTF8 THINGS
