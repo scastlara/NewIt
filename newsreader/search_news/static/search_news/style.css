@@ -614,6 +614,10 @@ margin-left: 270px;
     padding-bottom: 2%;
 }
 
+.search_subs_book a {
+  color:black;
+}
+
 .search_button_subs {
     float:right;
     margin-right: 5%;
