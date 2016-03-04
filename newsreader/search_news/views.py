@@ -363,18 +363,33 @@ def user_booked(request):
                 if name != "name":
                     continue
                 try:
-                    print("HOLA")
+                    # Try to get the article
                     book = Bookmark.objects.get(
                         username = request.user.username,
                         article  = url
                     )
+                    # Delete it if it exists
                     book.delete()
+
+                    # Get it again (is it bookmarked by someone else?)
+                    try:
+                        book_after = Bookmark.objects.get(article = url)
+                    except:
+                        # No one has it, set to False
+                        art = Article.objects.get(link = url)
+                        art.bookmarked = False
+                        art.save()
+
                 except:
-                    print("HOLA2")
+                    # Create bookmark for user
                     Bookmark.objects.get_or_create(
                         username = request.user.username,
                         article  = url
                     )
+                    # Set article as bookmarked by someone
+                    article = Article.objects.get(link = url)
+                    article.bookmarked = True
+                    article.save()
 
             return render(request, 'search_news/user_booked.html',{
                                                                'url' : url
