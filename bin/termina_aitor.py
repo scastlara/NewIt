@@ -138,5 +138,5 @@ while True:
 	for element in delete():
 		sys.stdout.write(element + "\n")
 	sys.stdout.close()
-	time.sleep(2592000)
+	time.sleep(7190)
 
