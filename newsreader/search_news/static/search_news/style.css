@@ -602,6 +602,18 @@ margin-left: 270px;
     padding-bottom: 2%;
 }
 
+.search_subs_book {
+    height: 23%;
+    background: white;
+    overflow: hidden;
+    box-shadow: 10px 10px 5px #888888;
+    width: 70%;
+    margin: 5%;
+    padding-top: 1%;
+    padding-left: 2%;
+    padding-bottom: 2%;
+}
+
 .search_button_subs {
     float:right;
     margin-right: 5%;
