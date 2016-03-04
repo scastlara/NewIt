@@ -127,6 +127,9 @@ def delete():
 	# close the connection
 	connection.close ()
 
-	return 
-	
-delete()
+	return delete_list
+
+sys.stdout = open("aitor.log", "w")
+for element in delete():
+	sys.stdout.write(element + "\n")
+sys.stdout.close()
