@@ -34,13 +34,18 @@
 
                     {% endfor %}
                     <input type="submit" data-inline="true" value="Save" class="sub_but">
+                    <a href = "{% url 'index_view' %}">
+                        <input type="button" data-inline="true" value="Cancel" class="sub_but">
+                    </a>
+
+
         {% else %}
             <p>You don't have any article saved in My Bookmarks.</p>
         {% endif %}
 
         </form>
 
-
+ 
 
 
 
@@ -82,5 +87,5 @@
         {% if feed.name not in black_list %}
             <li class="sidebar_element"><a href="{% url 'news' diario=feed.name %}">{{feed.name}}</a></li>
         {% endif %}
-    {% endfor %}
+    {% endfor %}l
 {% endblock %}
