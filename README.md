@@ -1,4 +1,6 @@
 # README
+<img src="https://github.com/scastlara/NewIt/blob/master/newsreader/search_news/static/search_news/Images/newit_logo.png"/>
+
 
 ## Version
 
